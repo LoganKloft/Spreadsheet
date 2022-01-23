@@ -17,6 +17,11 @@ namespace HW1
         // The top-level node of the BST.
         private Node<T> _root;
 
+        public BST()
+        {
+            _root = null;
+        }
+
         // Inserts data of type T into the BST as long as T is comparable and not a duplicate.
         // Returns InsertState.Duplicate in case of a duplicate data value, and InsertState.Success otherwise.
         public InsertState Insert(T data)
@@ -32,7 +37,7 @@ namespace HW1
 
         private InsertState InsertHelper(T data, Node<T> treeNode)
         {
-            if(data.CompareTo(treeNode.Data) < 0)
+            if(data.CompareTo(treeNode.Data) < 0) // left sub-tree
             {
                 if (treeNode.LeftNode == null)
                 {
@@ -43,7 +48,7 @@ namespace HW1
                 {
                     return InsertHelper(data, treeNode.LeftNode);
                 }
-            } else if(data.CompareTo(treeNode.Data) > 0)
+            } else if(data.CompareTo(treeNode.Data) > 0) // right sub-tree
             {
                 if(treeNode.RightNode == null)
                 {
@@ -55,7 +60,7 @@ namespace HW1
                 }
             }
 
-            return InsertState.Duplicate;
+            return InsertState.Duplicate; // found duplicate
         }
 
         // Returns the number of items stored in the BST.

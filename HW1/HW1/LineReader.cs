@@ -31,6 +31,8 @@ namespace HW1
         // Splits _line around delimeter ' ' and stores as an integer value in _range
         public void Split()
         {
+            if (_line == "") return;
+
             string[] subs = _line.Split(' ');
             foreach (string s in subs) {
                 _range.Add(Convert.ToInt32(s));
