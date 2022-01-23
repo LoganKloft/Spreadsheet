@@ -5,16 +5,16 @@ using System.Text;
 // The return type used in the Insert(T data) method.
 enum InsertState
 {
-    Success, // Type T successfully inserted into the BST
-    Duplicate // Type T is already in the BST
+    Success, // Type T successfully inserted into the BST.
+    Duplicate // Type T is already in the BST.
 }
 
 namespace HW1
 {
-    // IComparable so can use equivalent of '<' and '>' in the form of CompareTo
+    // IComparable so can use equivalent of '<' and '>' in the form of CompareTo.
     class BST<T> where T:IComparable
     {
-        // The top-level node of the BST
+        // The top-level node of the BST.
         private Node<T> _root;
 
         // Inserts data of type T into the BST as long as T is comparable and not a duplicate.

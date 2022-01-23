@@ -6,7 +6,7 @@ namespace HW1
 {
     class Node<T>
     {
-        // Constructor allowing access to only the setter of the Data property
+        // Constructor allowing access to only the setter of the Data property.
         public Node(T newData)
         {
             Data = newData;
@@ -14,7 +14,7 @@ namespace HW1
             RightNode = null;
         }
 
-        // Constructor allowing access to the setter of all three properties
+        // Constructor allowing access to the setter of all three properties.
         public Node(T newData, Node<T> leftNode, Node<T> rightNode)
         {
             Data = newData;
