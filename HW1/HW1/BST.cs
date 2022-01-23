@@ -14,7 +14,7 @@ namespace HW1
     class BST<T>
     {
         // The top-level node of the BST
-        private Node<T> root;
+        private Node<T> _root;
 
         // Inserts data of type T into the BST as long as T is comparable and not a duplicate.
         // Returns InsertState.Duplicate in case of a duplicate data value, and InsertState.Success otherwise.
@@ -24,18 +24,18 @@ namespace HW1
 
         // Returns the number of items stored in the BST.
         // Uses inorder traversal
-        public int Count(Node<T> treeNode = root)
+        public int Count(Node<T> treeNode)
         {
         }
 
         // Uses inorder traversal to display the values stored in the BST in ascending order.
         // Type T must be printable.
-        public void Display(Node<T> treeNode = root)
+        public void Display(Node<T> treeNode)
         {
         }
 
         // Returns the height of the BST + 1.
-        public int Levels(Node<T> treeNode = root)
+        public int Levels(Node<T> treeNode)
         {
         }
 
