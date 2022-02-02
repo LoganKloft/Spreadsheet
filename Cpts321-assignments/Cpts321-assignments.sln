@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW2_WinForms", "HW2_WinForms\HW2_WinForms.csproj", "{DFC00805-4708-44A1-8BAE-40BC6789835B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW2_WinFormsTests", "HW2_WinFormsTests\HW2_WinFormsTests.csproj", "{A2DBCA29-657C-411C-A05A-36D2EEBD5BDC}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFC00805-4708-44A1-8BAE-40BC6789835B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC00805-4708-44A1-8BAE-40BC6789835B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC00805-4708-44A1-8BAE-40BC6789835B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC00805-4708-44A1-8BAE-40BC6789835B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DBCA29-657C-411C-A05A-36D2EEBD5BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DBCA29-657C-411C-A05A-36D2EEBD5BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DBCA29-657C-411C-A05A-36D2EEBD5BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DBCA29-657C-411C-A05A-36D2EEBD5BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
