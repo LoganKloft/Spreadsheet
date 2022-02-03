@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HW2_WinFormsTests</name>
+    </assembly>
+    <members>
+        <member name="T:HW2_WinForms.HashSet.Tests.DistinctTests">
+            <summary>
+            Class for testing the three implementations of calculating the number of distinct.
+            </summary>
+        </member>
+        <member name="M:HW2_WinForms.HashSet.Tests.DistinctTests.TestCalculateDistinctByHashSet">
+            <summary>
+            Contains the tests for the first implementation of calculating the distinct elements of a list.
+            </summary>
+        </member>
+    </members>
+</doc>
