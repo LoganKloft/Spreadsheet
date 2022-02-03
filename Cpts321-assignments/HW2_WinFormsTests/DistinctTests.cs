@@ -2,7 +2,7 @@
 // Copyright (c) Logan Kloft 11728076. All rights reserved.
 // </copyright>
 
-namespace HW2_WinForms.HashSet.Tests
+namespace HW2_WinForms.Tests
 {
     using System.Collections.Generic;
     using NUnit.Framework;

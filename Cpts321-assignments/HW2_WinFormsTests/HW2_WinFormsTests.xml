@@ -4,22 +4,22 @@
         <name>HW2_WinFormsTests</name>
     </assembly>
     <members>
-        <member name="T:HW2_WinForms.HashSet.Tests.DistinctTests">
+        <member name="T:HW2_WinForms.Tests.DistinctTests">
             <summary>
             Class for testing the three implementations of calculating the number of distinct.
             </summary>
         </member>
-        <member name="M:HW2_WinForms.HashSet.Tests.DistinctTests.TestCalculateDistinctByHashSet">
+        <member name="M:HW2_WinForms.Tests.DistinctTests.TestCalculateDistinctByHashSet">
             <summary>
             Contains the tests for the first implementation of calculating the distinct elements of a list.
             </summary>
         </member>
-        <member name="M:HW2_WinForms.HashSet.Tests.DistinctTests.TestCalculateDistinctInConstantMemory">
+        <member name="M:HW2_WinForms.Tests.DistinctTests.TestCalculateDistinctInConstantMemory">
             <summary>
             Contains the tests for the second implementation of calculating the distinct elements of a list.
             </summary>
         </member>
-        <member name="M:HW2_WinForms.HashSet.Tests.DistinctTests.TestCalculateDistinctUsingSort">
+        <member name="M:HW2_WinForms.Tests.DistinctTests.TestCalculateDistinctUsingSort">
             <summary>
             Contains the tests for the third implementation of calculating the distinct elements of a list.
             </summary>
