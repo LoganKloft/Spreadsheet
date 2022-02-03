@@ -20,6 +20,8 @@ namespace HW2_WinForms.HashSet
         /// </summary>
         /// <param name="list"> Maximum and Minimum Size: 10,000. Upper Bound of Elements: 20,000. Lower Bound of Elements: 0. </param>
         /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when list.Count != 10,000 or list[i] is
+        /// less than 0 or list[i] is greater than 20,000.</exception>
         public static int CalculateDistinctByHashSet(List<int> list)
         {
             // exceptional case
@@ -51,6 +53,8 @@ namespace HW2_WinForms.HashSet
         /// </summary>
         /// <param name="list"> Maximum and Minimum Size: 10,000. Upper Bound of Elements: 20,000. Lower Bound of Elements: 0. </param>
         /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when list.Count != 10,000 or list[i] is
+        /// less than 0 or list[i] is greater than 20,000.</exception>
         public static int CalculateDistinctInConstantMemory(List<int> list)
         {
             // exceptional case
@@ -101,9 +105,41 @@ namespace HW2_WinForms.HashSet
         /// </summary>
         /// <param name="list"> Maximum and Minimum Size: 10,000. Upper Bound of Elements: 20,000. Lower Bound of Elements: 0. </param>
         /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when list.Count != 10,000 or list[i] is
+        /// less than 0 or list[i] is greater than 20,000.</exception>
         public static int CalculateDistinctUsingSort(List<int> list)
         {
-            return 0;
+            // exceptional case
+            if (list.Count != 10000)
+            {
+                throw new System.ArgumentOutOfRangeException("List does not contain 10,000 elements", "list");
+            }
+
+            list.Sort();
+
+            int result = 1; // start at one because first element is always distinct
+
+            // calculates the number of distinct values in list
+            // will look at all elements from index 0-(i-1), if list[i] doesn't appear
+            // in that range, then list[i] is a new distinct element.
+            for (int i = 1; i < list.Count; i++)
+            {
+                int element = list[i];
+
+                // exceptional case
+                if (element < 0 || element > 20000)
+                {
+                    throw new System.ArgumentOutOfRangeException("List element found to be outside of range [0, 20,000]", "list");
+                }
+
+                // The current element is different from the previous => current element is distinct
+                if (list[i] != list[i - 1])
+                {
+                    result++;
+                }
+            }
+
+            return result;
         }
     }
 }
