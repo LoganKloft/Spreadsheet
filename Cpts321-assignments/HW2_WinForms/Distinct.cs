@@ -19,7 +19,7 @@ namespace HW2_WinForms.HashSet
         /// Uses a HashSet to determine the distinct values in a list.
         /// </summary>
         /// <param name="list"> Maximum and Minimum Size: 10,000. Upper Bound of Elements: 20,000. Lower Bound of Elements: 0. </param>
-        /// <returns> An integer that represents the number of stinct integer values in a list. </returns>
+        /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
         public static int CalculateDistinctByHashSet(List<int> list)
         {
             if (list.Count != 10000)
@@ -39,6 +39,16 @@ namespace HW2_WinForms.HashSet
             }
 
             return distinctListValues.Count;
+        }
+
+        /// <summary>
+        /// Does not edit list or use auxillary memory in order to calculate the distinct integer elements in list.
+        /// </summary>
+        /// <param name="list"> Maximum and Minimum Size: 10,000. Upper Bound of Elements: 20,000. Lower Bound of Elements: 0. </param>
+        /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
+        public static int CalculateDistinctInConstantMemory(List<int> list)
+        {
+            return 0;
         }
     }
 }
