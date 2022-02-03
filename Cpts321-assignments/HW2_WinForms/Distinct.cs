@@ -95,5 +95,15 @@ namespace HW2_WinForms.HashSet
 
             return result;
         }
+
+        /// <summary>
+        /// Uses default list sort to calculate the distinct integer values in list.
+        /// </summary>
+        /// <param name="list"> Maximum and Minimum Size: 10,000. Upper Bound of Elements: 20,000. Lower Bound of Elements: 0. </param>
+        /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
+        public static int CalculateDistinctUsingSort(List<int> list)
+        {
+            return 0;
+        }
     }
 }
