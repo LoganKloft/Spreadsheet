@@ -22,14 +22,19 @@ namespace HW2_WinForms.HashSet
         /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
         public static int CalculateDistinctByHashSet(List<int> list)
         {
+            // exceptional case
             if (list.Count != 10000)
             {
                 throw new System.ArgumentOutOfRangeException("List does not contain 10,000 elements", "list");
             }
 
+            // Stores distinct values from list
             HashSet<int> distinctListValues = new HashSet<int>();
+
+            // add all values to distinctListValues
             foreach (int element in list)
             {
+                // exceptional case
                 if (element < 0 || element > 20000)
                 {
                     throw new System.ArgumentOutOfRangeException("List element found to be outside of range [0, 20,000]", "list");
@@ -48,7 +53,47 @@ namespace HW2_WinForms.HashSet
         /// <returns> An integer that represents the number of destinct integer values in a list. </returns>
         public static int CalculateDistinctInConstantMemory(List<int> list)
         {
-            return 0;
+            // exceptional case
+            if (list.Count != 10000)
+            {
+                throw new System.ArgumentOutOfRangeException("List does not contain 10,000 elements", "list");
+            }
+
+            int result = 0;
+
+            // calculates the number of distinct values in list
+            // will look at all elements from index 0-(i-1), if list[i] doesn't appear
+            // in that range, then list[i] is a new distinct element.
+            for (int i = 0; i < list.Count; i++)
+            {
+                int element = list[i];
+
+                // exceptional case
+                if (element < 0 || element > 20000)
+                {
+                    throw new System.ArgumentOutOfRangeException("List element found to be outside of range [0, 20,000]", "list");
+                }
+
+                bool isDistinct = true;
+
+                // looking for pre-existing element
+                for (int j = i - 1; j >= 0; j--)
+                {
+                    if (list[j] == element)
+                    {
+                        isDistinct = false;
+                        break;
+                    }
+                }
+
+                // no pre-existing element matching the new element value was found
+                if (isDistinct)
+                {
+                    result++;
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -14,5 +14,10 @@
             Contains the tests for the first implementation of calculating the distinct elements of a list.
             </summary>
         </member>
+        <member name="M:HW2_WinForms.HashSet.Tests.DistinctTests.TestCalculateDistinctInConstantMemory">
+            <summary>
+            Contains the tests for the second implementation of calculating the distinct elements of a list.
+            </summary>
+        </member>
     </members>
 </doc>
