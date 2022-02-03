@@ -2,7 +2,7 @@
 // Copyright (c) Logan Kloft 11728076. All rights reserved.
 // </copyright>
 
-namespace HW2_WinForms.HashSet
+namespace HW2_WinForms
 {
     using System;
     using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace HW2_WinForms.HashSet
             }
 
             // Stores distinct values from list
-            HashSet<int> distinctListValues = new HashSet<int>();
+            HashSet<int> distinctListValues = new HashSet<int>(10000);
 
             // add all values to distinctListValues
             foreach (int element in list)
