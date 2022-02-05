@@ -25,7 +25,15 @@ namespace HW2_WinForms
         public Form1()
         {
             this.InitializeComponent();
+        }
 
+        /// <summary>
+        /// Initial call that will load the text to the WinForm.
+        /// </summary>
+        /// <param name="sender"> Not used in this implementation. </param>
+        /// <param name="e"> Not used in this version of Form1_Load. </param>
+        private void Form1_Load(object sender, EventArgs e)
+        {
             List<int> randomNumberList = new List<int>();
             Random randomNumberGenerator = new Random();
 
@@ -56,11 +64,6 @@ namespace HW2_WinForms
             this.textBox1.AppendText(constantMemoryText);
             this.textBox1.AppendText(Environment.NewLine);
             this.textBox1.AppendText(sortText);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // So stylecop doesn't scream at me.
         }
     }
 }
