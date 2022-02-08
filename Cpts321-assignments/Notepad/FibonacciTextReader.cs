@@ -67,7 +67,7 @@ namespace Notepad
             {
                 this.currentFibonacciNumber = 1;
                 this.currentLine++;
-                return this.currentFibonacciNumber.ToString();
+                return (this.currentLine - 1).ToString() + ". " + this.currentFibonacciNumber.ToString();
             }
 
             // Logic for the first Fibonacci and the third plus numbers.
@@ -76,7 +76,7 @@ namespace Notepad
             this.previousFibonacciNumber = temp;
             this.currentLine++;
 
-            return this.currentFibonacciNumber.ToString();
+            return (this.currentLine - 1).ToString() + ". " + this.currentFibonacciNumber.ToString();
         }
     }
 }
