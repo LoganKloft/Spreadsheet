@@ -26,5 +26,25 @@ namespace Notepad
         {
             this.InitializeComponent();
         }
+
+        private void loadFromFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadFibonacciNumbersfirst50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadFibonacciNumbersfirst100ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
