@@ -56,7 +56,27 @@ namespace Notepad
         /// <returns> A string that represents the current fibonacci number, null when ReadLine() has no more text. </returns>
         public override string ReadLine()
         {
-            return "Default text";
+            // When no more 'lines' left to read.
+            if (this.currentLine > this.MaxLines)
+            {
+                return null;
+            }
+
+            // Base case of Fibonacci function.
+            if (this.currentLine == 2)
+            {
+                this.currentFibonacciNumber = 1;
+                this.currentLine++;
+                return this.currentFibonacciNumber.ToString();
+            }
+
+            // Logic for the first Fibonacci and the third plus numbers.
+            System.Numerics.BigInteger temp = this.currentFibonacciNumber;
+            this.currentFibonacciNumber = this.previousFibonacciNumber + this.currentFibonacciNumber;
+            this.previousFibonacciNumber = temp;
+            this.currentLine++;
+
+            return this.currentFibonacciNumber.ToString();
         }
     }
 }

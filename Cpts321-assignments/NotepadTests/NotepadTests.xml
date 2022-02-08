@@ -4,5 +4,15 @@
         <name>NotepadTests</name>
     </assembly>
     <members>
+        <member name="T:NotepadTests.FibonacciTextReaderTests">
+            <summary>
+            Class that will test the constructor and ReadLine() method of the FibonacciTextReader class.
+            </summary>
+        </member>
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest">
+            <summary>
+            Tests the ReadLine() method of the FibonacciTextReader class.
+            </summary>
+        </member>
     </members>
 </doc>
