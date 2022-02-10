@@ -46,7 +46,7 @@ namespace Notepad
 
             set
             {
-                this.maxLines = System.Math.Max(0, value);
+                this.maxLines = System.Math.Min(System.Math.Max(0, value), 10000);
             }
         }
 
