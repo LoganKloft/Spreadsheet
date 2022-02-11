@@ -9,47 +9,47 @@
             Class that will test the constructor and ReadLine() method of the FibonacciTextReader class.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest1">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineFirstCallTest">
             <summary>
             Tests the first generated Fibonacci number string.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest2">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineSecondCallTest">
             <summary>
             Tests to make sure the base case for generating the second fibonacci number works.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest3">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineLastCallTest">
             <summary>
             Tests the last generated fibonacci number.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest4">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineThirdCallTest">
             <summary>
             Tests the normal case of a fibonacci that is after the second and before the last.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest5">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineFirstNullTest">
             <summary>
             Tests to make sure null is returned after reading all fibonacci numbers.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest6">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineReoccuringNullTest">
             <summary>
             Tests to make sure null continues to return after calling ReadLine more than the maximum lines + 1.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest7">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineZeroMaxLineTest">
             <summary>
             Tests to make sure null is returned when object is initialized with 0.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest8">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineNegativeMaxLineTest">
             <summary>
             Tests to make sure null is returned when object is initialized with negative number.
             </summary>
         </member>
-        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineTest9">
+        <member name="M:NotepadTests.FibonacciTextReaderTests.ReadLineCutoffValueTest">
             <summary>
             Tests ReadLine when object is intialized with maximum value, would take too long to run so should make a cutoff value.
             </summary>

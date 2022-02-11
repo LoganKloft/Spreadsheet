@@ -62,29 +62,6 @@ namespace Notepad
         }
 
         /// <summary>
-        /// Displays the first 50 fibonacci numbers in the TextBox of the form.
-        /// </summary>
-        /// <param name="sender"> Object which raised the event. </param>
-        /// <param name="e"> Further information about the event. </param>
-        private void LoadFibonacciNumbersfirst50ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Notepad.FibonacciTextReader firstFifty = new Notepad.FibonacciTextReader(50);
-            this.LoadText(firstFifty);
-        }
-
-        /// <summary>
-        /// Displays the first 100 fibonacci numbers in the TextBox of the form.
-        /// </summary>
-        /// <param name="sender"> Object which raised the event. </param>
-        /// <param name="e"> Further information about the event. </param>
-        private void LoadFibonacciNumbersfirst100ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Notepad.FibonacciTextReader firstHundred = new Notepad.FibonacciTextReader(100);
-            this.textBox1.Clear(); // remove previous text
-            this.LoadText(firstHundred);
-        }
-
-        /// <summary>
         /// Prompts the user for a file to save the currently loaded text into.
         /// </summary>
         /// <param name="sender"> Object which raised the event. </param>
@@ -103,6 +80,28 @@ namespace Notepad
                     stream.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// Displays the first 50 fibonacci numbers in the TextBox of the form.
+        /// </summary>
+        /// <param name="sender"> Object which raised the event. </param>
+        /// <param name="e"> Further information about the event. </param>
+        private void LoadFibonacciNumbersfirstFiftyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Notepad.FibonacciTextReader firstFifty = new Notepad.FibonacciTextReader(50);
+            this.LoadText(firstFifty);
+        }
+
+        /// <summary>
+        /// Displays the first 100 fibonacci numbers in the TextBox of the form.
+        /// </summary>
+        /// <param name="sender"> Object which raised the event. </param>
+        /// <param name="e"> Further information about the event. </param>
+        private void LoadFibonacciNumbersfirstHundredToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Notepad.FibonacciTextReader firstHundred = new Notepad.FibonacciTextReader(100);
+            this.LoadText(firstHundred);
         }
     }
 }

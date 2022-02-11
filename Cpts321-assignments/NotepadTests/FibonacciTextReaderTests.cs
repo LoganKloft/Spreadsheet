@@ -15,7 +15,7 @@ namespace NotepadTests
         /// Tests the first generated Fibonacci number string.
         /// </summary>
         [Test]
-        public void ReadLineTest1()
+        public void ReadLineFirstCallTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(5);
 
@@ -27,7 +27,7 @@ namespace NotepadTests
         /// Tests to make sure the base case for generating the second fibonacci number works.
         /// </summary>
         [Test]
-        public void ReadLineTest2()
+        public void ReadLineSecondCallTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(5);
             string actual = testFibonacciTextReader.ReadLine();
@@ -39,7 +39,7 @@ namespace NotepadTests
         /// Tests the last generated fibonacci number.
         /// </summary>
         [Test]
-        public void ReadLineTest3()
+        public void ReadLineLastCallTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(5);
             string actual = testFibonacciTextReader.ReadLine();
@@ -54,7 +54,7 @@ namespace NotepadTests
         /// Tests the normal case of a fibonacci that is after the second and before the last.
         /// </summary>
         [Test]
-        public void ReadLineTest4()
+        public void ReadLineThirdCallTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(5);
             string actual = testFibonacciTextReader.ReadLine();
@@ -67,7 +67,7 @@ namespace NotepadTests
         /// Tests to make sure null is returned after reading all fibonacci numbers.
         /// </summary>
         [Test]
-        public void ReadLineTest5()
+        public void ReadLineFirstNullTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(5);
             string actual = testFibonacciTextReader.ReadLine();
@@ -83,7 +83,7 @@ namespace NotepadTests
         /// Tests to make sure null continues to return after calling ReadLine more than the maximum lines + 1.
         /// </summary>
         [Test]
-        public void ReadLineTest6()
+        public void ReadLineReoccuringNullTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(5);
             string actual = testFibonacciTextReader.ReadLine();
@@ -100,7 +100,7 @@ namespace NotepadTests
         /// Tests to make sure null is returned when object is initialized with 0.
         /// </summary>
         [Test]
-        public void ReadLineTest7()
+        public void ReadLineZeroMaxLineTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(0);
             string actual = testFibonacciTextReader.ReadLine();
@@ -111,7 +111,7 @@ namespace NotepadTests
         /// Tests to make sure null is returned when object is initialized with negative number.
         /// </summary>
         [Test]
-        public void ReadLineTest8()
+        public void ReadLineNegativeMaxLineTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(-4);
             string actual = testFibonacciTextReader.ReadLine();
@@ -122,7 +122,7 @@ namespace NotepadTests
         /// Tests ReadLine when object is intialized with maximum value, would take too long to run so should make a cutoff value.
         /// </summary>
         [Test]
-        public void ReadLineTest9()
+        public void ReadLineCutoffValueTest()
         {
             Notepad.FibonacciTextReader testFibonacciTextReader = new Notepad.FibonacciTextReader(2147483647);
             while (testFibonacciTextReader.ReadLine() != null)
