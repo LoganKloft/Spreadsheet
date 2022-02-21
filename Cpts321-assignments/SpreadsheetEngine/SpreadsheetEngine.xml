@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpreadsheetEngine</name>
+    </assembly>
+    <members>
+        <member name="T:CptS321.SpreadsheetCell">
+            <summary>
+            Class that provides the functionality of a single cell in the spreadsheet.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCell.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.SpreadsheetCell"/> class.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCell.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.SpreadsheetCell"/> class.
+            Constructor that allows creation of a SpreadsheetCell with a given rowIndex and columnIndex.
+            </summary>
+            <param name="rowIndex"> Initialize field rowIndex with parameter rowIndex. </param>
+            <param name="columnIndex"> Initialize field columnIndex with paremeter columnIndex. </param>
+        </member>
+        <member name="E:CptS321.SpreadsheetCell.PropertyChanged">
+            <summary>
+            Triggers when any of the properties are changed, argument sent is the name of the property.
+            </summary>
+        </member>
+        <member name="P:CptS321.SpreadsheetCell.RowIndex">
+            <summary>
+            Gets the SpreadsheetCell's rowIndex.
+            </summary>
+        </member>
+        <member name="P:CptS321.SpreadsheetCell.ColumnIndex">
+            <summary>
+            Gets the SpreadsheetCell's columnIndex.
+            </summary>
+        </member>
+        <member name="P:CptS321.SpreadsheetCell.Text">
+            <summary>
+            Gets or Sets the SpreadsheetCell's text.
+            </summary>
+        </member>
+        <member name="P:CptS321.SpreadsheetCell.Value">
+            <summary>
+            Gets the SpreadsheetCell's value.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreadsheet_Logan_Kloft", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetEngine", "SpreadsheetEngine\SpreadsheetEngine.csproj", "{E8DDA31A-CC39-4354-A488-BAA41968C6E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetEngineTests", "SpreadsheetEngineTests\SpreadsheetEngineTests.csproj", "{FC81A5FB-A851-44E1-BE39-AE6CFBB88CC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E8DDA31A-CC39-4354-A488-BAA41968C6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8DDA31A-CC39-4354-A488-BAA41968C6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8DDA31A-CC39-4354-A488-BAA41968C6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC81A5FB-A851-44E1-BE39-AE6CFBB88CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC81A5FB-A851-44E1-BE39-AE6CFBB88CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC81A5FB-A851-44E1-BE39-AE6CFBB88CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC81A5FB-A851-44E1-BE39-AE6CFBB88CC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
