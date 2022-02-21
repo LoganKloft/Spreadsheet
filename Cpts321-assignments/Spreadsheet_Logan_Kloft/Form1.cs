@@ -32,10 +32,22 @@ namespace Spreadsheet_Logan_Kloft
             // remove already existing columns
             this.dataGridView1.Columns.Clear();
 
+            // remove already existing rows
+            this.dataGridView1.Rows.Clear();
+
             // add columns from A-Z
             for (char columnName = 'A'; columnName <= 'Z'; columnName++)
             {
                 this.dataGridView1.Columns.Add(columnName.ToString(), columnName.ToString());
+            }
+
+            // add rows from 1-50
+            this.dataGridView1.Rows.Add(49);
+            int rowNumber = 1;
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                row.HeaderCell.Value = rowNumber.ToString();
+                rowNumber++;
             }
         }
     }
