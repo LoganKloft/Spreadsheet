@@ -26,5 +26,17 @@ namespace Spreadsheet_Logan_Kloft
         {
             this.InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // remove already existing columns
+            this.dataGridView1.Columns.Clear();
+
+            // add columns from A-Z
+            for (char columnName = 'A'; columnName <= 'Z'; columnName++)
+            {
+                this.dataGridView1.Columns.Add(columnName.ToString(), columnName.ToString());
+            }
+        }
     }
 }
