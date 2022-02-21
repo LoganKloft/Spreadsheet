@@ -103,7 +103,7 @@ namespace SpreadsheetEngineTests
             SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass();
             testCell.PropertyChanged += this.HasTextChanged;
             testCell.TextInterface = "test";
-            Assert.AreEqual("test", testCell.ValueInterface);
+            Assert.AreEqual("test", testCell.TextInterface);
         }
 
         /// <summary>

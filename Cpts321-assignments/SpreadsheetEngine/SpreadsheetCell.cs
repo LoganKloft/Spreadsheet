@@ -62,8 +62,21 @@ namespace CptS321
         /// </summary>
         protected string Text
         {
-            get { return this.text; }
-            set { this.text = value; }
+            get
+            {
+                return this.text;
+            }
+
+            set
+            {
+                if (value == this.text)
+                {
+                    return;
+                }
+
+                this.text = value;
+                this.PropertyChanged(this, new PropertyChangedEventArgs("Text"));
+            }
         }
 
         /// <summary>
@@ -71,7 +84,15 @@ namespace CptS321
         /// </summary>
         protected virtual string Value
         {
-            get { return this.value; }
+            get
+            {
+                if (this.value == null || this.value[0] != '=')
+                {
+                    return this.Text;
+                }
+
+                return this.Text;
+            }
         }
     }
 }
