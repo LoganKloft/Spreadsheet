@@ -12,8 +12,16 @@ namespace CptS321
     /// </summary>
     public abstract class SpreadsheetCell : INotifyPropertyChanged
     {
-        private string text;
-        private string value;
+        /// <summary>
+        /// The string of the cell that can be seen in the GUI.
+        /// </summary>
+        protected string text;
+
+        /// <summary>
+        /// The calculated value of the cell in the GUI.
+        /// </summary>
+        protected string value;
+
         private int rowIndex;
         private int columnIndex;
 
@@ -60,7 +68,7 @@ namespace CptS321
         /// <summary>
         /// Gets or Sets the SpreadsheetCell's text.
         /// </summary>
-        protected string Text
+        public string Text
         {
             get
             {
@@ -80,9 +88,9 @@ namespace CptS321
         }
 
         /// <summary>
-        /// Gets the SpreadsheetCell's value.
+        /// Gets or sets the SpreadsheetCell's value.
         /// </summary>
-        protected virtual string Value
+        public virtual string Value
         {
             get
             {
@@ -92,6 +100,11 @@ namespace CptS321
                 }
 
                 return this.Text;
+            }
+
+            set
+            {
+                return;
             }
         }
     }

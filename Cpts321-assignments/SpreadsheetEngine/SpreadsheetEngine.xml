@@ -4,9 +4,72 @@
         <name>SpreadsheetEngine</name>
     </assembly>
     <members>
+        <member name="T:CptS321.Spreadsheet">
+            <summary>
+            Factory for the SpreadsheetCell class.
+            </summary>
+        </member>
+        <member name="M:CptS321.Spreadsheet.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.Spreadsheet"/> class.
+            </summary>
+            <param name="numberRows"> The height of the spreadsheet. </param>
+            <param name="numberColumns"> The width of the spreadsheet. </param>
+        </member>
+        <member name="E:CptS321.Spreadsheet.CellPropertyChanged">
+            <summary>
+            This event triggers when any Cell in the 2-dimensional array is modified.
+            </summary>
+        </member>
+        <member name="P:CptS321.Spreadsheet.RowCount">
+            <summary>
+            Gets the height of the spreadsheet.
+            </summary>
+        </member>
+        <member name="P:CptS321.Spreadsheet.ColumnCount">
+            <summary>
+            Gets the width of the spreadsheet.
+            </summary>
+        </member>
+        <member name="M:CptS321.Spreadsheet.GetCell(System.Int32,System.Int32)">
+            <summary>
+            Accesses a cell.
+            </summary>
+            <param name="rowIndex"> The row of the cell one wants to access. </param>
+            <param name="columnIndex"> The column of the cell one wants to access. </param>
+            <returns> Returns the cell at location (rowIndex, columnIndex) or null if such a cell does not exist. </returns>
+        </member>
+        <member name="T:CptS321.Spreadsheet.Cell">
+            <summary>
+            Acts the same as a SpreadsheetCell, but can be initiated only inside of Spreadsheet.
+            </summary>
+        </member>
+        <member name="M:CptS321.Spreadsheet.Cell.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.Spreadsheet.Cell"/> class.
+            Provides access to the constructor of SpreadsheetCell.
+            </summary>
+            <param name="rowIndex"> The current row number of this cell. </param>
+            <param name="columnIndex"> The current column number of this cell. </param>
+        </member>
+        <member name="P:CptS321.Spreadsheet.Cell.Value">
+            <summary>
+            Gets or Sets the value of a cell.
+            </summary>
+        </member>
         <member name="T:CptS321.SpreadsheetCell">
             <summary>
             Class that provides the functionality of a single cell in the spreadsheet.
+            </summary>
+        </member>
+        <member name="F:CptS321.SpreadsheetCell.text">
+            <summary>
+            The string of the cell that can be seen in the GUI.
+            </summary>
+        </member>
+        <member name="F:CptS321.SpreadsheetCell.value">
+            <summary>
+            The calculated value of the cell in the GUI.
             </summary>
         </member>
         <member name="M:CptS321.SpreadsheetCell.#ctor">
@@ -44,7 +107,7 @@
         </member>
         <member name="P:CptS321.SpreadsheetCell.Value">
             <summary>
-            Gets the SpreadsheetCell's value.
+            Gets or sets the SpreadsheetCell's value.
             </summary>
         </member>
     </members>
