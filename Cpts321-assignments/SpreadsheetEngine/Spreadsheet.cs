@@ -30,6 +30,7 @@ namespace CptS321
                 for (int column = 1; column <= numberColumns; column++)
                 {
                     this.spreadSheet[row - 1].Add(new Cell(row, column));
+                    this.spreadSheet[row - 1][column - 1].PropertyChanged += this.UpdateSpreadsheet;
                 }
             }
         }
@@ -92,6 +93,29 @@ namespace CptS321
         }
 
         /// <summary>
+        /// Triggers CellPropertyChanged and is called whenever a single cell in spreadSheet has its text field changed.
+        /// </summary>
+        /// <param name="sender"> The cell that was changed. </param>
+        /// <param name="e"> The name of the property that was used for the change. </param>
+        public void UpdateSpreadsheet(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
+            if (changedCell.Text.StartsWith("="))
+            {
+                // extra cell - first get row
+                int row = int.Parse(changedCell.Text.Substring(1, changedCell.Text.Length - 2)); // already 1-based indexing.
+                int column = changedCell.Text[changedCell.Text.Length - 1] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
+                changedCell.Value = this.GetCell(row, column).Value;
+            }
+            else
+            {
+                changedCell.Value = changedCell.Text;
+            }
+
+            this.CellPropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+        }
+
+        /// <summary>
         /// Acts the same as a SpreadsheetCell, but can be initiated only inside of Spreadsheet.
         /// </summary>
         protected class Cell : CptS321.SpreadsheetCell
@@ -114,12 +138,7 @@ namespace CptS321
             {
                 get
                 {
-                    if (this.value == null || this.value[0] != '=')
-                    {
-                        return this.Text;
-                    }
-
-                    return this.Text;
+                    return this.value;
                 }
 
                 set

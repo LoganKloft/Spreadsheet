@@ -39,6 +39,13 @@
             <param name="columnIndex"> The column of the cell one wants to access. </param>
             <returns> Returns the cell at location (rowIndex, columnIndex) or null if such a cell does not exist. </returns>
         </member>
+        <member name="M:CptS321.Spreadsheet.UpdateSpreadsheet(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Triggers CellPropertyChanged and is called whenever a single cell in spreadSheet has its text field changed.
+            </summary>
+            <param name="sender"> The cell that was changed. </param>
+            <param name="e"> The name of the property that was used for the change. </param>
+        </member>
         <member name="T:CptS321.Spreadsheet.Cell">
             <summary>
             Acts the same as a SpreadsheetCell, but can be initiated only inside of Spreadsheet.

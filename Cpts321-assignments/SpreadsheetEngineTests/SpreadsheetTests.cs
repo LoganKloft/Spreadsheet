@@ -20,13 +20,28 @@ namespace SpreadsheetEngineTests
         /// Test if CellPropertyEvent triggers when a cell is changed.
         /// </summary>
         [Test]
-        public void TestCellPropertyChanged()
+        public void TestCellPropertyChangedWithNoEqual()
         {
             CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(5, 5);
             testSpreadsheet.CellPropertyChanged += this.HasSpreadsheetChanged;
-            CptS321.SpreadsheetCell cell = testSpreadsheet.GetCell(0, 0);
+            CptS321.SpreadsheetCell cell = testSpreadsheet.GetCell(1, 1);
             cell.Text = "test";
             Assert.IsTrue(this.isCellPropertyHandlerTriggered); // normal case
+        }
+
+        /// <summary>
+        /// Test UpdateSpreadsheet.
+        /// </summary>
+        [Test]
+        public void TestUpdateSpreadsheet()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(5, 5);
+            testSpreadsheet.CellPropertyChanged += this.HasSpreadsheetChanged;
+            CptS321.SpreadsheetCell cell1 = testSpreadsheet.GetCell(1, 1);
+            CptS321.SpreadsheetCell cell2 = testSpreadsheet.GetCell(1, 1);
+            cell1.Text = "test";
+            cell2.Text = "=1A";
+            Assert.AreEqual("test", cell2.Value); // normal case
         }
 
         /// <summary>
