@@ -38,9 +38,9 @@ namespace SpreadsheetEngineTests
             CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(5, 5);
             testSpreadsheet.CellPropertyChanged += this.HasSpreadsheetChanged;
             CptS321.SpreadsheetCell cell1 = testSpreadsheet.GetCell(1, 1);
-            CptS321.SpreadsheetCell cell2 = testSpreadsheet.GetCell(1, 1);
+            CptS321.SpreadsheetCell cell2 = testSpreadsheet.GetCell(2, 2);
             cell1.Text = "test";
-            cell2.Text = "=1A";
+            cell2.Text = "=A1";
             Assert.AreEqual("test", cell2.Value); // normal case
         }
 

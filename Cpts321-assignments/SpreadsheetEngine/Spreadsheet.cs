@@ -89,7 +89,7 @@ namespace CptS321
                 return null;
             }
 
-            return this.spreadSheet[rowIndex][columnIndex];
+            return this.spreadSheet[rowIndex - 1][columnIndex - 1];
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace CptS321
             if (changedCell.Text.StartsWith("="))
             {
                 // extra cell - first get row
-                int row = int.Parse(changedCell.Text.Substring(1, changedCell.Text.Length - 2)); // already 1-based indexing.
-                int column = changedCell.Text[changedCell.Text.Length - 1] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
+                int row = int.Parse(changedCell.Text.Substring(2)); // already 1-based indexing.
+                int column = changedCell.Text[1] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
                 changedCell.Value = this.GetCell(row, column).Value;
             }
             else
@@ -112,7 +112,7 @@ namespace CptS321
                 changedCell.Value = changedCell.Text;
             }
 
-            this.CellPropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+            this.CellPropertyChanged(sender, new System.ComponentModel.PropertyChangedEventArgs("Value"));
         }
 
         /// <summary>
