@@ -56,7 +56,7 @@ namespace SpreadsheetEngineTests
         public void TestGetCellInBounds()
         {
             CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(5, 5);
-            Assert.AreNotEqual(null, testSpreadsheet.GetCell(0, 0)); // normal case
+            Assert.AreNotEqual(null, testSpreadsheet.GetCell(1, 1)); // normal case
         }
 
         /// <summary>

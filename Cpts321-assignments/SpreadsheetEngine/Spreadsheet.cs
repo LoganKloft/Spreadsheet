@@ -14,7 +14,7 @@ namespace CptS321
     /// </summary>
     public class Spreadsheet : CptS321.SpreadsheetCell
     {
-        private List<List<Cell>> spreadSheet;
+        private List<List<Cell>> spreadSheet = new List<List<Cell>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
@@ -29,7 +29,7 @@ namespace CptS321
                 this.spreadSheet.Add(new List<Cell>());
                 for (int column = 1; column <= numberColumns; column++)
                 {
-                    this.spreadSheet[row].Add(new Cell(row, column));
+                    this.spreadSheet[row - 1].Add(new Cell(row, column));
                 }
             }
         }
@@ -44,7 +44,15 @@ namespace CptS321
         /// </summary>
         public int RowCount
         {
-            get { return 0; }
+            get
+            {
+                if (this.spreadSheet == null)
+                {
+                    return 0;
+                }
+
+                return this.spreadSheet.Count;
+            }
         }
 
         /// <summary>
@@ -52,7 +60,15 @@ namespace CptS321
         /// </summary>
         public int ColumnCount
         {
-            get { return 0; }
+            get
+            {
+                if (this.spreadSheet == null || this.spreadSheet.Count < 1)
+                {
+                    return 0;
+                }
+
+                return this.spreadSheet[0].Count;
+            }
         }
 
         /// <summary>
@@ -63,7 +79,16 @@ namespace CptS321
         /// <returns> Returns the cell at location (rowIndex, columnIndex) or null if such a cell does not exist. </returns>
         public CptS321.SpreadsheetCell GetCell(int rowIndex, int columnIndex)
         {
-            return null;
+            if (rowIndex < 1 || rowIndex > this.RowCount)
+            {
+                return null;
+            }
+            else if (columnIndex < 1 || columnIndex > this.ColumnCount)
+            {
+                return null;
+            }
+
+            return this.spreadSheet[rowIndex][columnIndex];
         }
 
         /// <summary>
