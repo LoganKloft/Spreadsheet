@@ -90,7 +90,7 @@ namespace SpreadsheetEngineTests
         {
             SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass();
             testCell.PropertyChanged += this.HasTextChanged;
-            testCell.TextInterface = "test";
+            testCell.Text = "test";
             Assert.IsTrue(this.isTextPropertyHandlerTriggered);
         }
 
@@ -102,8 +102,8 @@ namespace SpreadsheetEngineTests
         {
             SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass();
             testCell.PropertyChanged += this.HasTextChanged;
-            testCell.TextInterface = "test";
-            Assert.AreEqual("test", testCell.TextInterface);
+            testCell.Text = "test";
+            Assert.AreEqual("test", testCell.Value);
         }
 
         /// <summary>
@@ -126,8 +126,8 @@ namespace SpreadsheetEngineTests
         public void TestValuePropertyGetter()
         {
             SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass();
-            testCell.TextInterface = "test";
-            Assert.AreEqual("test", testCell.ValueInterface); // normal case (default)
+            testCell.Text = "test";
+            Assert.AreEqual("test", testCell.Value); // normal case (default)
         }
 
         /// <summary>
@@ -152,23 +152,6 @@ namespace SpreadsheetEngineTests
             public SpreadsheetCellTestClass(int rowIndex, int columnIndex)
                 : base(rowIndex, columnIndex)
             {
-            }
-
-            /// <summary>
-            /// Gets or Sets the protected Text property of SpreadsheetCell for testing purposes.
-            /// </summary>
-            public string TextInterface
-            {
-                get { return this.Text; }
-                set { this.Text = value; }
-            }
-
-            /// <summary>
-            /// Gets the protected Text property of SpreadsheetCell for testing purposes.
-            /// </summary>
-            public string ValueInterface
-            {
-                get { return this.Value; }
             }
         }
     }
