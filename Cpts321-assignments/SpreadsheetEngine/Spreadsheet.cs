@@ -12,7 +12,7 @@ namespace CptS321
     /// <summary>
     /// Factory for the SpreadsheetCell class.
     /// </summary>
-    public class Spreadsheet : CptS321.SpreadsheetCell
+    public class Spreadsheet
     {
         private List<List<Cell>> spreadSheet = new List<List<Cell>>();
 
@@ -118,7 +118,7 @@ namespace CptS321
         /// <summary>
         /// Acts the same as a SpreadsheetCell, but can be initiated only inside of Spreadsheet.
         /// </summary>
-        protected class Cell : CptS321.SpreadsheetCell
+        private class Cell : CptS321.SpreadsheetCell
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="Cell"/> class.
