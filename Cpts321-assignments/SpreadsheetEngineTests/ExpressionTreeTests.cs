@@ -197,5 +197,111 @@ namespace SpreadsheetEngineTests
 
             Assert.AreEqual(testValue, testExpressionTreeDictionary["A"].Value); // Normal
         }
+
+        /// <summary>
+        /// Tests an expression that has one variable.
+        /// </summary>
+        [Test]
+        public void TestEvaluateOneVariable()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
+            testExpressionTree.SetVariable("A", 2.0);
+            double expected = 2.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate()); // Edge
+        }
+
+        /// <summary>
+        /// Tests an expression that has one value.
+        /// </summary>
+        [Test]
+        public void TestEvaluateOneValue()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("5");
+            double expected = 5.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate()); // Edge
+        }
+
+        /// <summary>
+        /// Tests an expression that has only variables and addition.
+        /// </summary>
+        [Test]
+        public void TestEvaluateAdditionWithVariables()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+B");
+            testExpressionTree.SetVariable("A", 5.0);
+            testExpressionTree.SetVariable("B", 5.0);
+            double expected = 10.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
+        /// Tests an expression that has only values and addition.
+        /// </summary>
+        [Test]
+        public void TestEvaluateAdditionWithValues()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("5+5");
+            double expected = 10.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
+        /// Tests an expression that has variables, values, and addition.
+        /// </summary>
+        [Test]
+        public void TestEvaluateAdditionWithVariablesAndValues()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+5");
+            testExpressionTree.SetVariable("A", 5.0);
+            double expected = 10.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
+        /// Tests an expression that has variables, values, and subtraction.
+        /// </summary>
+        [Test]
+        public void TestEvaluateWithSubtraction()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A-5");
+            testExpressionTree.SetVariable("A", 10.0);
+            double expected = 5.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
+        /// Tests an expression that has variables, values, and multiplication.
+        /// </summary>
+        [Test]
+        public void TestEvaluateWithMultiplcation()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A*5");
+            testExpressionTree.SetVariable("A", 5.0);
+            double expected = 25.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
+        /// Tests an expression that has variables, values, and division.
+        /// </summary>
+        [Test]
+        public void TestEvaluateWithDivision()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A/5");
+            testExpressionTree.SetVariable("A", 5.0);
+            double expected = 1.0;
+            Assert.AreEqual(expected, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
+        /// Tests an expression that divides by zero.
+        /// </summary>
+        [Test]
+        public void TestEvaluateDivideByZero()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A/0");
+            testExpressionTree.SetVariable("A", 5.0);
+            Assert.Throws<System.ArgumentException>(() => testExpressionTree.Evaluate());
+        }
     }
 }

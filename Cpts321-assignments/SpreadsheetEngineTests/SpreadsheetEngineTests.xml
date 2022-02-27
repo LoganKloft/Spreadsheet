@@ -94,6 +94,51 @@
             Test providing 5.0 as the double value for the variableValue parameter.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateOneVariable">
+            <summary>
+            Tests an expression that has one variable.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateOneValue">
+            <summary>
+            Tests an expression that has one value.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateAdditionWithVariables">
+            <summary>
+            Tests an expression that has only variables and addition.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateAdditionWithValues">
+            <summary>
+            Tests an expression that has only values and addition.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateAdditionWithVariablesAndValues">
+            <summary>
+            Tests an expression that has variables, values, and addition.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateWithSubtraction">
+            <summary>
+            Tests an expression that has variables, values, and subtraction.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateWithMultiplcation">
+            <summary>
+            Tests an expression that has variables, values, and multiplication.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateWithDivision">
+            <summary>
+            Tests an expression that has variables, values, and division.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateDivideByZero">
+            <summary>
+            Tests an expression that divides by zero.
+            </summary>
+        </member>
         <member name="T:SpreadsheetEngineTests.ExpressionVariableTests">
             <summary>
             Class for testing the ExpressionVariable class in the SpreadsheetEngine class library.
