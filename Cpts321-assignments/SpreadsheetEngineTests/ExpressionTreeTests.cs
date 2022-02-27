@@ -85,6 +85,9 @@ namespace SpreadsheetEngineTests
             Assert.True(testExpressionTreeDictionary.ContainsKey("aa")); // Normal
         }
 
+        /// <summary>
+        /// Tests to ensure the expression is correctly parsed. For this parse, a combination of a character followed by a digit followed by a character.
+        /// </summary>
         [Test]
         public void TestConstructorCharacterIntegerCombination()
         {
@@ -96,103 +99,103 @@ namespace SpreadsheetEngineTests
             Assert.True(testExpressionTreeDictionary.ContainsKey("A2a")); // Normal
         }
 
-        ///// <summary>
-        ///// Test providing an empty string for the variableName parameter.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableEmptyString()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A1+B1+C1");
-        //    Assert.Throws<System.ArgumentException>(() => testExpressionTree.SetVariable(string.Empty, 5.0)); // Exceptional
-        //}
+        /// <summary>
+        /// Test providing an empty string for the variableName parameter.
+        /// </summary>
+        [Test]
+        public void TestSetVariableEmptyString()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A1+B1+C1");
+            Assert.Throws<System.ArgumentException>(() => testExpressionTree.SetVariable(string.Empty, 5.0)); // Exceptional
+        }
 
-        ///// <summary>
-        ///// Test providing a null string for the variableName parameter.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableNullString()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A1+B1+C1");
-        //    Assert.Throws<System.ArgumentException>(() => testExpressionTree.SetVariable(null, 5.0)); // Exceptional
-        //}
+        /// <summary>
+        /// Test providing a null string for the variableName parameter.
+        /// </summary>
+        [Test]
+        public void TestSetVariableNullString()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A1+B1+C1");
+            Assert.Throws<System.ArgumentException>(() => testExpressionTree.SetVariable(null, 5.0)); // Exceptional
+        }
 
-        ///// <summary>
-        ///// Test setting a variable that does not exist.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableDoesNotExist()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A1+B1+C1");
-        //    testExpressionTree.SetVariable("D1", 5.0);
-        //    Assert.Pass(); // Edge
-        //}
+        /// <summary>
+        /// Test setting a variable that does not exist.
+        /// </summary>
+        [Test]
+        public void TestSetVariableDoesNotExist()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A1+B1+C1");
+            testExpressionTree.SetVariable("D1", 5.0);
+            Assert.Pass(); // Edge
+        }
 
-        ///// <summary>
-        ///// Test providing the maximum double value for the variableValue parameter.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableValueMaximum()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
-        //    double testValue = double.MaxValue;
-        //    testExpressionTree.SetVariable("A", testValue);
+        /// <summary>
+        /// Test providing the maximum double value for the variableValue parameter.
+        /// </summary>
+        [Test]
+        public void TestSetVariableValueMaximum()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
+            double testValue = double.MaxValue;
+            testExpressionTree.SetVariable("A", testValue);
 
-        //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
-        //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
+            Type expressionTreeType = typeof(CptS321.ExpressionTree);
+            FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
-        //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
-        //}
+            Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
+        }
 
-        ///// <summary>
-        ///// Test providing the minimum double value for the variableValue parameter.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableValueMinimum()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
-        //    double testValue = double.MinValue;
-        //    testExpressionTree.SetVariable("A", testValue);
+        /// <summary>
+        /// Test providing the minimum double value for the variableValue parameter.
+        /// </summary>
+        [Test]
+        public void TestSetVariableValueMinimum()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
+            double testValue = double.MinValue;
+            testExpressionTree.SetVariable("A", testValue);
 
-        //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
-        //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
+            Type expressionTreeType = typeof(CptS321.ExpressionTree);
+            FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
-        //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
-        //}
+            Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
+        }
 
-        ///// <summary>
-        ///// Test providing 0.0 as the double value for the variableValue parameter.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableValueZero()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
-        //    double testValue = 0.0;
-        //    testExpressionTree.SetVariable("A", testValue);
+        /// <summary>
+        /// Test providing 0.0 as the double value for the variableValue parameter.
+        /// </summary>
+        [Test]
+        public void TestSetVariableValueZero()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
+            double testValue = 0.0;
+            testExpressionTree.SetVariable("A", testValue);
 
-        //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
-        //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
+            Type expressionTreeType = typeof(CptS321.ExpressionTree);
+            FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
-        //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
-        //}
+            Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
+        }
 
-        ///// <summary>
-        ///// Test providing 5.0 as the double value for the variableValue parameter.
-        ///// </summary>
-        //[Test]
-        //public void TestSetVariableValueNormal()
-        //{
-        //    CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
-        //    double testValue = 5.0;
-        //    testExpressionTree.SetVariable("A", testValue);
+        /// <summary>
+        /// Test providing 5.0 as the double value for the variableValue parameter.
+        /// </summary>
+        [Test]
+        public void TestSetVariableValueNormal()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A");
+            double testValue = 5.0;
+            testExpressionTree.SetVariable("A", testValue);
 
-        //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
-        //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
+            Type expressionTreeType = typeof(CptS321.ExpressionTree);
+            FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
-        //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Normal
-        //}
+            Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Normal
+        }
     }
 }
