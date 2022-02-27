@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpreadsheetEngineTests</name>
+    </assembly>
+    <members>
+        <member name="T:SpreadsheetEngineTests.BinaryOperatorNodeTests">
+            <summary>
+            Class the contains the tests for the BinaryOperatorNode class in the SpreadsheetEngine class library.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeTests.TestLeftNode">
+            <summary>
+            Tests the proper storing of the leftNode in a BinaryOperatorNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeTests.TestRightNode">
+            <summary>
+            Tests the proper storing of the rightNode in a BinaryOperatorNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeTests.TestOp">
+            <summary>
+            Tests the proper storing of the op in a BinaryOperatorNode.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.ExpressionTreeTests">
+            <summary>
+            Class for testing the ExpressionTree class in class library SpreadsheetEngine.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorWithNoVariables">
+            <summary>
+            Tests to ensure the expression is correctly parsed. For this parse, there are no variables.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorCapitalCharacter">
+            <summary>
+            Tests to ensure the expression is correctly parsed. For this parse, a single uppercase character.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorLowercaseCharacter">
+            <summary>
+            Tests to ensure the expression is correctly parsed. For this parse, a single lowercase character.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorCharacterInteger">
+            <summary>
+            Tests to ensure the expression is correctly parsed. For this parse, a combination of a character followed by one or more integers.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorCharacterCharacter">
+            <summary>
+            Tests to ensure the expression is correctly parsed. For this parse, a combination of more than one character.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.ExpressionVariableTests">
+            <summary>
+            Class for testing the ExpressionVariable class in the SpreadsheetEngine class library.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionVariableTests.TestName">
+            <summary>
+            Tests the getter and setter for the Name property of the ExpressionVariable class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionVariableTests.TestValue">
+            <summary>
+            Tests the getter and setter for the Value property of the ExpressionVaraible class.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetCellTests">
+            <summary>
+            Class that contains the tests for the SpreadsheetCell class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.SetUp">
+            <summary>
+            Resets fields required for testing events.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestRowIndexPropertyNormal">
+            <summary>
+            Tests the RowIndex property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestRowIndexPropertyMinimum">
+            <summary>
+            Tests the RowIndex property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestRowIndexPropertyMaximum">
+            <summary>
+            Tests the RowIndex property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestColumnIndexProperty">
+            <summary>
+            Tests the ColumnIndex property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestColumnIndexPropertyMinimum">
+            <summary>
+            Tests the ColumnIndex property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestColumnIndexPropertyMaximum">
+            <summary>
+            Tests the ColumnIndex property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestTextPropertyEvent">
+            <summary>
+            Tests the Text property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestTextProperty">
+            <summary>
+            Tests the Text property.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.HasTextChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Used in pair with TestTextProperty to assure the PropertyHandler is triggered.
+            </summary>
+            <param name="sender"> Class from which the event was triggered. </param>
+            <param name="e"> Name of the property that was triggered. </param>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestValuePropertyGetter">
+            <summary>
+            Tests the Value property.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass">
+            <summary>
+            Allows ability to test abstract class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass"/> class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass"/> class.
+            Constructor that allows creation of a SpreadsheetCell with a given rowIndex and columnIndex.
+            </summary>
+            <param name="rowIndex"> Initialize field rowIndex with parameter rowIndex. </param>
+            <param name="columnIndex"> Initialize field columnIndex with paremeter columnIndex. </param>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetTests">
+            <summary>
+            Contains the tests for the Spreadsheet class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestCellPropertyChangedWithNoEqual">
+            <summary>
+            Test if CellPropertyEvent triggers when a cell is changed.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestUpdateSpreadsheet">
+            <summary>
+            Test UpdateSpreadsheet.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.HasSpreadsheetChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Allows testing of the CellPropertyChagned event.
+            </summary>
+            <param name="sender"> Object that triggered the event. </param>
+            <param name="e"> Property that triggered the event. </param>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestGetCellOutOfBounds">
+            <summary>
+            Test the call to GetCell when the arguments are out of bounds.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestGetCellInBounds">
+            <summary>
+            Test the call to GetCell when the arguments are in bounds.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestColumnCountIsZero">
+            <summary>
+            Test ColumnCount when there are no cells.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestColumnCountIsFive">
+            <summary>
+            Test ColumnCount when the spreadsheet is 5x5.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestRowCountIsZero">
+            <summary>
+            Test RowCount when there are no cells.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestRowCountIsFive">
+            <summary>
+            Test RowCount when the spreadsheet is 5x5.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.ValueNodeTests">
+            <summary>
+            Tests for the ValueNode class of the SpreadsheetEngine class library.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ValueNodeTests.TestValueNode">
+            <summary>
+            Tests the proper storing of a normal value in ValueNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ValueNodeTests.TestValueNodeZero">
+            <summary>
+            Tests the proper storing of a zero value in ValueNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ValueNodeTests.TestValueNodeMaxMinimum">
+            <summary>
+            Tests the proper storing of a minimum value in a ValueNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ValueNodeTests.TestValueNodeMaxValue">
+            <summary>
+            Tests the proper storing of a maximum value in a ValueNode.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.VariableNodeTests">
+            <summary>
+            Class that contains test for the VariableNode class in the SpreadsheetEngine class library.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.VariableNodeTests.TestVariableNode">
+            <summary>
+            Affirms that an ExpressionVariable is properly stored inside of a VariableNode.
+            </summary>
+        </member>
+    </members>
+</doc>
