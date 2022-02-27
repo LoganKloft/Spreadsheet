@@ -15,7 +15,6 @@ namespace CptS321
     {
         private ExpressionVariable variable;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableNode"/> class.
         /// </summary>
@@ -31,6 +30,15 @@ namespace CptS321
         public ExpressionVariable Variable
         {
             get { return this.variable; }
+        }
+
+        /// <summary>
+        /// The result of this node.
+        /// </summary>
+        /// <returns> The value field of variable. </returns>
+        public override double Compute()
+        {
+            return this.Variable.Value;
         }
     }
 }

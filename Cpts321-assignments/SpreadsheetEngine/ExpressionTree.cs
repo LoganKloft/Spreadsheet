@@ -14,6 +14,7 @@ namespace CptS321
     public class ExpressionTree
     {
         private Dictionary<string, CptS321.ExpressionVariable> variables = new Dictionary<string, CptS321.ExpressionVariable>();
+        private Node headNode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -21,7 +22,12 @@ namespace CptS321
         /// <param name="expression"> The expression to be evaluated in string form. </param>
         public ExpressionTree(string expression)
         {
-            string[] parsedExpression = this.ParseExpression(expression);
+            Queue<Node> nodes = new Queue<Node>();
+            Queue<string> operatorStack = new Queue<string>();
+
+            List<string> parsedExpression = this.ParseExpression(expression);
+
+            // Add variables to the dictionary.
             foreach (string s in parsedExpression)
             {
                 if (char.IsLetter(s[0]))
@@ -33,6 +39,65 @@ namespace CptS321
                     }
                 }
             }
+
+            // Create the Expression Tree.
+            string operatorString = "+-/*";
+
+            foreach (string s in parsedExpression)
+            {
+                if (operatorString.Contains(s))
+                {
+                    // s is an operator
+                    operatorStack.Enqueue(s);
+                }
+                else
+                {
+                    // s is an operand
+                    if (char.IsLetter(s[0]))
+                    {
+                        // s is a variable
+                        nodes.Enqueue(new VariableNode(this.variables[s]));
+                    }
+                    else
+                    {
+                        // s is a value
+                        int value = 0;
+                        int.TryParse(s, out value);
+
+                        nodes.Enqueue(new ValueNode(value));
+                    }
+
+                    if (nodes.Count > 1 && operatorStack.Count > 0)
+                    {
+                        // enough nodes to create a new headNode.
+                        string op = operatorStack.Dequeue();
+                        BinaryOperatorNode interiorNode = null;
+
+                        if (op == "+")
+                        {
+                            interiorNode = new BinaryOperatorNode(new AdditionBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                        }
+                        else if (op == "-")
+                        {
+                            interiorNode = new BinaryOperatorNode(new SubtractionBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                        }
+                        else if (op == "/")
+                        {
+                            interiorNode = new BinaryOperatorNode(new DivisionBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                        }
+                        else
+                        {
+                            // multiplication
+                            interiorNode = new BinaryOperatorNode(new MultiplicationBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                        }
+
+                        // push node to queue
+                        nodes.Enqueue(interiorNode);
+                    }
+                }
+            }
+
+            this.headNode = nodes.Dequeue();
         }
 
         /// <summary>
@@ -64,18 +129,47 @@ namespace CptS321
         /// <returns> A double value that is the result of evaluating the expression. </returns>
         public double Evaluate()
         {
-            return 0.0;
+            return this.headNode.Compute();
         }
 
         /// <summary>
         /// Extracts the operands and operators from the input string.
         /// </summary>
         /// <param name="expression"> A string represening an expression. </param>
-        /// <returns> The list operands and operators contained in expression. </returns>
-        private string[] ParseExpression(string expression)
+        /// <returns> A list of the operands and operators contained in expression an expression. </returns>
+        private List<string> ParseExpression(string expression)
         {
-            char[] separators = { '+', '-', '/', '*' };
-            return expression.Split(separators);
+            List<string> expressionAsList = new List<string>();
+            string expressionElement = string.Empty;
+
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (!char.IsLetterOrDigit(expression[i]))
+                {
+                    // found a delimiter
+                    if (!string.IsNullOrEmpty(expressionElement))
+                    {
+                        expressionAsList.Add(expressionElement);
+                        expressionAsList.Add(expression[i].ToString());
+                        expressionElement = string.Empty;
+                    }
+                    else
+                    {
+                        expressionElement += expression[i].ToString();
+                    }
+                }
+                else
+                {
+                    expressionElement += expression[i].ToString();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(expressionElement))
+            {
+                expressionAsList.Add(expressionElement);
+            }
+
+            return expressionAsList;
         }
     }
 }

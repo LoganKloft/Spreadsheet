@@ -58,6 +58,12 @@
             Gets op.
             </summary>
         </member>
+        <member name="M:CptS321.BinaryOperatorNode.Compute">
+            <summary>
+            The result of this node.
+            </summary>
+            <returns> The value. </returns>
+        </member>
         <member name="T:CptS321.DivisionBinaryOperator">
             <summary>
             Represents a / operator.
@@ -101,7 +107,7 @@
             Extracts the operands and operators from the input string.
             </summary>
             <param name="expression"> A string represening an expression. </param>
-            <returns> The list operands and operators contained in expression. </returns>
+            <returns> A list of the operands and operators contained in expression an expression. </returns>
         </member>
         <member name="T:CptS321.ExpressionVariable">
             <summary>
@@ -142,6 +148,12 @@
             <summary>
             For polymorphism of future nodes.
             </summary>
+        </member>
+        <member name="M:CptS321.Node.Compute">
+            <summary>
+            Everynode has a value that it can return, Compute returns that value.
+            </summary>
+            <returns> Returns the value of the Node. </returns>
         </member>
         <member name="T:CptS321.Spreadsheet">
             <summary>
@@ -285,6 +297,12 @@
             Gets the value of the node.
             </summary>
         </member>
+        <member name="M:CptS321.ValueNode.Compute">
+            <summary>
+            The result of this node.
+            </summary>
+            <returns> The value. </returns>
+        </member>
         <member name="T:CptS321.VariableNode">
             <summary>
             Leaf node that represents a variable in an expression.
@@ -300,6 +318,12 @@
             <summary>
             Gets the variable of this node.
             </summary>
+        </member>
+        <member name="M:CptS321.VariableNode.Compute">
+            <summary>
+            The result of this node.
+            </summary>
+            <returns> The value field of variable. </returns>
         </member>
     </members>
 </doc>

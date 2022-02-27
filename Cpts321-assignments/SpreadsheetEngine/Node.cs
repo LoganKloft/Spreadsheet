@@ -13,5 +13,10 @@ namespace CptS321
     /// </summary>
     public abstract class Node
     {
+        /// <summary>
+        /// Everynode has a value that it can return, Compute returns that value.
+        /// </summary>
+        /// <returns> Returns the value of the Node. </returns>
+        public abstract double Compute();
     }
 }

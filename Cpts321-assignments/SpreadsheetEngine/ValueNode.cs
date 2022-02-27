@@ -31,5 +31,14 @@ namespace CptS321
         {
             get { return this.value; }
         }
+
+        /// <summary>
+        /// The result of this node.
+        /// </summary>
+        /// <returns> The value. </returns>
+        public override double Compute()
+        {
+            return this.Value;
+        }
     }
 }
