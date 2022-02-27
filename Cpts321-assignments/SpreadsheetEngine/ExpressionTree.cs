@@ -36,23 +36,26 @@ namespace CptS321
         }
 
         /// <summary>
-        /// Extracts the operands and operators from the input string.
-        /// </summary>
-        /// <param name="expression"> A string represening an expression. </param>
-        /// <returns> The list operands and operators contained in expression. </returns>
-        private string[] ParseExpression(string expression)
-        {
-            char[] separators = { '+', '-', '/', '*' };
-            return expression.Split(separators);
-        }
-
-        /// <summary>
         /// Sets the specified variable within the ExpresionTree variables dictionary.
         /// </summary>
         /// <param name="variableName"> The name of the variable, used as the key in the variable dictionary. </param>
         /// <param name="variableValue"> The value associated with the variable. </param>
         public void SetVariable(string variableName, double variableValue)
         {
+            if (variableName == null)
+            {
+                throw new ArgumentException("In SetVariable of ExpressionTree: parameter variableName is null.");
+            }
+
+            if (variableName == string.Empty)
+            {
+                throw new ArgumentException("In SetVariable of ExpressionTree: parameter variableName is an empty string.");
+            }
+
+            if (this.variables.ContainsKey(variableName))
+            {
+                this.variables[variableName].Value = variableValue;
+            }
         }
 
         /// <summary>
@@ -62,6 +65,17 @@ namespace CptS321
         public double Evaluate()
         {
             return 0.0;
+        }
+
+        /// <summary>
+        /// Extracts the operands and operators from the input string.
+        /// </summary>
+        /// <param name="expression"> A string represening an expression. </param>
+        /// <returns> The list operands and operators contained in expression. </returns>
+        private string[] ParseExpression(string expression)
+        {
+            char[] separators = { '+', '-', '/', '*' };
+            return expression.Split(separators);
         }
     }
 }

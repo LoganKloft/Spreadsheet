@@ -54,6 +54,46 @@
             Tests to ensure the expression is correctly parsed. For this parse, a combination of more than one character.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorCharacterIntegerCombination">
+            <summary>
+            Tests to ensure the expression is correctly parsed. For this parse, a combination of a character followed by a digit followed by a character.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableEmptyString">
+            <summary>
+            Test providing an empty string for the variableName parameter.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableNullString">
+            <summary>
+            Test providing a null string for the variableName parameter.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableDoesNotExist">
+            <summary>
+            Test setting a variable that does not exist.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableValueMaximum">
+            <summary>
+            Test providing the maximum double value for the variableValue parameter.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableValueMinimum">
+            <summary>
+            Test providing the minimum double value for the variableValue parameter.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableValueZero">
+            <summary>
+            Test providing 0.0 as the double value for the variableValue parameter.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestSetVariableValueNormal">
+            <summary>
+            Test providing 5.0 as the double value for the variableValue parameter.
+            </summary>
+        </member>
         <member name="T:SpreadsheetEngineTests.ExpressionVariableTests">
             <summary>
             Class for testing the ExpressionVariable class in the SpreadsheetEngine class library.

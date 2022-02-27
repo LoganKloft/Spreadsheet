@@ -83,13 +83,6 @@
             </summary>
             <param name="expression"> The expression to be evaluated in string form. </param>
         </member>
-        <member name="M:CptS321.ExpressionTree.ParseExpression(System.String)">
-            <summary>
-            Extracts the operands and operators from the input string.
-            </summary>
-            <param name="expression"> A string represening an expression. </param>
-            <returns> The list operands and operators contained in expression. </returns>
-        </member>
         <member name="M:CptS321.ExpressionTree.SetVariable(System.String,System.Double)">
             <summary>
             Sets the specified variable within the ExpresionTree variables dictionary.
@@ -102,6 +95,13 @@
             Evaluates the expression stored ExpressionTree.
             </summary>
             <returns> A double value that is the result of evaluating the expression. </returns>
+        </member>
+        <member name="M:CptS321.ExpressionTree.ParseExpression(System.String)">
+            <summary>
+            Extracts the operands and operators from the input string.
+            </summary>
+            <param name="expression"> A string represening an expression. </param>
+            <returns> The list operands and operators contained in expression. </returns>
         </member>
         <member name="T:CptS321.ExpressionVariable">
             <summary>
