@@ -36,7 +36,7 @@ namespace CptS321
         /// The result of this node.
         /// </summary>
         /// <returns> The value field of variable. </returns>
-        public override double Compute()
+        public override double Evaluate()
         {
             return this.Variable.Value;
         }

@@ -15,6 +15,7 @@ namespace CptS321
     {
         private Dictionary<string, CptS321.ExpressionVariable> variables = new Dictionary<string, CptS321.ExpressionVariable>();
         private Node headNode;
+        private string expression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -22,10 +23,112 @@ namespace CptS321
         /// <param name="expression"> The expression to be evaluated in string form. </param>
         public ExpressionTree(string expression)
         {
-            Queue<Node> nodes = new Queue<Node>();
-            Queue<string> operatorStack = new Queue<string>();
+            this.expression = expression;
 
-            List<string> parsedExpression = this.ParseExpression(expression);
+            // Add variables to the dictionary.
+            this.LoadVariables();
+
+            // Build the ExpressionTree
+            this.Build();
+        }
+
+        /// <summary>
+        /// Gets or Sets expression.
+        /// </summary>
+        public string Expression
+        {
+            get
+            {
+                return this.expression;
+            }
+
+            set
+            {
+                this.expression = value;
+                this.LoadVariables();
+                this.Build();
+            }
+        }
+
+        /// <summary>
+        /// Sets the specified variable within the ExpresionTree variables dictionary.
+        /// </summary>
+        /// <param name="variableName"> The name of the variable, used as the key in the variable dictionary. </param>
+        /// <param name="variableValue"> The value associated with the variable. </param>
+        public void SetVariable(string variableName, double variableValue)
+        {
+            if (variableName == null)
+            {
+                throw new ArgumentException("In SetVariable of ExpressionTree: parameter variableName is null.");
+            }
+
+            if (variableName == string.Empty)
+            {
+                throw new ArgumentException("In SetVariable of ExpressionTree: parameter variableName is an empty string.");
+            }
+
+            if (this.variables.ContainsKey(variableName))
+            {
+                this.variables[variableName].Value = variableValue;
+            }
+        }
+
+        /// <summary>
+        /// Evaluates the expression stored ExpressionTree.
+        /// </summary>
+        /// <returns> A double value that is the result of evaluating the expression. </returns>
+        public double Evaluate()
+        {
+            return this.headNode.Evaluate();
+        }
+
+        /// <summary>
+        /// Extracts the operands and operators from the input string.
+        /// </summary>
+        /// <param name="expression"> A string represening an expression. </param>
+        /// <returns> A list of the operands and operators contained in expression an expression. </returns>
+        private List<string> ParseExpression(string expression)
+        {
+            List<string> expressionAsList = new List<string>();
+            string expressionElement = string.Empty;
+
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (!char.IsLetterOrDigit(expression[i]))
+                {
+                    // found a delimiter
+                    if (!string.IsNullOrEmpty(expressionElement))
+                    {
+                        expressionAsList.Add(expressionElement);
+                        expressionAsList.Add(expression[i].ToString());
+                        expressionElement = string.Empty;
+                    }
+                    else
+                    {
+                        expressionElement += expression[i].ToString();
+                    }
+                }
+                else
+                {
+                    expressionElement += expression[i].ToString();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(expressionElement))
+            {
+                expressionAsList.Add(expressionElement);
+            }
+
+            return expressionAsList;
+        }
+
+        /// <summary>
+        /// Resets the variable dictionary and fills it out again.
+        /// </summary>
+        private void LoadVariables()
+        {
+            this.variables.Clear();
+            List<string> parsedExpression = this.ParseExpression(this.expression);
 
             // Add variables to the dictionary.
             foreach (string s in parsedExpression)
@@ -39,6 +142,17 @@ namespace CptS321
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Builds the parse tree based off of the current expression string.
+        /// </summary>
+        private void Build()
+        {
+            Queue<Node> nodes = new Queue<Node>();
+            Queue<string> operatorStack = new Queue<string>();
+
+            List<string> parsedExpression = this.ParseExpression(this.expression);
 
             // Create the Expression Tree.
             string operatorString = "+-/*";
@@ -98,78 +212,6 @@ namespace CptS321
             }
 
             this.headNode = nodes.Dequeue();
-        }
-
-        /// <summary>
-        /// Sets the specified variable within the ExpresionTree variables dictionary.
-        /// </summary>
-        /// <param name="variableName"> The name of the variable, used as the key in the variable dictionary. </param>
-        /// <param name="variableValue"> The value associated with the variable. </param>
-        public void SetVariable(string variableName, double variableValue)
-        {
-            if (variableName == null)
-            {
-                throw new ArgumentException("In SetVariable of ExpressionTree: parameter variableName is null.");
-            }
-
-            if (variableName == string.Empty)
-            {
-                throw new ArgumentException("In SetVariable of ExpressionTree: parameter variableName is an empty string.");
-            }
-
-            if (this.variables.ContainsKey(variableName))
-            {
-                this.variables[variableName].Value = variableValue;
-            }
-        }
-
-        /// <summary>
-        /// Evaluates the expression stored ExpressionTree.
-        /// </summary>
-        /// <returns> A double value that is the result of evaluating the expression. </returns>
-        public double Evaluate()
-        {
-            return this.headNode.Compute();
-        }
-
-        /// <summary>
-        /// Extracts the operands and operators from the input string.
-        /// </summary>
-        /// <param name="expression"> A string represening an expression. </param>
-        /// <returns> A list of the operands and operators contained in expression an expression. </returns>
-        private List<string> ParseExpression(string expression)
-        {
-            List<string> expressionAsList = new List<string>();
-            string expressionElement = string.Empty;
-
-            for (int i = 0; i < expression.Length; i++)
-            {
-                if (!char.IsLetterOrDigit(expression[i]))
-                {
-                    // found a delimiter
-                    if (!string.IsNullOrEmpty(expressionElement))
-                    {
-                        expressionAsList.Add(expressionElement);
-                        expressionAsList.Add(expression[i].ToString());
-                        expressionElement = string.Empty;
-                    }
-                    else
-                    {
-                        expressionElement += expression[i].ToString();
-                    }
-                }
-                else
-                {
-                    expressionElement += expression[i].ToString();
-                }
-            }
-
-            if (!string.IsNullOrEmpty(expressionElement))
-            {
-                expressionAsList.Add(expressionElement);
-            }
-
-            return expressionAsList;
         }
     }
 }
