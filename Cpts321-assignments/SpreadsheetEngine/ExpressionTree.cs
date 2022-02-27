@@ -13,7 +13,7 @@ namespace CptS321
     /// </summary>
     public class ExpressionTree
     {
-        private Dictionary<string, CptS321.ExpressionVariable> variables;
+        private Dictionary<string, CptS321.ExpressionVariable> variables = new Dictionary<string, CptS321.ExpressionVariable>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -21,6 +21,29 @@ namespace CptS321
         /// <param name="expression"> The expression to be evaluated in string form. </param>
         public ExpressionTree(string expression)
         {
+            string[] parsedExpression = this.ParseExpression(expression);
+            foreach (string s in parsedExpression)
+            {
+                if (char.IsLetter(s[0]))
+                {
+                    // s is a variable, add to dictionary if not already in it.
+                    if (!this.variables.ContainsKey(s))
+                    {
+                        this.variables.Add(s, new ExpressionVariable(s));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Extracts the operands and operators from the input string.
+        /// </summary>
+        /// <param name="expression"> A string represening an expression. </param>
+        /// <returns> The list operands and operators contained in expression. </returns>
+        private string[] ParseExpression(string expression)
+        {
+            char[] separators = { '+', '-', '/', '*' };
+            return expression.Split(separators);
         }
 
         /// <summary>

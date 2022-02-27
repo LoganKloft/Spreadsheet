@@ -24,7 +24,7 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("1+12+123123");
             Type expressionTreeType = typeof(CptS321.ExpressionTree);
             FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
             Assert.AreEqual(testExpressionTreeDictionary.Count, 0); // Normal
         }
@@ -38,7 +38,7 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+a+A2+aa+A2a");
             Type expressionTreeType = typeof(CptS321.ExpressionTree);
             FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
             Assert.True(testExpressionTreeDictionary.ContainsKey("A")); // Normal
         }
@@ -52,7 +52,7 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+a+A2+aa+A2a");
             Type expressionTreeType = typeof(CptS321.ExpressionTree);
             FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
             Assert.True(testExpressionTreeDictionary.ContainsKey("a")); // Normal
         }
@@ -66,7 +66,7 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+a+A2+aa+A2a");
             Type expressionTreeType = typeof(CptS321.ExpressionTree);
             FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
             Assert.True(testExpressionTreeDictionary.ContainsKey("A2")); // Normal
         }
@@ -80,9 +80,9 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+a+A2+aa+A2a");
             Type expressionTreeType = typeof(CptS321.ExpressionTree);
             FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
-            Assert.True(testExpressionTreeDictionary.ContainsKey("a2a")); // Normal
+            Assert.True(testExpressionTreeDictionary.ContainsKey("aa")); // Normal
         }
 
         [Test]
@@ -91,9 +91,9 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A+a+A2+aa+A2a");
             Type expressionTreeType = typeof(CptS321.ExpressionTree);
             FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+            Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
-            Assert.True(testExpressionTreeDictionary.ContainsKey("A")); // Normal
+            Assert.True(testExpressionTreeDictionary.ContainsKey("A2a")); // Normal
         }
 
         ///// <summary>
@@ -139,7 +139,7 @@ namespace SpreadsheetEngineTests
 
         //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
         //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
         //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
         //}
@@ -156,7 +156,7 @@ namespace SpreadsheetEngineTests
 
         //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
         //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
         //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
         //}
@@ -173,7 +173,7 @@ namespace SpreadsheetEngineTests
 
         //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
         //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
         //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Edge
         //}
@@ -190,7 +190,7 @@ namespace SpreadsheetEngineTests
 
         //    Type expressionTreeType = typeof(CptS321.ExpressionTree);
         //    FieldInfo expressionTreeInfo = expressionTreeType.GetField("variables", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    Dictionary<string, double> testExpressionTreeDictionary = (Dictionary<string, double>)expressionTreeInfo.GetValue(testExpressionTree);
+        //    Dictionary<string, CptS321.ExpressionVariable> testExpressionTreeDictionary = (Dictionary<string, CptS321.ExpressionVariable>)expressionTreeInfo.GetValue(testExpressionTree);
 
         //    Assert.AreEqual(testExpressionTreeDictionary["A"].Value, testValue); // Normal
         //}
