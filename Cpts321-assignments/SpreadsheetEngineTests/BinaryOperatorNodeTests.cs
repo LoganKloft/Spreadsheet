@@ -35,7 +35,7 @@ namespace SpreadsheetEngineTests
             CptS321.BinaryOperatorNode binaryOperatorNode = new CptS321.BinaryOperatorNode(null, null, null);
             CptS321.ValueNode actual = new CptS321.ValueNode(10.0);
             binaryOperatorNode.RightNode = actual;
-            Assert.AreEqual(binaryOperatorNode.LeftNode, actual); // Normal
+            Assert.AreEqual(binaryOperatorNode.RightNode, actual); // Normal
         }
 
         /// <summary>
