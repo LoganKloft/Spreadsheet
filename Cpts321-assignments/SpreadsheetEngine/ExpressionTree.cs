@@ -189,20 +189,20 @@ namespace CptS321
 
                         if (op == "+")
                         {
-                            interiorNode = new BinaryOperatorNode(new AdditionBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                            interiorNode = new CptS321.AdditionNode(nodes.Dequeue(), nodes.Dequeue());
                         }
                         else if (op == "-")
                         {
-                            interiorNode = new BinaryOperatorNode(new SubtractionBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                            interiorNode = new CptS321.SubtractionNode(nodes.Dequeue(), nodes.Dequeue());
                         }
                         else if (op == "/")
                         {
-                            interiorNode = new BinaryOperatorNode(new DivisionBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                            interiorNode = new CptS321.DivisionNode(nodes.Dequeue(), nodes.Dequeue());
                         }
                         else
                         {
                             // multiplication
-                            interiorNode = new BinaryOperatorNode(new MultiplicationBinaryOperator(), nodes.Dequeue(), nodes.Dequeue());
+                            interiorNode = new CptS321.MultiplicationNode(nodes.Dequeue(), nodes.Dequeue());
                         }
 
                         // push node to queue

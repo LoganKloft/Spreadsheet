@@ -11,21 +11,18 @@ namespace CptS321
     /// <summary>
     /// Class that represents an operator in an expression.
     /// </summary>
-    public class BinaryOperatorNode : Node
+    public abstract class BinaryOperatorNode : Node
     {
         private Node leftNode;
         private Node rightNode;
-        private BinaryOperator op;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryOperatorNode"/> class.
         /// </summary>
-        /// <param name="op"> The operator of the BinaryOperatorNode. </param>
         /// <param name="leftNode"> Reference to the left node. </param>
         /// <param name="rightNode"> Reference to the right node. </param>
-        public BinaryOperatorNode(BinaryOperator op, Node leftNode, Node rightNode)
+        public BinaryOperatorNode(Node leftNode = null, Node rightNode = null)
         {
-            this.op = op;
             this.LeftNode = leftNode;
             this.RightNode = rightNode;
         }
@@ -46,23 +43,6 @@ namespace CptS321
         {
             get { return this.rightNode; }
             set { this.rightNode = value; }
-        }
-
-        /// <summary>
-        /// Gets op.
-        /// </summary>
-        public BinaryOperator Op
-        {
-            get { return this.op; }
-        }
-
-        /// <summary>
-        /// The result of this node.
-        /// </summary>
-        /// <returns> The value. </returns>
-        public override double Evaluate()
-        {
-            return this.Op.Compute(this.LeftNode.Evaluate(), this.RightNode.Evaluate());
         }
     }
 }

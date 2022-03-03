@@ -4,6 +4,161 @@
         <name>SpreadsheetEngine</name>
     </assembly>
     <members>
+        <member name="T:CptS321.AdditionNode">
+            <summary>
+            Represents the addition binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.AdditionNode.#ctor(CptS321.Node,CptS321.Node)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.AdditionNode"/> class.
+            </summary>
+            <param name="leftNode"> The left child. </param>
+            <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="M:CptS321.AdditionNode.Evaluate">
+            <summary>
+            Adds the left and right node together.
+            </summary>
+            <returns> The value of the left node plus the right node. </returns>
+        </member>
+        <member name="T:CptS321.BinaryOperatorNode">
+            <summary>
+            Class that represents an operator in an expression.
+            </summary>
+        </member>
+        <member name="M:CptS321.BinaryOperatorNode.#ctor(CptS321.Node,CptS321.Node)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.BinaryOperatorNode"/> class.
+            </summary>
+            <param name="leftNode"> Reference to the left node. </param>
+            <param name="rightNode"> Reference to the right node. </param>
+        </member>
+        <member name="P:CptS321.BinaryOperatorNode.LeftNode">
+            <summary>
+            Gets or sets leftNode.
+            </summary>
+        </member>
+        <member name="P:CptS321.BinaryOperatorNode.RightNode">
+            <summary>
+            Gets or sets rightNode.
+            </summary>
+        </member>
+        <member name="T:CptS321.DivisionNode">
+            <summary>
+            Represents the division binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.DivisionNode.#ctor(CptS321.Node,CptS321.Node)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.DivisionNode"/> class.
+            </summary>
+            <param name="leftNode"> The left child. </param>
+            <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="M:CptS321.DivisionNode.Evaluate">
+            <summary>
+            Divides the left and right node.
+            </summary>
+            <returns> The value of the left node divided by the right node. </returns>
+        </member>
+        <member name="T:CptS321.ExpressionTree">
+            <summary>
+            Class for evaluating expressions.
+            </summary>
+        </member>
+        <member name="M:CptS321.ExpressionTree.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.ExpressionTree"/> class.
+            </summary>
+            <param name="expression"> The expression to be evaluated in string form. </param>
+        </member>
+        <member name="P:CptS321.ExpressionTree.Expression">
+            <summary>
+            Gets or Sets expression.
+            </summary>
+        </member>
+        <member name="M:CptS321.ExpressionTree.SetVariable(System.String,System.Double)">
+            <summary>
+            Sets the specified variable within the ExpresionTree variables dictionary.
+            </summary>
+            <param name="variableName"> The name of the variable, used as the key in the variable dictionary. </param>
+            <param name="variableValue"> The value associated with the variable. </param>
+        </member>
+        <member name="M:CptS321.ExpressionTree.Evaluate">
+            <summary>
+            Evaluates the expression stored ExpressionTree.
+            </summary>
+            <returns> A double value that is the result of evaluating the expression. </returns>
+        </member>
+        <member name="M:CptS321.ExpressionTree.ParseExpression(System.String)">
+            <summary>
+            Extracts the operands and operators from the input string.
+            </summary>
+            <param name="expression"> A string represening an expression. </param>
+            <returns> A list of the operands and operators contained in expression an expression. </returns>
+        </member>
+        <member name="M:CptS321.ExpressionTree.LoadVariables">
+            <summary>
+            Resets the variable dictionary and fills it out again.
+            </summary>
+        </member>
+        <member name="M:CptS321.ExpressionTree.Build">
+            <summary>
+            Builds the parse tree based off of the current expression string.
+            </summary>
+        </member>
+        <member name="T:CptS321.ExpressionVariable">
+            <summary>
+            Class that represents a variable in an expression.
+            </summary>
+        </member>
+        <member name="M:CptS321.ExpressionVariable.#ctor(System.String,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.ExpressionVariable"/> class.
+            </summary>
+            <param name="name"> The name of the new variable. </param>
+            <param name="value"> The value of the new variable. </param>
+        </member>
+        <member name="P:CptS321.ExpressionVariable.Name">
+            <summary>
+            Gets or Sets name.
+            </summary>
+        </member>
+        <member name="P:CptS321.ExpressionVariable.Value">
+            <summary>
+            Gets or Sets value.
+            </summary>
+        </member>
+        <member name="T:CptS321.MultiplicationNode">
+            <summary>
+            Represents the multiplication binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.MultiplicationNode.#ctor(CptS321.Node,CptS321.Node)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.MultiplicationNode"/> class.
+            </summary>
+            <param name="leftNode"> The left child. </param>
+            <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="M:CptS321.MultiplicationNode.Evaluate">
+            <summary>
+            Multiplies the left and right node together.
+            </summary>
+            <returns> The value of the left node times the right node. </returns>
+        </member>
+        <member name="T:CptS321.Node">
+            <summary>
+            For polymorphism of future nodes.
+            </summary>
+        </member>
+        <member name="M:CptS321.Node.Evaluate">
+            <summary>
+            Everynode has a value that it can return, Compute returns that value.
+            </summary>
+            <returns> Returns the value of the Node. </returns>
+        </member>
         <member name="T:CptS321.Spreadsheet">
             <summary>
             Factory for the SpreadsheetCell class.
@@ -116,6 +271,68 @@
             <summary>
             Gets or sets the SpreadsheetCell's value.
             </summary>
+        </member>
+        <member name="T:CptS321.SubtractionNode">
+            <summary>
+            Represents the subtraction binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.SubtractionNode.#ctor(CptS321.Node,CptS321.Node)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.SubtractionNode"/> class.
+            </summary>
+            <param name="leftNode"> The left child. </param>
+            <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="M:CptS321.SubtractionNode.Evaluate">
+            <summary>
+            Subtracts the right node from the left..
+            </summary>
+            <returns> The value of the right node minus the left node. </returns>
+        </member>
+        <member name="T:CptS321.ValueNode">
+            <summary>
+            Leaf node that represents a constant numerical value.
+            </summary>
+        </member>
+        <member name="M:CptS321.ValueNode.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.ValueNode"/> class.
+            </summary>
+            <param name="value"> The value that the leaf will store. </param>
+        </member>
+        <member name="P:CptS321.ValueNode.Value">
+            <summary>
+            Gets the value of the node.
+            </summary>
+        </member>
+        <member name="M:CptS321.ValueNode.Evaluate">
+            <summary>
+            The result of this node.
+            </summary>
+            <returns> The value. </returns>
+        </member>
+        <member name="T:CptS321.VariableNode">
+            <summary>
+            Leaf node that represents a variable in an expression.
+            </summary>
+        </member>
+        <member name="M:CptS321.VariableNode.#ctor(CptS321.ExpressionVariable)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.VariableNode"/> class.
+            </summary>
+            <param name="variable"> Reference to the variable that this node will store. </param>
+        </member>
+        <member name="P:CptS321.VariableNode.Variable">
+            <summary>
+            Gets the variable of this node.
+            </summary>
+        </member>
+        <member name="M:CptS321.VariableNode.Evaluate">
+            <summary>
+            The result of this node.
+            </summary>
+            <returns> The value field of variable. </returns>
         </member>
     </members>
 </doc>

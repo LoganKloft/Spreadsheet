@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpreadsheetConsoleApp</name>
+    </assembly>
+    <members>
+        <member name="T:SpreadsheetConsoleApp.Program">
+            <summary>
+            The class the holds the entry point to the console application.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetConsoleApp.Program.Main(System.String[])">
+            <summary>
+            The entry point to the console application.
+            </summary>
+            <param name="args"> List of strings provided from the command line. </param>
+        </member>
+        <member name="M:SpreadsheetConsoleApp.Program.MenuMessage(System.String)">
+            <summary>
+            Prints to the screen a menu that gives options for the user to choose from.
+            </summary>
+            <param name="expression"> String that is printed at the top of the menu. Represents the current expression. </param>
+        </member>
+    </members>
+</doc>

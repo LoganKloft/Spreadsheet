@@ -301,7 +301,7 @@ namespace SpreadsheetEngineTests
         {
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A/0");
             testExpressionTree.SetVariable("A", 5.0);
-            Assert.Throws<System.ArgumentException>(() => testExpressionTree.Evaluate());
+            Assert.AreEqual(double.PositiveInfinity, testExpressionTree.Evaluate());
         }
     }
 }

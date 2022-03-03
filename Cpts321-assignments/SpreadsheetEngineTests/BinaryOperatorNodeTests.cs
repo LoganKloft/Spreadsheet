@@ -20,7 +20,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestLeftNode()
         {
-            CptS321.BinaryOperatorNode binaryOperatorNode = new CptS321.BinaryOperatorNode(null, null, null);
+            BinaryOperatorNodeTestClass binaryOperatorNode = new BinaryOperatorNodeTestClass(null, null);
             CptS321.ValueNode actual = new CptS321.ValueNode(10.0);
             binaryOperatorNode.LeftNode = actual;
             Assert.AreEqual(binaryOperatorNode.LeftNode, actual); // Normal
@@ -32,21 +32,23 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestRightNode()
         {
-            CptS321.BinaryOperatorNode binaryOperatorNode = new CptS321.BinaryOperatorNode(null, null, null);
+            BinaryOperatorNodeTestClass binaryOperatorNode = new BinaryOperatorNodeTestClass(null, null);
             CptS321.ValueNode actual = new CptS321.ValueNode(10.0);
             binaryOperatorNode.RightNode = actual;
             Assert.AreEqual(binaryOperatorNode.RightNode, actual); // Normal
         }
 
-        /// <summary>
-        /// Tests the proper storing of the op in a BinaryOperatorNode.
-        /// </summary>
-        [Test]
-        public void TestOp()
+        private class BinaryOperatorNodeTestClass : CptS321.BinaryOperatorNode
         {
-            CptS321.AdditionBinaryOperator actual = new CptS321.AdditionBinaryOperator();
-            CptS321.BinaryOperatorNode binaryOperatorNode = new CptS321.BinaryOperatorNode(actual, null, null);
-            Assert.AreEqual(binaryOperatorNode.Op, actual); // Normal
+            public BinaryOperatorNodeTestClass(CptS321.Node leftNode = null, CptS321.Node rightNode = null)
+                : base(leftNode, rightNode)
+            {
+            }
+
+            public override double Evaluate()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
