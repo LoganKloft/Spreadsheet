@@ -4,6 +4,21 @@
         <name>SpreadsheetEngineTests</name>
     </assembly>
     <members>
+        <member name="T:SpreadsheetEngineTests.AdditionNodeTests">
+            <summary>
+            Tests for the AdditionNode class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.AdditionNodeTests.TestEvaluateValue">
+            <summary>
+            Test the addition of two nodes.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.AdditionNodeTests.TestEvaluateMaximumValue">
+            <summary>
+            Test the addition of two nodes with maximum double values.
+            </summary>
+        </member>
         <member name="T:SpreadsheetEngineTests.BinaryOperatorNodeTests">
             <summary>
             Class the contains the tests for the BinaryOperatorNode class in the SpreadsheetEngine class library.
@@ -17,6 +32,21 @@
         <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeTests.TestRightNode">
             <summary>
             Tests the proper storing of the rightNode in a BinaryOperatorNode.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.DivisionNodeClass">
+            <summary>
+            Tests for the DivisionNode class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.DivisionNodeClass.TestEvaluateValues">
+            <summary>
+            Tests the division of two values.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.DivisionNodeClass.TestEvaluateMaximumValue">
+            <summary>
+            Test division by 0.
             </summary>
         </member>
         <member name="T:SpreadsheetEngineTests.ExpressionTreeTests">
@@ -149,6 +179,21 @@
             Tests the getter and setter for the Value property of the ExpressionVaraible class.
             </summary>
         </member>
+        <member name="T:SpreadsheetEngineTests.MultiplicationNodeTests">
+            <summary>
+            Tests for the MultiplicationNode class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.MultiplicationNodeTests.TestEvaluateValue">
+            <summary>
+            Test the multiplication of two nodes.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.MultiplicationNodeTests.TestEvaluateMaximumValue">
+            <summary>
+            Test the multiplication of two nodes with maximum double values.
+            </summary>
+        </member>
         <member name="T:SpreadsheetEngineTests.SpreadsheetCellTests">
             <summary>
             Class that contains the tests for the SpreadsheetCell class.
@@ -279,6 +324,21 @@
         <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestRowCountIsFive">
             <summary>
             Test RowCount when the spreadsheet is 5x5.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SubtractionNodeTests">
+            <summary>
+            Tests for the SubtractionNode class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SubtractionNodeTests.TestEvaluateValue">
+            <summary>
+            Test the subtraction of two nodes.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SubtractionNodeTests.TestEvaluateMinimumValue">
+            <summary>
+            Test the subtraction of two nodes whose result is the minimum double value.
             </summary>
         </member>
         <member name="T:SpreadsheetEngineTests.ValueNodeTests">
