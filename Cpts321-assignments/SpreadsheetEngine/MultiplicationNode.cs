@@ -24,6 +24,21 @@ namespace CptS321
         }
 
         /// <summary>
+        /// Gets the operator.
+        /// </summary>
+        public static char Operator => '*';
+
+        /// <summary>
+        /// Gets the precedence.
+        /// </summary>
+        public static int Precedence => 6;
+
+        /// <summary>
+        /// Gets the associativity.
+        /// </summary>
+        public static Associative Associativity => Associative.Left;
+
+        /// <summary>
         /// Multiplies the left and right node together.
         /// </summary>
         /// <returns> The value of the left node times the right node. </returns>

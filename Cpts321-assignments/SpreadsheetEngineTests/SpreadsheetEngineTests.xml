@@ -34,17 +34,17 @@
             Tests the proper storing of the rightNode in a BinaryOperatorNode.
             </summary>
         </member>
-        <member name="T:SpreadsheetEngineTests.DivisionNodeClass">
+        <member name="T:SpreadsheetEngineTests.DivisionNodeTests">
             <summary>
             Tests for the DivisionNode class.
             </summary>
         </member>
-        <member name="M:SpreadsheetEngineTests.DivisionNodeClass.TestEvaluateValues">
+        <member name="M:SpreadsheetEngineTests.DivisionNodeTests.TestEvaluateValues">
             <summary>
             Tests the division of two values.
             </summary>
         </member>
-        <member name="M:SpreadsheetEngineTests.DivisionNodeClass.TestEvaluateMaximumValue">
+        <member name="M:SpreadsheetEngineTests.DivisionNodeTests.TestEvaluateMaximumValue">
             <summary>
             Test division by 0.
             </summary>

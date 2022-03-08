@@ -24,6 +24,21 @@ namespace CptS321
         }
 
         /// <summary>
+        /// Gets the operator.
+        /// </summary>
+        public static char Operator => '-';
+
+        /// <summary>
+        /// Gets the precedence.
+        /// </summary>
+        public static int Precedence => 7;
+
+        /// <summary>
+        /// Gets the associativity.
+        /// </summary>
+        public static Associative Associativity => Associative.Left;
+
+        /// <summary>
         /// Subtracts the right node from the left..
         /// </summary>
         /// <returns> The value of the right node minus the left node. </returns>

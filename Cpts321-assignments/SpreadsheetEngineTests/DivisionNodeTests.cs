@@ -1,4 +1,4 @@
-﻿// <copyright file="DivisionNodeClass.cs" company="Logan Kloft 11728076">
+﻿// <copyright file="DivisionNodeTests.cs" company="Logan Kloft 11728076">
 // Copyright (c) Logan Kloft 11728076. All rights reserved.
 // </copyright>
 
@@ -12,7 +12,7 @@ namespace SpreadsheetEngineTests
     /// <summary>
     /// Tests for the DivisionNode class.
     /// </summary>
-    public class DivisionNodeClass
+    public class DivisionNodeTests
     {
         /// <summary>
         /// Tests the division of two values.

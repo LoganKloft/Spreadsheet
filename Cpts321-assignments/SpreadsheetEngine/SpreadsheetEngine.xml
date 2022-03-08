@@ -16,6 +16,21 @@
             <param name="leftNode"> The left child. </param>
             <param name="rightNode"> the right child. </param>
         </member>
+        <member name="P:CptS321.AdditionNode.Operator">
+            <summary>
+            Gets the operator.
+            </summary>
+        </member>
+        <member name="P:CptS321.AdditionNode.Precedence">
+            <summary>
+            Gets the precedence.
+            </summary>
+        </member>
+        <member name="P:CptS321.AdditionNode.Associativity">
+            <summary>
+            Gets the associativity.
+            </summary>
+        </member>
         <member name="M:CptS321.AdditionNode.Evaluate">
             <summary>
             Adds the left and right node together.
@@ -33,6 +48,21 @@
             </summary>
             <param name="leftNode"> Reference to the left node. </param>
             <param name="rightNode"> Reference to the right node. </param>
+        </member>
+        <member name="T:CptS321.BinaryOperatorNode.Associative">
+            <summary>
+            Represents the associative of a binary operator.
+            </summary>
+        </member>
+        <member name="F:CptS321.BinaryOperatorNode.Associative.Right">
+            <summary>
+            The operator is Right associative.
+            </summary>
+        </member>
+        <member name="F:CptS321.BinaryOperatorNode.Associative.Left">
+            <summary>
+            The operator is Left associative.
+            </summary>
         </member>
         <member name="P:CptS321.BinaryOperatorNode.LeftNode">
             <summary>
@@ -55,6 +85,21 @@
             </summary>
             <param name="leftNode"> The left child. </param>
             <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="P:CptS321.DivisionNode.Operator">
+            <summary>
+            Gets the operator.
+            </summary>
+        </member>
+        <member name="P:CptS321.DivisionNode.Precedence">
+            <summary>
+            Gets the precedence.
+            </summary>
+        </member>
+        <member name="P:CptS321.DivisionNode.Associativity">
+            <summary>
+            Gets the associativity.
+            </summary>
         </member>
         <member name="M:CptS321.DivisionNode.Evaluate">
             <summary>
@@ -141,6 +186,21 @@
             </summary>
             <param name="leftNode"> The left child. </param>
             <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="P:CptS321.MultiplicationNode.Operator">
+            <summary>
+            Gets the operator.
+            </summary>
+        </member>
+        <member name="P:CptS321.MultiplicationNode.Precedence">
+            <summary>
+            Gets the precedence.
+            </summary>
+        </member>
+        <member name="P:CptS321.MultiplicationNode.Associativity">
+            <summary>
+            Gets the associativity.
+            </summary>
         </member>
         <member name="M:CptS321.MultiplicationNode.Evaluate">
             <summary>
@@ -283,6 +343,21 @@
             </summary>
             <param name="leftNode"> The left child. </param>
             <param name="rightNode"> the right child. </param>
+        </member>
+        <member name="P:CptS321.SubtractionNode.Operator">
+            <summary>
+            Gets the operator.
+            </summary>
+        </member>
+        <member name="P:CptS321.SubtractionNode.Precedence">
+            <summary>
+            Gets the precedence.
+            </summary>
+        </member>
+        <member name="P:CptS321.SubtractionNode.Associativity">
+            <summary>
+            Gets the associativity.
+            </summary>
         </member>
         <member name="M:CptS321.SubtractionNode.Evaluate">
             <summary>

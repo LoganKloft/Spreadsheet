@@ -28,6 +28,22 @@ namespace CptS321
         }
 
         /// <summary>
+        /// Represents the associative of a binary operator.
+        /// </summary>
+        public enum Associative
+        {
+            /// <summary>
+            /// The operator is Right associative.
+            /// </summary>
+            Right,
+
+            /// <summary>
+            /// The operator is Left associative.
+            /// </summary>
+            Left,
+        }
+
+        /// <summary>
         /// Gets or sets leftNode.
         /// </summary>
         public Node LeftNode
