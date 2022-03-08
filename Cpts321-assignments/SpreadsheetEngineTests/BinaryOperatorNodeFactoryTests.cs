@@ -1,4 +1,8 @@
-﻿namespace SpreadsheetEngineTests
+﻿// <copyright file="BinaryOperatorNodeFactoryTests.cs" company="Logan Kloft 11728076">
+// Copyright (c) Logan Kloft 11728076. All rights reserved.
+// </copyright>
+
+namespace SpreadsheetEngineTests
 {
     using System;
     using System.Collections.Generic;
