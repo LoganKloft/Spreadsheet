@@ -16,6 +16,29 @@ namespace SpreadsheetEngineTests
     public class ExpressionTreeTests
     {
         /// <summary>
+        /// Tests precedence of operators and the use of parenthesis.
+        /// </summary>
+        /// <param name="expression"> String format of an expression in infix notation. </param>
+        /// <returns> The evaluation of the expression. </returns>
+        // Parameterized test cases - each one has a reason for why the test is included.
+        [Test]
+        [TestCase("3+5", ExpectedResult = 8.0)] // simple expression with a single operator
+        [TestCase("100/10*10", ExpectedResult = 100.0)] // mixing operators (/ and *) with same precedence
+        [TestCase("100/(10*10)", ExpectedResult = 1.0)] // mixing operators (/ and *) with same precedence and parenthesis
+        [TestCase("7-4+2", ExpectedResult = 5.0)] // mixing operators (+ and -) with same precedence
+        [TestCase("10/(7-2)", ExpectedResult = 2.0)] // operators with difference precedence with parenthesis - higher precedence
+        [TestCase("(12-2)/2", ExpectedResult = 5.0)] // operators with difference precedence with parenthesis - lower precedence
+        [TestCase("(((((2+3)-(4+5)))))", ExpectedResult = -4.0)] // extra parenthesis and negative result
+        [TestCase("2*3+5", ExpectedResult = 11.0)] // operators with different precedence - higher precedence first
+        [TestCase("2+3*5", ExpectedResult = 17.0)] // operators with different precedence - lower precedence first
+        [TestCase("2+3*5", ExpectedResult = 17.0)] // spaces and mixing operators (+ and *) with difference precedence
+        public double TestEvaluateNormalCases(string expression) // not throwing any exceptions
+        {
+            CptS321.ExpressionTree exp = new CptS321.ExpressionTree(expression);
+            return exp.Evaluate();
+        }
+
+        /// <summary>
         /// Tests to ensure the expression is correctly parsed. For this parse, there are no variables.
         /// </summary>
         [Test]

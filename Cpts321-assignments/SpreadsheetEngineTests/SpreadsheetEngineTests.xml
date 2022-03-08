@@ -84,6 +84,13 @@
             Class for testing the ExpressionTree class in class library SpreadsheetEngine.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestEvaluateNormalCases(System.String)">
+            <summary>
+            Tests precedence of operators and the use of parenthesis.
+            </summary>
+            <param name="expression"> String format of an expression in infix notation. </param>
+            <returns> The evaluation of the expression. </returns>
+        </member>
         <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestConstructorWithNoVariables">
             <summary>
             Tests to ensure the expression is correctly parsed. For this parse, there are no variables.
