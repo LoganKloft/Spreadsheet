@@ -74,6 +74,18 @@
             Gets or sets rightNode.
             </summary>
         </member>
+        <member name="T:CptS321.BinaryOperatorNodeFactory">
+            <summary>
+            Class that controls the creation of BinaryOperatorNodes.
+            </summary>
+        </member>
+        <member name="M:CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode(System.Char)">
+            <summary>
+            Given the character representation of an operator, returns the corresponding BinaryOperatorNode.
+            </summary>
+            <param name="op"> The character represenatation of a binary operator. </param>
+            <returns> A child of the BinaryOperatorNode class. </returns>
+        </member>
         <member name="T:CptS321.DivisionNode">
             <summary>
             Represents the division binary operator.

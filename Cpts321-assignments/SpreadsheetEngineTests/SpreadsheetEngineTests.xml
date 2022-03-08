@@ -19,6 +19,36 @@
             Test the addition of two nodes with maximum double values.
             </summary>
         </member>
+        <member name="T:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests">
+            <summary>
+            Class that contains the tests for the BinaryOperatorNodeFactory class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.TestCreateBinaryOperatorNodeAddition">
+            <summary>
+            Tests the creation of an AdditionNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.TestCreateBinaryOperatorNodeSubtraction">
+            <summary>
+            Tests the creation of an SubtractionNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.TestCreateBinaryOperatorNodeMultiplication">
+            <summary>
+            Tests the creation of an MultiplicationNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.TestCreateBinaryOperatorNodeDivision">
+            <summary>
+            Tests the creation of an DivisionNode.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.TestCreateBinaryOperatorNodeBadOperator">
+            <summary>
+            Test that uses a non-existing BinaryOperator.
+            </summary>
+        </member>
         <member name="T:SpreadsheetEngineTests.BinaryOperatorNodeTests">
             <summary>
             Class the contains the tests for the BinaryOperatorNode class in the SpreadsheetEngine class library.
