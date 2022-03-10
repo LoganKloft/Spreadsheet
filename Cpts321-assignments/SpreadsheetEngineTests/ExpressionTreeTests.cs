@@ -15,12 +15,48 @@ namespace SpreadsheetEngineTests
     /// </summary>
     public class ExpressionTreeTests
     {
+        private CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree();
+
+        /// <summary>
+        /// Tests to make sure infix expressions are correctly transformed into a list.
+        /// </summary>
+        [Test]
+        public void TestParseExpression()
+        {
+            MethodInfo methodInfo = this.GetMethod("ParseExpression", new Type[] { typeof(string) });
+            List<string> expected = new List<string> { "(", "a", "+", "b", ")" };
+            Assert.That(methodInfo.Invoke(this.expressionTree, new object[] { "(a+b)" }), Is.EqualTo(expected)); // normal
+        }
+
+        /// <summary>
+        /// Test to make sure the conversion of a list from infix to postfix is done correctly.
+        /// </summary>
+        [Test]
+        public void TestInfixToPostfixNormal()
+        {
+            MethodInfo methodInfo = this.GetMethod("InfixToPostfix", new Type[] { typeof(List<string>) });
+            List<string> prefix = new List<string> { "a", "b", "c", "*", "+" };
+            List<string> infix = new List<string> { "(", "a", "+", "b", "*", "c", ")" };
+            Assert.That(methodInfo.Invoke(this.expressionTree, new object[] { infix }), Is.EqualTo(prefix)); // normal with + and * operator
+        }
+
+        /// <summary>
+        /// Uses parenthesis, and the first four operators that are defined.
+        /// </summary>
+        [Test]
+        public void TestInfixToPostfixAllOperators()
+        {
+            MethodInfo methodInfo = this.GetMethod("InfixToPostfix", new Type[] { typeof(List<string>) });
+            List<string> infix = new List<string> { "(", "A", "+", "2", "*", "3", ")", "/", "B", "*", "4", "-", "1", "+", "(", "2", "-", "(", "C", "*", "4", ")", ")" };
+            List<string> prefix = new List<string> { "A", "2", "3", "*", "+", "B", "/", "4", "*", "1", "-", "2", "C", "4", "*", "-", "+" };
+            Assert.That(methodInfo.Invoke(this.expressionTree, new object[] { infix }), Is.EqualTo(prefix)); // normal with +,/,-,*,(,and)
+        }
+
         /// <summary>
         /// Tests precedence of operators and the use of parenthesis.
         /// </summary>
         /// <param name="expression"> String format of an expression in infix notation. </param>
         /// <returns> The evaluation of the expression. </returns>
-        // Parameterized test cases - each one has a reason for why the test is included.
         [Test]
         [TestCase("3+5", ExpectedResult = 8.0)] // simple expression with a single operator
         [TestCase("100/10*10", ExpectedResult = 100.0)] // mixing operators (/ and *) with same precedence
@@ -325,6 +361,28 @@ namespace SpreadsheetEngineTests
             CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A/0");
             testExpressionTree.SetVariable("A", 5.0);
             Assert.AreEqual(double.PositiveInfinity, testExpressionTree.Evaluate());
+        }
+
+        private MethodInfo GetMethod(string methodName, Type[] parameterTypes)
+        {
+            if (string.IsNullOrWhiteSpace(methodName))
+            {
+                Assert.Fail("methodName cannot be null or whitespace");
+            }
+
+            var method = this.expressionTree.GetType().GetMethod(
+                methodName,
+                BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance,
+                null,
+                parameterTypes,
+                null);
+
+            if (method == null)
+            {
+                Assert.Fail(string.Format("{0} method not found", methodName));
+            }
+
+            return method;
         }
     }
 }

@@ -124,6 +124,11 @@
             Class for evaluating expressions.
             </summary>
         </member>
+        <member name="M:CptS321.ExpressionTree.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.ExpressionTree"/> class.
+            </summary>
+        </member>
         <member name="M:CptS321.ExpressionTree.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:CptS321.ExpressionTree"/> class.
@@ -150,17 +155,40 @@
         </member>
         <member name="M:CptS321.ExpressionTree.ParseExpression(System.String)">
             <summary>
-            Extracts the operands and operators from the input string.
+            Accepts an expression in infix notation and returns a list of the operands (values and variables)
+            and operators of the string in infix order.
             </summary>
-            <param name="expression"> A string represening an expression. </param>
-            <returns> A list of the operands and operators contained in expression an expression. </returns>
+            <param name="expression"> A string representing an expression in infix order. </param>
+            <returns> A list of the operands (values and variables) and operators in infix order. </returns>
         </member>
-        <member name="M:CptS321.ExpressionTree.LoadVariables">
+        <member name="M:CptS321.ExpressionTree.LoadVariables(System.String)">
             <summary>
             Resets the variable dictionary and fills it out again.
             </summary>
         </member>
-        <member name="M:CptS321.ExpressionTree.Build">
+        <member name="M:CptS321.ExpressionTree.ComparePrecedence(System.String,System.String)">
+            <summary>
+            Given two operators, returns a negative value if the first parameter is lower precedence,
+            0 if the first parameter is of equal precedence, and greater than 0 if of higher precedence.
+            </summary>
+            <param name="s1"> The first operator. </param>
+            <param name="s2"> The second operator. </param>
+            <returns> An integer value representing whether the first operator is lower, equal, or higher predence. </returns>
+        </member>
+        <member name="M:CptS321.ExpressionTree.GetAssociativity(System.String)">
+            <summary>
+            Returns the associativity of an operator.
+            </summary>
+            <param name="s"> String representation of an operator. </param>
+        </member>
+        <member name="M:CptS321.ExpressionTree.InfixToPostfix(System.Collections.Generic.List{System.String})">
+            <summary>
+            Uses shunting yard algorithm to convert an infix expression into postfix.
+            </summary>
+            <param name="infix"> An expression in list format in infix notation. </param>
+            <returns> A list of values, variables, and operators in postfix notation. </returns>
+        </member>
+        <member name="M:CptS321.ExpressionTree.Build(System.Collections.Generic.List{System.String})">
             <summary>
             Builds the parse tree based off of the current expression string.
             </summary>
