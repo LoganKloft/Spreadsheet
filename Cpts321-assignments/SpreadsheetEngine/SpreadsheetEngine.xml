@@ -9,6 +9,11 @@
             Represents the addition binary operator.
             </summary>
         </member>
+        <member name="M:CptS321.AdditionNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.AdditionNode"/> class.
+            </summary>
+        </member>
         <member name="M:CptS321.AdditionNode.#ctor(CptS321.Node,CptS321.Node)">
             <summary>
             Initializes a new instance of the <see cref="T:CptS321.AdditionNode"/> class.
@@ -79,6 +84,11 @@
             Class that controls the creation of BinaryOperatorNodes.
             </summary>
         </member>
+        <member name="M:CptS321.BinaryOperatorNodeFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.BinaryOperatorNodeFactory"/> class.
+            </summary>
+        </member>
         <member name="M:CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode(System.Char)">
             <summary>
             Given the character representation of an operator, returns the corresponding BinaryOperatorNode.
@@ -89,6 +99,11 @@
         <member name="T:CptS321.DivisionNode">
             <summary>
             Represents the division binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.DivisionNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.DivisionNode"/> class.
             </summary>
         </member>
         <member name="M:CptS321.DivisionNode.#ctor(CptS321.Node,CptS321.Node)">
@@ -218,6 +233,11 @@
         <member name="T:CptS321.MultiplicationNode">
             <summary>
             Represents the multiplication binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.MultiplicationNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.MultiplicationNode"/> class.
             </summary>
         </member>
         <member name="M:CptS321.MultiplicationNode.#ctor(CptS321.Node,CptS321.Node)">
@@ -375,6 +395,11 @@
         <member name="T:CptS321.SubtractionNode">
             <summary>
             Represents the subtraction binary operator.
+            </summary>
+        </member>
+        <member name="M:CptS321.SubtractionNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.SubtractionNode"/> class.
             </summary>
         </member>
         <member name="M:CptS321.SubtractionNode.#ctor(CptS321.Node,CptS321.Node)">

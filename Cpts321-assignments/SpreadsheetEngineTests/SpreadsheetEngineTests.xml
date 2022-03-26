@@ -24,6 +24,11 @@
             Class that contains the tests for the BinaryOperatorNodeFactory class.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.SetUp">
+            <summary>
+            Adds operators to operator dictionary.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.BinaryOperatorNodeFactoryTests.TestCreateBinaryOperatorNodeAddition">
             <summary>
             Tests the creation of an AdditionNode.

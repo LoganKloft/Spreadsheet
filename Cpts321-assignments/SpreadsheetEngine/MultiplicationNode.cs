@@ -16,6 +16,13 @@ namespace CptS321
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiplicationNode"/> class.
         /// </summary>
+        public MultiplicationNode()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MultiplicationNode"/> class.
+        /// </summary>
         /// <param name="leftNode"> The left child. </param>
         /// <param name="rightNode"> the right child. </param>
         public MultiplicationNode(Node leftNode = null, Node rightNode = null)

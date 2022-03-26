@@ -15,6 +15,15 @@ namespace SpreadsheetEngineTests
     public class BinaryOperatorNodeFactoryTests
     {
         /// <summary>
+        /// Adds operators to operator dictionary.
+        /// </summary>
+        [SetUp]
+        public void SetUp()
+        {
+            CptS321.BinaryOperatorNodeFactory binaryOperatorNodeFactory = new CptS321.BinaryOperatorNodeFactory();
+        }
+
+        /// <summary>
         /// Tests the creation of an AdditionNode.
         /// </summary>
         [Test]
@@ -84,8 +93,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestCreateBinaryOperatorNodeBadOperator()
         {
-            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('a');
-            Assert.Null(testNode); // edge
+            Assert.Throws<Exception>(() => CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('a')); // edge
         }
     }
 }

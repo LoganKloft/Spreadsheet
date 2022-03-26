@@ -16,6 +16,13 @@ namespace CptS321
         /// <summary>
         /// Initializes a new instance of the <see cref="SubtractionNode"/> class.
         /// </summary>
+        public SubtractionNode()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubtractionNode"/> class.
+        /// </summary>
         /// <param name="leftNode"> The left child. </param>
         /// <param name="rightNode"> the right child. </param>
         public SubtractionNode(Node leftNode = null, Node rightNode = null)

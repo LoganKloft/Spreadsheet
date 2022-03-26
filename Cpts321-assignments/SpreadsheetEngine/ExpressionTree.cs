@@ -16,6 +16,7 @@ namespace CptS321
         private Dictionary<string, CptS321.ExpressionVariable> variables = new Dictionary<string, CptS321.ExpressionVariable>();
         private Node headNode;
         private string expression;
+        private CptS321.BinaryOperatorNodeFactory binaryOperatorNodeFactory = new CptS321.BinaryOperatorNodeFactory(); // load BinaryOperators
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -282,7 +283,6 @@ namespace CptS321
                     // 6 - lower precedence or equal and left-associative
                     else
                     {
-
                         // lower or equal and left-associative to top
                         while (symbol.Count > 0 && (this.ComparePrecedence(infix[i], symbol.Peek()) > 0
                         || (this.ComparePrecedence(infix[i], symbol.Peek()) == 0 &&

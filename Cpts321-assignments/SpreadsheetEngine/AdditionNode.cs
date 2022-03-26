@@ -16,6 +16,13 @@ namespace CptS321
         /// <summary>
         /// Initializes a new instance of the <see cref="AdditionNode"/> class.
         /// </summary>
+        public AdditionNode()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdditionNode"/> class.
+        /// </summary>
         /// <param name="leftNode"> The left child. </param>
         /// <param name="rightNode"> the right child. </param>
         public AdditionNode(Node leftNode = null, Node rightNode = null)

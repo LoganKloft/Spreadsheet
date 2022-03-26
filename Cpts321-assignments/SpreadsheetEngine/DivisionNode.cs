@@ -16,6 +16,13 @@ namespace CptS321
         /// <summary>
         /// Initializes a new instance of the <see cref="DivisionNode"/> class.
         /// </summary>
+        public DivisionNode()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DivisionNode"/> class.
+        /// </summary>
         /// <param name="leftNode"> The left child. </param>
         /// <param name="rightNode"> the right child. </param>
         public DivisionNode(Node leftNode = null, Node rightNode = null)
