@@ -17,6 +17,25 @@ namespace SpreadsheetEngineTests
         private bool isCellPropertyHandlerTriggered = false;
 
         /// <summary>
+        /// Tests that changing the value of one cell updates all cells that refer to that value.
+        /// </summary>
+        [Test]
+        public void TestExpressionWhenValueChanges()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(2, 2);
+            CptS321.SpreadsheetCell cell11 = testSpreadsheet.GetCell(1, 1);
+            CptS321.SpreadsheetCell cell12 = testSpreadsheet.GetCell(1, 2);
+            CptS321.SpreadsheetCell cell21 = testSpreadsheet.GetCell(2, 1);
+            CptS321.SpreadsheetCell cell22 = testSpreadsheet.GetCell(2, 2);
+            cell11.Text = "1";
+            cell12.Text = "2";
+            cell21.Text = "3";
+            cell22.Text = "=A1+A2+B1";
+            cell21.Text = "10";
+            Assert.AreEqual("10", cell22.Value); // normal
+        }
+
+        /// <summary>
         /// Test an evaluation using the spreadsheet with no variables.
         /// </summary>
         [Test]
@@ -25,7 +44,7 @@ namespace SpreadsheetEngineTests
             CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(2, 2);
             CptS321.SpreadsheetCell cell = testSpreadsheet.GetCell(1, 1);
             cell.Text = "1";
-            Assert.AreEqual("1", cell.Value);
+            Assert.AreEqual("1", cell.Value); // normal
         }
 
         /// <summary>
@@ -43,7 +62,7 @@ namespace SpreadsheetEngineTests
             cell12.Text = "2";
             cell21.Text = "3";
             cell22.Text = "=A1+A2+B1";
-            Assert.AreEqual("6", cell22.Value);
+            Assert.AreEqual("6", cell22.Value); // normal
         }
 
         /// <summary>
