@@ -17,6 +17,36 @@ namespace SpreadsheetEngineTests
         private bool isCellPropertyHandlerTriggered = false;
 
         /// <summary>
+        /// Test an evaluation using the spreadsheet with no variables.
+        /// </summary>
+        [Test]
+        public void TestExpressionWithNoVariables()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(2, 2);
+            CptS321.SpreadsheetCell cell = testSpreadsheet.GetCell(1, 1);
+            cell.Text = "1";
+            Assert.AreEqual("1", cell.Value);
+        }
+
+        /// <summary>
+        /// Test an evaluation using the spreadsheet with variables.
+        /// </summary>
+        [Test]
+        public void TestExpressionEvaluationWithVariables()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(2, 2);
+            CptS321.SpreadsheetCell cell11 = testSpreadsheet.GetCell(1, 1);
+            CptS321.SpreadsheetCell cell12 = testSpreadsheet.GetCell(1, 2);
+            CptS321.SpreadsheetCell cell21 = testSpreadsheet.GetCell(2, 1);
+            CptS321.SpreadsheetCell cell22 = testSpreadsheet.GetCell(2, 2);
+            cell11.Text = "1";
+            cell12.Text = "2";
+            cell21.Text = "3";
+            cell22.Text = "=A1+A2+B1";
+            Assert.AreEqual("6", cell22.Value);
+        }
+
+        /// <summary>
         /// Test if CellPropertyEvent triggers when a cell is changed.
         /// </summary>
         [Test]

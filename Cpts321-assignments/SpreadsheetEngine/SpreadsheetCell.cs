@@ -94,12 +94,14 @@ namespace CptS321
         {
             get
             {
-                if (this.value == null || this.value[0] != '=')
+                if (this.value == null)
                 {
                     return this.Text;
                 }
-
-                return this.Text;
+                else
+                {
+                    return this.value;
+                }
             }
 
             set

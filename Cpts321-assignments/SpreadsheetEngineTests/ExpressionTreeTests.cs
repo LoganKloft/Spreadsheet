@@ -18,6 +18,26 @@ namespace SpreadsheetEngineTests
         private CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree();
 
         /// <summary>
+        /// ExpressionTree should throw an exception when an expression is evaluated with no value.
+        /// </summary>
+        [Test]
+        public void TestDefaultVariableValue()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("A2+B2");
+            Assert.Throws<System.InvalidOperationException>(() => testExpressionTree.Evaluate()); // edge
+        }
+
+        /// <summary>
+        /// Expressions should ignore white spaces during the parsing stage.
+        /// </summary>
+        [Test]
+        public void TestIgnoreWhiteSpaces()
+        {
+            CptS321.ExpressionTree testExpressionTree = new CptS321.ExpressionTree("3    + 4      * 5");
+            Assert.AreEqual(23, testExpressionTree.Evaluate());
+        }
+
+        /// <summary>
         /// Tests to make sure infix expressions are correctly transformed into a list.
         /// </summary>
         [Test]

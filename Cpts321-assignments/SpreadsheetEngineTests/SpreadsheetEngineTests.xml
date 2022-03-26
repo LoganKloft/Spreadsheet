@@ -89,6 +89,16 @@
             Class for testing the ExpressionTree class in class library SpreadsheetEngine.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestDefaultVariableValue">
+            <summary>
+            ExpressionTree should throw an exception when an expression is evaluated with no value.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestIgnoreWhiteSpaces">
+            <summary>
+            Expressions should ignore white spaces during the parsing stage.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.ExpressionTreeTests.TestParseExpression">
             <summary>
             Tests to make sure infix expressions are correctly transformed into a list.
