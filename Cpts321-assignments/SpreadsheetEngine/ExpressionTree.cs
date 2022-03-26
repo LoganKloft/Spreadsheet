@@ -82,6 +82,21 @@ namespace CptS321
         }
 
         /// <summary>
+        /// Gets a list of the currently stored variable names which are the keys in the variables dictionary.
+        /// </summary>
+        /// <returns> List of variable names stored in this expression tree. </returns>
+        public List<string> GetVariableNames()
+        {
+            List<string> variableNames = new List<string>();
+            foreach (string key in this.variables.Keys)
+            {
+                variableNames.Add(key);
+            }
+
+            return variableNames;
+        }
+
+        /// <summary>
         /// Evaluates the expression stored ExpressionTree.
         /// </summary>
         /// <returns> A double value that is the result of evaluating the expression. </returns>

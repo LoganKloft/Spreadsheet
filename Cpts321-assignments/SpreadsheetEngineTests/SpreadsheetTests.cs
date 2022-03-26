@@ -71,7 +71,7 @@ namespace SpreadsheetEngineTests
             CptS321.SpreadsheetCell cell2 = testSpreadsheet.GetCell(2, 2);
             cell1.Text = "test";
             cell2.Text = "=A1";
-            Assert.AreEqual("test", cell2.Value); // normal case
+            Assert.AreEqual("0", cell2.Value); // normal case
         }
 
         /// <summary>

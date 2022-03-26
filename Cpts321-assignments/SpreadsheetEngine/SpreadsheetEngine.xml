@@ -162,6 +162,12 @@
             <param name="variableName"> The name of the variable, used as the key in the variable dictionary. </param>
             <param name="variableValue"> The value associated with the variable. </param>
         </member>
+        <member name="M:CptS321.ExpressionTree.GetVariableNames">
+            <summary>
+            Gets a list of the currently stored variable names which are the keys in the variables dictionary.
+            </summary>
+            <returns> List of variable names stored in this expression tree. </returns>
+        </member>
         <member name="M:CptS321.ExpressionTree.Evaluate">
             <summary>
             Evaluates the expression stored ExpressionTree.
@@ -213,7 +219,7 @@
             Class that represents a variable in an expression.
             </summary>
         </member>
-        <member name="M:CptS321.ExpressionVariable.#ctor(System.String,System.Double)">
+        <member name="M:CptS321.ExpressionVariable.#ctor(System.String,System.Nullable{System.Double})">
             <summary>
             Initializes a new instance of the <see cref="T:CptS321.ExpressionVariable"/> class.
             </summary>
@@ -320,6 +326,13 @@
             </summary>
             <param name="sender"> The cell that was changed. </param>
             <param name="e"> The name of the property that was used for the change. </param>
+        </member>
+        <member name="M:CptS321.Spreadsheet.ParseVariableName(System.String)">
+            <summary>
+            Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
+            </summary>
+            <param name="variableName"> A cell location. </param>
+            <returns> The {row, col} in 1-based indexing. </returns>
         </member>
         <member name="T:CptS321.Spreadsheet.Cell">
             <summary>

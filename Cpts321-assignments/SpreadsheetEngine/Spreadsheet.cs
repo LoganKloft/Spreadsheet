@@ -102,10 +102,23 @@ namespace CptS321
             CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
             if (changedCell.Text.StartsWith("="))
             {
-                // extra cell - first get row
-                int row = int.Parse(changedCell.Text.Substring(2)); // already 1-based indexing.
-                int column = changedCell.Text[1] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
-                changedCell.Value = this.GetCell(row, column).Value;
+                // Load the expression
+                string expression = changedCell.Text.Substring(1);
+                CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
+
+                // Set the values of the variables
+                List<string> variableNames = expressionTree.GetVariableNames();
+                foreach (string variableName in variableNames)
+                {
+                    int[] rowCol = this.ParseVariableName(variableName);
+                    CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
+                    double val = 0;
+                    double.TryParse(cell.Value, out val);
+                    expressionTree.SetVariable(variableName, val);
+                }
+
+                // Update the Value of the changed cell
+                changedCell.Value = expressionTree.Evaluate().ToString();
             }
             else
             {
@@ -113,6 +126,18 @@ namespace CptS321
             }
 
             this.CellPropertyChanged(sender, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+        }
+
+        /// <summary>
+        /// Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
+        /// </summary>
+        /// <param name="variableName"> A cell location. </param>
+        /// <returns> The {row, col} in 1-based indexing. </returns>
+        private int[] ParseVariableName(string variableName)
+        {
+            int row = int.Parse(variableName.Substring(1)); // already 1-based indexing.
+            int column = variableName[0] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
+            return new int[] { row, column };
         }
 
         /// <summary>

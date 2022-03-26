@@ -38,7 +38,13 @@ namespace CptS321
         /// <returns> The value field of variable. </returns>
         public override double Evaluate()
         {
-            return this.Variable.Value;
+            double? val = this.Variable.Value;
+            if (val == null)
+            {
+                throw new System.InvalidOperationException();
+            }
+
+            return (double)this.Variable.Value;
         }
     }
 }

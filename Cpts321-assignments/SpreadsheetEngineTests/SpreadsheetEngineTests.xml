@@ -346,6 +346,16 @@
             Contains the tests for the Spreadsheet class.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestExpressionWithNoVariables">
+            <summary>
+            Test an evaluation using the spreadsheet with no variables.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestExpressionEvaluationWithVariables">
+            <summary>
+            Test an evaluation using the spreadsheet with variables.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestCellPropertyChangedWithNoEqual">
             <summary>
             Test if CellPropertyEvent triggers when a cell is changed.
