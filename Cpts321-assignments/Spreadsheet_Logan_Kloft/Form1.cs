@@ -34,6 +34,12 @@ namespace Spreadsheet_Logan_Kloft
             // remove already existing rows
             this.dataGridView1.Rows.Clear();
 
+            // subscribe to the CellBeginEdit event
+            this.dataGridView1.CellBeginEdit += this.CellBeginEditHandler;
+
+            // subscribe to the CellEndEdit event
+            this.dataGridView1.CellEndEdit += this.CellEndEditHandler;
+
             // add columns from A-Z
             for (char columnName = 'A'; columnName <= 'Z'; columnName++)
             {
@@ -51,6 +57,41 @@ namespace Spreadsheet_Logan_Kloft
 
             this.spreadsheet = new CptS321.Spreadsheet(50, 26);
             this.spreadsheet.CellPropertyChanged += this.UpdateDataGridView;
+        }
+
+        /// <summary>
+        /// Event handler when cell is being edited.
+        /// </summary>
+        /// <param name="sender"> The object sending the event. dataGridView1. </param>
+        /// <param name="e"> The parameters included in the event. </param>
+        public void CellBeginEditHandler(object sender, System.Windows.Forms.DataGridViewCellCancelEventArgs e)
+        {
+            int row = e.RowIndex;
+            int col = e.ColumnIndex;
+
+            CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
+            this.dataGridView1[col, row].Value = cell.Text;
+        }
+
+        /// <summary>
+        /// Event handler when cell is not being edited anymore.
+        /// </summary>
+        /// <param name="sender"> The object sending the event. dataGridView1. </param>
+        /// <param name="e"> The parameters included in the event. </param>
+        public void CellEndEditHandler(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
+        {
+            int row = e.RowIndex;
+            int col = e.ColumnIndex;
+
+            CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
+            if (this.dataGridView1[col, row].Value == null)
+            {
+                cell.Text = "null";
+            }
+            else
+            {
+                cell.Text = this.dataGridView1[col, row].Value.ToString();
+            }
         }
 
         /// <summary>
