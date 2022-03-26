@@ -15,6 +15,7 @@ namespace CptS321
     public class Spreadsheet
     {
         private List<List<Cell>> spreadSheet = new List<List<Cell>>();
+        private Dictionary<string, List<string>> referenceCells = new Dictionary<string, List<string>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
@@ -23,6 +24,9 @@ namespace CptS321
         /// <param name="numberColumns"> The width of the spreadsheet. </param>
         public Spreadsheet(int numberRows, int numberColumns)
         {
+            // subscribe to event
+            this.CellPropertyChanged += this.CellPropertyChangedHandler;
+
             // add rows and columns
             for (int row = 1; row <= numberRows; row++)
             {
@@ -102,6 +106,16 @@ namespace CptS321
             CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
             if (changedCell.Text.StartsWith("="))
             {
+                // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
+                foreach (List<string> cellNames in this.referenceCells.Values)
+                {
+                    // found in dictionary, remove it.
+                    if (cellNames != null && cellNames.Contains(changedCell.ToString()))
+                    {
+                        cellNames.Remove(changedCell.ToString());
+                    }
+                }
+
                 // Load the expression
                 string expression = changedCell.Text.Substring(1);
                 CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
@@ -110,6 +124,18 @@ namespace CptS321
                 List<string> variableNames = expressionTree.GetVariableNames();
                 foreach (string variableName in variableNames)
                 {
+                    // Add the changedCell as a reference to variableName
+                    // At this point, any previous occurences of changedCell in any values in the referenceCells dictionary
+                    // have been removed.
+                    if (this.referenceCells.ContainsKey(variableName))
+                    {
+                        this.referenceCells[variableName].Add(changedCell.ToString());
+                    }
+                    else
+                    {
+                        this.referenceCells.Add(variableName, new List<string>() { changedCell.ToString() });
+                    }
+
                     int[] rowCol = this.ParseVariableName(variableName);
                     CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
                     double val = 0;
@@ -126,6 +152,62 @@ namespace CptS321
             }
 
             this.CellPropertyChanged(sender, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+        }
+
+        /// <summary>
+        ///  Called when the value of a Cell has been changed. Should update all cells that reference this cell.
+        /// </summary>
+        /// <param name="sender"> The cell whose value changed. </param>
+        /// <param name="e"> The name of the property that has changed. </param>
+        private void CellPropertyChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            // Recalculate Values for cells that depend on this one.
+            CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
+            this.RecalculateCellsWhoReference(changedCell.ToString());
+        }
+
+        /// <summary>
+        /// Given a cell name, will search all cells who depend on this cell and recalculate their values using an expression tree.
+        /// </summary>
+        /// <param name="cellName"> The name of the cell name who other cells reference in there Text property. </param>
+        private void RecalculateCellsWhoReference(string cellName)
+        {
+            List<string> referenceCellNames = null;
+            if (this.referenceCells.TryGetValue(cellName, out referenceCellNames))
+            {
+                foreach (string referenceCellName in referenceCellNames)
+                {
+                    int[] rowCol = this.ParseVariableName(referenceCellName);
+                    CptS321.SpreadsheetCell spreadsheetCell = this.GetCell(rowCol[0], rowCol[1]);
+                    this.RecalculateCellExpression(spreadsheetCell);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Performs the same function as UpdateSpreadsheet but on a cell with an expression
+        /// and can be explicitly called.
+        /// </summary>
+        /// <param name="spreadsheetCell"> A spreadsheet cell whose text property must start with '='. </param>
+        private void RecalculateCellExpression(CptS321.SpreadsheetCell spreadsheetCell)
+        {
+            // Load the expression
+            string expression = spreadsheetCell.Text.Substring(1);
+            CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
+
+            // Set the values of the variables
+            List<string> variableNames = expressionTree.GetVariableNames();
+            foreach (string variableName in variableNames)
+            {
+                int[] rowCol = this.ParseVariableName(variableName);
+                CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
+                double val = 0;
+                double.TryParse(cell.Value, out val);
+                expressionTree.SetVariable(variableName, val);
+            }
+
+            spreadsheetCell.Value = expressionTree.Evaluate().ToString();
+            this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
         }
 
         /// <summary>

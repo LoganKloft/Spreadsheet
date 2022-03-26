@@ -5,6 +5,7 @@
 namespace CptS321
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
 
     /// <summary>
@@ -108,6 +109,19 @@ namespace CptS321
             {
                 return;
             }
+        }
+
+        /// <summary>
+        /// Represents the string format of a SpreadsheetCell object.
+        /// </summary>
+        /// <returns> Returns the ColumnIndex in character form concatenated to the RowIndex.
+        /// i.e a SpreadsheetCell with ColumnIndex 1 and RowIndex 1 will return "A1". </returns>
+        public override string ToString()
+        {
+            string result = string.Empty;
+            result += (char)(this.ColumnIndex + 'A' - 1); // convert integer-based column to letter representation.
+            result += this.RowIndex.ToString();
+            return result;
         }
     }
 }

@@ -17,6 +17,20 @@ namespace SpreadsheetEngineTests
         private bool isCellPropertyHandlerTriggered = false;
 
         /// <summary>
+        /// Tests cell changing when the reference of the cell it is referencing changes.
+        /// </summary>
+        [Test]
+        public void TestExpressionWithReferenceOfReference()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(3, 3);
+            testSpreadsheet.GetCell(1, 1).Text = "1";
+            testSpreadsheet.GetCell(2, 1).Text = "=A1";
+            testSpreadsheet.GetCell(3, 1).Text = "=A2";
+            testSpreadsheet.GetCell(1, 1).Text = "2";
+            Assert.AreEqual("2", testSpreadsheet.GetCell(3, 1).Value); // edge
+        }
+
+        /// <summary>
         /// Tests that changing the value of one cell updates all cells that refer to that value.
         /// </summary>
         [Test]
@@ -31,7 +45,7 @@ namespace SpreadsheetEngineTests
             cell12.Text = "2";
             cell21.Text = "3";
             cell22.Text = "=A1+A2+B1";
-            cell21.Text = "10";
+            cell21.Text = "7";
             Assert.AreEqual("10", cell22.Value); // normal
         }
 

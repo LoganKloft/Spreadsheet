@@ -327,6 +327,26 @@
             <param name="sender"> The cell that was changed. </param>
             <param name="e"> The name of the property that was used for the change. </param>
         </member>
+        <member name="M:CptS321.Spreadsheet.CellPropertyChangedHandler(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+             Called when the value of a Cell has been changed. Should update all cells that reference this cell.
+            </summary>
+            <param name="sender"> The cell whose value changed. </param>
+            <param name="e"> The name of the property that has changed. </param>
+        </member>
+        <member name="M:CptS321.Spreadsheet.RecalculateCellsWhoReference(System.String)">
+            <summary>
+            Given a cell name, will search all cells who depend on this cell and recalculate their values using an expression tree.
+            </summary>
+            <param name="cellName"> The name of the cell name who other cells reference in there Text property. </param>
+        </member>
+        <member name="M:CptS321.Spreadsheet.RecalculateCellExpression(CptS321.SpreadsheetCell)">
+            <summary>
+            Performs the same function as UpdateSpreadsheet but on a cell with an expression
+            and can be explicitly called.
+            </summary>
+            <param name="spreadsheetCell"> A spreadsheet cell whose text property must start with '='. </param>
+        </member>
         <member name="M:CptS321.Spreadsheet.ParseVariableName(System.String)">
             <summary>
             Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
@@ -404,6 +424,13 @@
             <summary>
             Gets or sets the SpreadsheetCell's value.
             </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCell.ToString">
+            <summary>
+            Represents the string format of a SpreadsheetCell object.
+            </summary>
+            <returns> Returns the ColumnIndex in character form concatenated to the RowIndex.
+            i.e a SpreadsheetCell with ColumnIndex 1 and RowIndex 1 will return "A1". </returns>
         </member>
         <member name="T:CptS321.SubtractionNode">
             <summary>

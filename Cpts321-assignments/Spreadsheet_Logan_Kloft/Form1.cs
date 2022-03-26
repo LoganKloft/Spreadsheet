@@ -86,11 +86,12 @@ namespace Spreadsheet_Logan_Kloft
             CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
             if (this.dataGridView1[col, row].Value == null)
             {
-                cell.Text = "null";
+                cell.Text = string.Empty;
             }
             else
             {
                 cell.Text = this.dataGridView1[col, row].Value.ToString();
+                this.dataGridView1[col, row].Value = cell.Value; // if no change to text, go back to displaying value
             }
         }
 

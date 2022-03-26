@@ -346,6 +346,11 @@
             Contains the tests for the Spreadsheet class.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestExpressionWithReferenceOfReference">
+            <summary>
+            Tests cell changing when the reference of the cell it is referencing changes.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestExpressionWhenValueChanges">
             <summary>
             Tests that changing the value of one cell updates all cells that refer to that value.
