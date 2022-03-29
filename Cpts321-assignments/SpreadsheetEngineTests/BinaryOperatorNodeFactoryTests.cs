@@ -29,7 +29,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestCreateBinaryOperatorNodeAddition()
         {
-            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('+');
+            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode("+");
             bool passed = false;
             if (testNode is CptS321.AdditionNode)
             {
@@ -45,7 +45,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestCreateBinaryOperatorNodeSubtraction()
         {
-            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('-');
+            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode("-");
             bool passed = false;
             if (testNode is CptS321.SubtractionNode)
             {
@@ -61,7 +61,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestCreateBinaryOperatorNodeMultiplication()
         {
-            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('*');
+            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode("*");
             bool passed = false;
             if (testNode is CptS321.MultiplicationNode)
             {
@@ -77,7 +77,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestCreateBinaryOperatorNodeDivision()
         {
-            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('/');
+            object testNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode("/");
             bool passed = false;
             if (testNode is CptS321.DivisionNode)
             {
@@ -93,7 +93,7 @@ namespace SpreadsheetEngineTests
         [Test]
         public void TestCreateBinaryOperatorNodeBadOperator()
         {
-            Assert.Throws<Exception>(() => CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode('a')); // edge
+            Assert.Throws<CptS321.UnsupportedOperatorException>(() => CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode("a")); // edge
         }
     }
 }

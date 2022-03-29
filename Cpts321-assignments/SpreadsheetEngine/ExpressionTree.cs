@@ -173,74 +173,6 @@ namespace CptS321
         }
 
         /// <summary>
-        /// Given two operators, returns a negative value if the first parameter is lower precedence,
-        /// 0 if the first parameter is of equal precedence, and greater than 0 if of higher precedence.
-        /// </summary>
-        /// <param name="s1"> The first operator. </param>
-        /// <param name="s2"> The second operator. </param>
-        /// <returns> An integer value representing whether the first operator is lower, equal, or higher predence. </returns>
-        private int ComparePrecedence(string s1, string s2)
-        {
-            int p1 = 0;
-            int p2 = 0;
-
-            switch (s1)
-            {
-                case "+":
-                    p1 = AdditionNode.Precedence;
-                    break;
-                case "-":
-                    p1 = SubtractionNode.Precedence;
-                    break;
-                case "/":
-                    p1 = DivisionNode.Precedence;
-                    break;
-                case "*":
-                    p1 = MultiplicationNode.Precedence;
-                    break;
-            }
-
-            switch (s2)
-            {
-                case "+":
-                    p2 = AdditionNode.Precedence;
-                    break;
-                case "-":
-                    p2 = SubtractionNode.Precedence;
-                    break;
-                case "/":
-                    p2 = DivisionNode.Precedence;
-                    break;
-                case "*":
-                    p2 = MultiplicationNode.Precedence;
-                    break;
-            }
-
-            return p1 - p2;
-        }
-
-        /// <summary>
-        /// Returns the associativity of an operator.
-        /// </summary>
-        /// <param name="s"> String representation of an operator. </param>
-        private CptS321.BinaryOperatorNode.Associative GetAssociativity(string s)
-        {
-            switch (s)
-            {
-                case "+":
-                    return AdditionNode.Associativity;
-                case "-":
-                    return SubtractionNode.Associativity;
-                case "/":
-                    return DivisionNode.Associativity;
-                case "*":
-                    return MultiplicationNode.Associativity;
-            }
-
-            return CptS321.BinaryOperatorNode.Associative.Left;
-        }
-
-        /// <summary>
         /// Uses shunting yard algorithm to convert an infix expression into postfix.
         /// </summary>
         /// <param name="infix"> An expression in list format in infix notation. </param>
@@ -288,9 +220,9 @@ namespace CptS321
                     }
 
                     // 5 - higher precedence or equal and right-assoc
-                    else if (this.ComparePrecedence(infix[i], symbol.Peek()) < 0
-                        || (this.ComparePrecedence(infix[i], symbol.Peek()) == 0 &&
-                        this.GetAssociativity(infix[i]) == CptS321.BinaryOperatorNode.Associative.Right))
+                    else if (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) < 0
+                        || (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) == 0 &&
+                        CptS321.BinaryOperatorNodeFactory.GetAssociativity(infix[i]) == CptS321.BinaryOperatorNode.Associative.Right))
                     {
                         symbol.Push(infix[i]);
                     }
@@ -299,9 +231,9 @@ namespace CptS321
                     else
                     {
                         // lower or equal and left-associative to top
-                        while (symbol.Count > 0 && (this.ComparePrecedence(infix[i], symbol.Peek()) > 0
-                        || (this.ComparePrecedence(infix[i], symbol.Peek()) == 0 &&
-                        this.GetAssociativity(infix[i]) == CptS321.BinaryOperatorNode.Associative.Left)))
+                        while (symbol.Count > 0 && (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) > 0
+                        || (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) == 0 &&
+                        CptS321.BinaryOperatorNodeFactory.GetAssociativity(infix[i]) == CptS321.BinaryOperatorNode.Associative.Left)))
                         {
                             postfix.Add(symbol.Pop());
                         }
@@ -348,24 +280,9 @@ namespace CptS321
                 // symbol
                 else
                 {
-                    BinaryOperatorNode binaryOperatorNode = null;
+                    BinaryOperatorNode binaryOperatorNode = CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode(s);
                     Node last = nodes.Pop();
                     Node previousToLast = nodes.Pop();
-                    switch (s)
-                    {
-                        case "+":
-                            binaryOperatorNode = new AdditionNode();
-                            break;
-                        case "-":
-                            binaryOperatorNode = new SubtractionNode();
-                            break;
-                        case "/":
-                            binaryOperatorNode = new DivisionNode();
-                            break;
-                        case "*":
-                            binaryOperatorNode = new MultiplicationNode();
-                            break;
-                    }
 
                     binaryOperatorNode.RightNode = last;
                     binaryOperatorNode.LeftNode = previousToLast;

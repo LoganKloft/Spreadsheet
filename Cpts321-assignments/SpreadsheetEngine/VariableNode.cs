@@ -41,7 +41,7 @@ namespace CptS321
             double? val = this.Variable.Value;
             if (val == null)
             {
-                throw new System.InvalidOperationException();
+                throw new System.InvalidOperationException("Variable not initialized");
             }
 
             return (double)this.Variable.Value;

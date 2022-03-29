@@ -89,12 +89,28 @@
             Initializes a new instance of the <see cref="T:CptS321.BinaryOperatorNodeFactory"/> class.
             </summary>
         </member>
-        <member name="M:CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode(System.Char)">
+        <member name="M:CptS321.BinaryOperatorNodeFactory.CreateBinaryOperatorNode(System.String)">
             <summary>
             Given the character representation of an operator, returns the corresponding BinaryOperatorNode.
             </summary>
             <param name="op"> The character represenatation of a binary operator. </param>
             <returns> A child of the BinaryOperatorNode class. </returns>
+        </member>
+        <member name="M:CptS321.BinaryOperatorNodeFactory.ComparePrecedence(System.String,System.String)">
+            <summary>
+            Given two operators, returns a negative value if the first parameter is lower precedence,
+            0 if the first parameter is of equal precedence, and greater than 0 if of higher precedence.
+            </summary>
+            <param name="op1"> The first operator. </param>
+            <param name="op2"> The second operator. </param>
+            <returns> An integer value representing whether the first operator is lower, equal, or higher predence. </returns>
+        </member>
+        <member name="M:CptS321.BinaryOperatorNodeFactory.GetAssociativity(System.String)">
+            <summary>
+            Returns the associativity of an operator.
+            </summary>
+            <param name="op"> String representation of an operator. </param>
+            <returns> The associativity of the given operator. </returns>
         </member>
         <member name="T:CptS321.DivisionNode">
             <summary>
@@ -186,21 +202,6 @@
             <summary>
             Resets the variable dictionary and fills it out again.
             </summary>
-        </member>
-        <member name="M:CptS321.ExpressionTree.ComparePrecedence(System.String,System.String)">
-            <summary>
-            Given two operators, returns a negative value if the first parameter is lower precedence,
-            0 if the first parameter is of equal precedence, and greater than 0 if of higher precedence.
-            </summary>
-            <param name="s1"> The first operator. </param>
-            <param name="s2"> The second operator. </param>
-            <returns> An integer value representing whether the first operator is lower, equal, or higher predence. </returns>
-        </member>
-        <member name="M:CptS321.ExpressionTree.GetAssociativity(System.String)">
-            <summary>
-            Returns the associativity of an operator.
-            </summary>
-            <param name="s"> String representation of an operator. </param>
         </member>
         <member name="M:CptS321.ExpressionTree.InfixToPostfix(System.Collections.Generic.List{System.String})">
             <summary>
@@ -469,6 +470,29 @@
             Subtracts the right node from the left..
             </summary>
             <returns> The value of the right node minus the left node. </returns>
+        </member>
+        <member name="T:CptS321.UnsupportedOperatorException">
+            <summary>
+            Use this when trying to access a property or initialize an operator that does not exist.
+            </summary>
+        </member>
+        <member name="M:CptS321.UnsupportedOperatorException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.UnsupportedOperatorException"/> class.
+            </summary>
+        </member>
+        <member name="M:CptS321.UnsupportedOperatorException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.UnsupportedOperatorException"/> class.
+            </summary>
+            <param name="message"> The error message that should be displayed in the console. </param>
+        </member>
+        <member name="M:CptS321.UnsupportedOperatorException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.UnsupportedOperatorException"/> class.
+            </summary>
+            <param name="message"> The error message that should be displayed in the console. </param>
+            <param name="inner"> The less specific related error message. </param>
         </member>
         <member name="T:CptS321.ValueNode">
             <summary>
