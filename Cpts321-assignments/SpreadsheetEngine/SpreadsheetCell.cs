@@ -23,7 +23,7 @@ namespace CptS321
         /// </summary>
         protected string value;
 
-        private uint bgColor = 0x00000000;
+        private uint bgColor = 0xFFFFFFFF;
 
         private int rowIndex;
         private int columnIndex;
@@ -125,7 +125,13 @@ namespace CptS321
 
             set
             {
-                this.BGColor = value;
+                if (value == this.BGColor)
+                {
+                    return;
+                }
+
+                this.bgColor = value;
+                this.PropertyChanged(this, new PropertyChangedEventArgs("BGColor"));
             }
         }
 

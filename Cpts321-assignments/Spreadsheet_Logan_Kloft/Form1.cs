@@ -103,7 +103,15 @@ namespace Spreadsheet_Logan_Kloft
         public void UpdateDataGridView(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
-            this.dataGridView1[changedCell.ColumnIndex - 1, changedCell.RowIndex - 1].Value = changedCell.Value;
+            if (e.PropertyName == "Value")
+            {
+                this.dataGridView1[changedCell.ColumnIndex - 1, changedCell.RowIndex - 1].Value = changedCell.Value;
+            }
+
+            if (e.PropertyName == "BGColor")
+            {
+                this.dataGridView1[changedCell.ColumnIndex - 1, changedCell.RowIndex - 1].Style.BackColor = Color.FromArgb((int)changedCell.BGColor);
+            }
         }
 
         /// <summary>
@@ -136,6 +144,28 @@ namespace Spreadsheet_Logan_Kloft
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        /// <summary>
+        /// Event handler for changing the background color of selected cells.
+        /// </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event parameters. </param>
+        private void ChangeBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (DataGridViewCell selectedCell in this.dataGridView1.SelectedCells)
+                    {
+                        int row = selectedCell.RowIndex;
+                        int col = selectedCell.ColumnIndex;
+                        CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
+                        cell.BGColor = (uint)colorDialog.Color.ToArgb();
+                    }
+                }
+            }
         }
     }
 }

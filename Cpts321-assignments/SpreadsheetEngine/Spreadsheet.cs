@@ -103,55 +103,63 @@ namespace CptS321
         /// <param name="e"> The name of the property that was used for the change. </param>
         public void UpdateSpreadsheet(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
-            if (changedCell.Text.StartsWith("="))
+            if (e.PropertyName == "Text")
             {
-                // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
-                foreach (List<string> cellNames in this.referenceCells.Values)
+                CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
+                if (changedCell.Text.StartsWith("="))
                 {
-                    // found in dictionary, remove it.
-                    if (cellNames != null && cellNames.Contains(changedCell.ToString()))
+                    // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
+                    foreach (List<string> cellNames in this.referenceCells.Values)
                     {
-                        cellNames.Remove(changedCell.ToString());
+                        // found in dictionary, remove it.
+                        if (cellNames != null && cellNames.Contains(changedCell.ToString()))
+                        {
+                            cellNames.Remove(changedCell.ToString());
+                        }
                     }
+
+                    // Load the expression
+                    string expression = changedCell.Text.Substring(1);
+                    CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
+
+                    // Set the values of the variables
+                    List<string> variableNames = expressionTree.GetVariableNames();
+                    foreach (string variableName in variableNames)
+                    {
+                        // Add the changedCell as a reference to variableName
+                        // At this point, any previous occurences of changedCell in any values in the referenceCells dictionary
+                        // have been removed.
+                        if (this.referenceCells.ContainsKey(variableName))
+                        {
+                            this.referenceCells[variableName].Add(changedCell.ToString());
+                        }
+                        else
+                        {
+                            this.referenceCells.Add(variableName, new List<string>() { changedCell.ToString() });
+                        }
+
+                        int[] rowCol = this.ParseVariableName(variableName);
+                        CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
+                        double val = 0;
+                        double.TryParse(cell.Value, out val);
+                        expressionTree.SetVariable(variableName, val);
+                    }
+
+                    // Update the Value of the changed cell
+                    changedCell.Value = expressionTree.Evaluate().ToString();
+                }
+                else
+                {
+                    changedCell.Value = changedCell.Text;
                 }
 
-                // Load the expression
-                string expression = changedCell.Text.Substring(1);
-                CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
-
-                // Set the values of the variables
-                List<string> variableNames = expressionTree.GetVariableNames();
-                foreach (string variableName in variableNames)
-                {
-                    // Add the changedCell as a reference to variableName
-                    // At this point, any previous occurences of changedCell in any values in the referenceCells dictionary
-                    // have been removed.
-                    if (this.referenceCells.ContainsKey(variableName))
-                    {
-                        this.referenceCells[variableName].Add(changedCell.ToString());
-                    }
-                    else
-                    {
-                        this.referenceCells.Add(variableName, new List<string>() { changedCell.ToString() });
-                    }
-
-                    int[] rowCol = this.ParseVariableName(variableName);
-                    CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
-                    double val = 0;
-                    double.TryParse(cell.Value, out val);
-                    expressionTree.SetVariable(variableName, val);
-                }
-
-                // Update the Value of the changed cell
-                changedCell.Value = expressionTree.Evaluate().ToString();
+                this.CellPropertyChanged(sender, new System.ComponentModel.PropertyChangedEventArgs("Value"));
             }
-            else
+
+            if (e.PropertyName == "BGColor")
             {
-                changedCell.Value = changedCell.Text;
+                this.CellPropertyChanged(sender, new System.ComponentModel.PropertyChangedEventArgs("BGColor"));
             }
-
-            this.CellPropertyChanged(sender, new System.ComponentModel.PropertyChangedEventArgs("Value"));
         }
 
         /// <summary>
@@ -161,9 +169,12 @@ namespace CptS321
         /// <param name="e"> The name of the property that has changed. </param>
         private void CellPropertyChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            // Recalculate Values for cells that depend on this one.
-            CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
-            this.RecalculateCellsWhoReference(changedCell.ToString());
+            if (e.PropertyName == "Value")
+            {
+                // Recalculate Values for cells that depend on this one.
+                CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
+                this.RecalculateCellsWhoReference(changedCell.ToString());
+            }
         }
 
         /// <summary>
