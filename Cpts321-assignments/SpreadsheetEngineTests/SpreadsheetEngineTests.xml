@@ -69,6 +69,64 @@
             Tests the proper storing of the rightNode in a BinaryOperatorNode.
             </summary>
         </member>
+        <member name="T:SpreadsheetEngineTests.CommandInvokerTests">
+            <summary>
+            Tests for the CommandInvoker class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestCanUndo">
+            <summary>
+            Tests the CanUndo method of CommandInvoker on a non-empty undo stack.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestCanUndoEmpty">
+            <summary>
+            Tests the CanUndo method of CommandInvoker on an empty undo stack.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestUndo">
+            <summary>
+            Tests the Undo method of CommandInvoker.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestCanRedo">
+            <summary>
+            Tests the CanRedo method of CommandInvoker on a non-empty redo stack.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestCanRedoEmpty">
+            <summary>
+            Tests the CanRedo method of CommandInvoker on an empty redo stack.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestRedo">
+            <summary>
+            Tests the Redo method of CommandInvoker.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.TestAddUndo">
+            <summary>
+            Tests the AddUndo method of CommandInvoker.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.CommandInvokerTests.SpreadsheetCellTestClass">
+            <summary>
+            Allows ability to test abstract class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.SpreadsheetCellTestClass.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.CommandInvokerTests.SpreadsheetCellTestClass"/> class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.CommandInvokerTests.SpreadsheetCellTestClass.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.CommandInvokerTests.SpreadsheetCellTestClass"/> class.
+            Constructor that allows creation of a SpreadsheetCell with a given rowIndex and columnIndex.
+            </summary>
+            <param name="rowIndex"> Initialize field rowIndex with parameter rowIndex. </param>
+            <param name="columnIndex"> Initialize field columnIndex with paremeter columnIndex. </param>
+        </member>
         <member name="T:SpreadsheetEngineTests.DivisionNodeTests">
             <summary>
             Tests for the DivisionNode class.
@@ -261,6 +319,44 @@
             Test the multiplication of two nodes with maximum double values.
             </summary>
         </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests">
+            <summary>
+            The class for testing SpreadsheetCellBGColorCommand.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.TestExecute">
+            <summary>
+            Tests the Execute command of SpreadsheetCellBGColorCommand.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.TestUnexecute">
+            <summary>
+            Tests the Unexecute method of SpreadsheetCellBGColorCommand.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.TestMessage">
+            <summary>
+            Tests the message property of SpreadsheetCellBGColorCommand.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.SpreadsheetCellTestClass">
+            <summary>
+            Allows ability to test abstract class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.SpreadsheetCellTestClass.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.SpreadsheetCellTestClass"/> class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.SpreadsheetCellTestClass.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellBGColorCommandTests.SpreadsheetCellTestClass"/> class.
+            Constructor that allows creation of a SpreadsheetCell with a given rowIndex and columnIndex.
+            </summary>
+            <param name="rowIndex"> Initialize field rowIndex with parameter rowIndex. </param>
+            <param name="columnIndex"> Initialize field columnIndex with paremeter columnIndex. </param>
+        </member>
         <member name="T:SpreadsheetEngineTests.SpreadsheetCellTests">
             <summary>
             Class that contains the tests for the SpreadsheetCell class.
@@ -373,6 +469,44 @@
         <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass.#ctor(System.Int32,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellTests.SpreadsheetCellTestClass"/> class.
+            Constructor that allows creation of a SpreadsheetCell with a given rowIndex and columnIndex.
+            </summary>
+            <param name="rowIndex"> Initialize field rowIndex with parameter rowIndex. </param>
+            <param name="columnIndex"> Initialize field columnIndex with paremeter columnIndex. </param>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests">
+            <summary>
+            Tests for the SpreadsheetCellTextCommand class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.TestExecute">
+            <summary>
+            Tests the Execute method of SpreadsheetCellTextCommand.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.TestUnexecute">
+            <summary>
+            Tests the Unexecute method of SpreadsheetCellTextCommand.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.TestMessage">
+            <summary>
+            Tests the Message property of SpreadsheetCellTextCommand.
+            </summary>
+        </member>
+        <member name="T:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.SpreadsheetCellTestClass">
+            <summary>
+            Allows ability to test abstract class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.SpreadsheetCellTestClass.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.SpreadsheetCellTestClass"/> class.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.SpreadsheetCellTestClass.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SpreadsheetEngineTests.SpreadsheetCellTextCommandTests.SpreadsheetCellTestClass"/> class.
             Constructor that allows creation of a SpreadsheetCell with a given rowIndex and columnIndex.
             </summary>
             <param name="rowIndex"> Initialize field rowIndex with parameter rowIndex. </param>

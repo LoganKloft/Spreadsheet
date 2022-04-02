@@ -112,6 +112,41 @@
             <param name="op"> String representation of an operator. </param>
             <returns> The associativity of the given operator. </returns>
         </member>
+        <member name="T:CptS321.CommandInvoker">
+            <summary>
+            Responsible for redoing and undoing commands.
+            </summary>
+        </member>
+        <member name="M:CptS321.CommandInvoker.AddUndo(CptS321.ICommand)">
+            <summary>
+            Adds a command that can be undone by calling CommandInvoker.Undo().
+            </summary>
+            <param name="undoCommand"> The command that was just executed. </param>
+        </member>
+        <member name="M:CptS321.CommandInvoker.Undo">
+            <summary>
+            Pops the command at the top of the undo stack.
+            Unexecutes the popped command and pushes it to the redoStack.
+            </summary>
+        </member>
+        <member name="M:CptS321.CommandInvoker.CanUndo">
+            <summary>
+            Returns true if undoStack is not empty, false otherwise.
+            </summary>
+            <returns> A boolean value that means whether there are any commands left to undo. </returns>
+        </member>
+        <member name="M:CptS321.CommandInvoker.CanRedo">
+            <summary>
+            Returns true if redoStack is not empty, false otherwise.
+            </summary>
+            <returns> A boolean value that means whether there are any commands left to redo. </returns>
+        </member>
+        <member name="M:CptS321.CommandInvoker.Redo">
+            <summary>
+            Pops the command at the top of the redo stack.
+            Executes the popped comman and pushes it to the undoStack.
+            </summary>
+        </member>
         <member name="T:CptS321.DivisionNode">
             <summary>
             Represents the division binary operator.
@@ -237,6 +272,21 @@
             Gets or Sets value.
             </summary>
         </member>
+        <member name="T:CptS321.ICommand">
+            <summary>
+            Defines the basic behavior of any command in the Command Design Pattern.
+            </summary>
+        </member>
+        <member name="M:CptS321.ICommand.Execute">
+            <summary>
+            The logic of the action of the command.
+            </summary>
+        </member>
+        <member name="M:CptS321.ICommand.Unexecute">
+            <summary>
+            The logic for undoing the action of the command.
+            </summary>
+        </member>
         <member name="T:CptS321.MultiplicationNode">
             <summary>
             Represents the multiplication binary operator.
@@ -274,6 +324,21 @@
             Multiplies the left and right node together.
             </summary>
             <returns> The value of the left node times the right node. </returns>
+        </member>
+        <member name="T:CptS321.NoCommand">
+            <summary>
+            The NoCommand is used as a plcae holder for a command that does nothing.
+            </summary>
+        </member>
+        <member name="M:CptS321.NoCommand.Execute">
+            <summary>
+            Represents a command that does nothing. Used as a place holder instead of null.
+            </summary>
+        </member>
+        <member name="M:CptS321.NoCommand.Unexecute">
+            <summary>
+            Represents a command that does nothing. Used as a place holder instead of null.
+            </summary>
         </member>
         <member name="T:CptS321.Node">
             <summary>
@@ -437,6 +502,64 @@
             </summary>
             <returns> Returns the ColumnIndex in character form concatenated to the RowIndex.
             i.e a SpreadsheetCell with ColumnIndex 1 and RowIndex 1 will return "A1". </returns>
+        </member>
+        <member name="T:CptS321.SpreadsheetCellBGColorCommand">
+            <summary>
+            Command for changing the BGColor of a cell.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCellBGColorCommand.#ctor(CptS321.SpreadsheetCell,System.UInt32,System.UInt32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.SpreadsheetCellBGColorCommand"/> class.
+            </summary>
+            <param name="spreadsheetCell"> The cell the command will act on. </param>
+            <param name="bgcolorBeforeCommand"> The BGColor before running the command. </param>
+            <param name="bgcolorAfterCommand"> The BGColor after running the command. </param>
+            <param name="message"> Message describing what is being updated in the cell. </param>
+        </member>
+        <member name="P:CptS321.SpreadsheetCellBGColorCommand.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCellBGColorCommand.Execute">
+            <summary>
+            Updates spreadsheetCell's BGColor to bgcolorAfterCommand.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCellBGColorCommand.Unexecute">
+            <summary>
+            Updates spreadsheetCell's BGColor to bgcolorBeforeCommand.
+            </summary>
+        </member>
+        <member name="T:CptS321.SpreadsheetCellTextCommand">
+            <summary>
+            Command for changing the Text of a cell.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCellTextCommand.#ctor(CptS321.SpreadsheetCell,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.SpreadsheetCellTextCommand"/> class.
+            </summary>
+            <param name="spreadsheetCell"> The cell the command will act on. </param>
+            <param name="textBeforeCommand"> The text of the cell before running the command. </param>
+            <param name="textAfterCommand"> The text of the cell after running the command. </param>
+            <param name="message"> Message describing what is being updated in the cell. </param>
+        </member>
+        <member name="P:CptS321.SpreadsheetCellTextCommand.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCellTextCommand.Execute">
+            <summary>
+            Updates spreadsheetCell's text to textAfterCommand.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCellTextCommand.Unexecute">
+            <summary>
+            Updates spreadsheetCell's text to textBeforeCommand.
+            </summary>
         </member>
         <member name="T:CptS321.SubtractionNode">
             <summary>
