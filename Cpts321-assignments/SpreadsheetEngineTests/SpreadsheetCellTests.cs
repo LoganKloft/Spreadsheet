@@ -12,6 +12,7 @@ namespace SpreadsheetEngineTests
     public class SpreadsheetCellTests
     {
         private bool isTextPropertyHandlerTriggered = false;
+        private bool isBGColorPropertyHandlerTriggered = false;
 
         /// <summary>
         /// Resets fields required for testing events.
@@ -20,6 +21,83 @@ namespace SpreadsheetEngineTests
         public void SetUp()
         {
             this.isTextPropertyHandlerTriggered = false;
+            this.isBGColorPropertyHandlerTriggered = false;
+        }
+
+        /// <summary>
+        /// Test that the property changed event in a SpreadsheetCell triggers when the BGColor is changed.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertySetToDifferent()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // normal case
+            testCell.BGColor = 0xFFFF0000;
+            Assert.True(this.isBGColorPropertyHandlerTriggered);
+        }
+
+        /// <summary>
+        /// Test that the property changed event in a SpreadsheetCell does not trigger if setting the same value.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertySetToSame()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // edge case
+            testCell.BGColor = 0xFFFFFFFF;
+            Assert.False(this.isBGColorPropertyHandlerTriggered);
+        }
+
+        /// <summary>
+        /// Tests the default value of the background to be white.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertyDefault()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // normal case
+            Assert.AreEqual(0xFFFFFFFF, testCell.BGColor);
+        }
+
+        /// <summary>
+        /// Tests setting BGColor a valid value.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertyNormal()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // normal case
+            testCell.BGColor = 0xFFFF0000;
+            Assert.AreEqual(0xFFFF0000, testCell.BGColor);
+        }
+
+        /// <summary>
+        /// Tests that the background color is set to white when an invalid value is entered for BGColor.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertyExceptional()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // exceptional case
+            testCell.BGColor = uint.MaxValue;
+            Assert.AreEqual(0xFFFFFFFF, testCell.BGColor);
+        }
+
+        /// <summary>
+        /// Tests the lower boundary of the range of BGColor.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertyLowerEdge()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // edge case
+            testCell.BGColor = 0x00000000;
+            Assert.AreEqual(0x00000000, testCell.BGColor);
+        }
+
+        /// <summary>
+        /// Tests the upper boundary of the range of BGColor.
+        /// </summary>
+        [Test]
+        public void TestBGColorPropertyUpperEdge()
+        {
+            SpreadsheetCellTestClass testCell = new SpreadsheetCellTestClass(); // edge case
+            testCell.BGColor = 0xFFFFFFFF;
+            Assert.AreEqual(0xFFFFFFFF, testCell.BGColor);
         }
 
         /// <summary>
@@ -116,6 +194,11 @@ namespace SpreadsheetEngineTests
             if (e.PropertyName == "Text")
             {
                 this.isTextPropertyHandlerTriggered = true;
+            }
+
+            if (e.PropertyName == "BGColor")
+            {
+                this.isBGColorPropertyHandlerTriggered = true;
             }
         }
 

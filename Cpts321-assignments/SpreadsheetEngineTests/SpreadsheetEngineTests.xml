@@ -271,6 +271,41 @@
             Resets fields required for testing events.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertySetToDifferent">
+            <summary>
+            Test that the property changed event in a SpreadsheetCell triggers when the BGColor is changed.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertySetToSame">
+            <summary>
+            Test that the property changed event in a SpreadsheetCell does not trigger if setting the same value.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertyDefault">
+            <summary>
+            Tests the default value of the background to be white.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertyNormal">
+            <summary>
+            Tests setting BGColor a valid value.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertyExceptional">
+            <summary>
+            Tests that the background color is set to white when an invalid value is entered for BGColor.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertyLowerEdge">
+            <summary>
+            Tests the lower boundary of the range of BGColor.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestBGColorPropertyUpperEdge">
+            <summary>
+            Tests the upper boundary of the range of BGColor.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.SpreadsheetCellTests.TestRowIndexPropertyNormal">
             <summary>
             Tests the RowIndex property.

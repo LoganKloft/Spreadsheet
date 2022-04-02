@@ -23,6 +23,8 @@ namespace CptS321
         /// </summary>
         protected string value;
 
+        private uint bgColor = 0x00000000;
+
         private int rowIndex;
         private int columnIndex;
 
@@ -108,6 +110,22 @@ namespace CptS321
             set
             {
                 return;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bgColor.
+        /// </summary>
+        public uint BGColor
+        {
+            get
+            {
+                return this.bgColor;
+            }
+
+            set
+            {
+                this.BGColor = value;
             }
         }
 

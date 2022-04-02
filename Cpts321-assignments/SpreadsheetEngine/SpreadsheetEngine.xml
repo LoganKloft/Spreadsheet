@@ -426,6 +426,11 @@
             Gets or sets the SpreadsheetCell's value.
             </summary>
         </member>
+        <member name="P:CptS321.SpreadsheetCell.BGColor">
+            <summary>
+            Gets or sets the bgColor.
+            </summary>
+        </member>
         <member name="M:CptS321.SpreadsheetCell.ToString">
             <summary>
             Represents the string format of a SpreadsheetCell object.
