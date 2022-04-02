@@ -106,7 +106,7 @@ namespace CptS321
             if (e.PropertyName == "Text")
             {
                 CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
-                if (changedCell.Text.StartsWith("="))
+                if (changedCell.Text != null && changedCell.Text.StartsWith("="))
                 {
                     // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
                     foreach (List<string> cellNames in this.referenceCells.Values)
@@ -203,22 +203,26 @@ namespace CptS321
         private void RecalculateCellExpression(CptS321.SpreadsheetCell spreadsheetCell)
         {
             // Load the expression
-            string expression = spreadsheetCell.Text.Substring(1);
-            CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
-
-            // Set the values of the variables
-            List<string> variableNames = expressionTree.GetVariableNames();
-            foreach (string variableName in variableNames)
+            string expression = spreadsheetCell.Text;
+            if (expression != null)
             {
-                int[] rowCol = this.ParseVariableName(variableName);
-                CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
-                double val = 0;
-                double.TryParse(cell.Value, out val);
-                expressionTree.SetVariable(variableName, val);
-            }
+                expression = spreadsheetCell.Text.Substring(1);
+                CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
 
-            spreadsheetCell.Value = expressionTree.Evaluate().ToString();
-            this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+                // Set the values of the variables
+                List<string> variableNames = expressionTree.GetVariableNames();
+                foreach (string variableName in variableNames)
+                {
+                    int[] rowCol = this.ParseVariableName(variableName);
+                    CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
+                    double val = 0;
+                    double.TryParse(cell.Value, out val);
+                    expressionTree.SetVariable(variableName, val);
+                }
+
+                spreadsheetCell.Value = expressionTree.Evaluate().ToString();
+                this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+            }
         }
 
         /// <summary>

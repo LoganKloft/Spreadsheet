@@ -33,7 +33,11 @@ namespace Spreadsheet_Logan_Kloft
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeBackgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.Undo = new System.Windows.Forms.ToolStripMenuItem();
+            this.Redo = new System.Windows.Forms.ToolStripMenuItem();
+            this.cellToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeBackgroundColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +67,9 @@ namespace Spreadsheet_Logan_Kloft
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(36, 36);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.Edit,
+            this.cellToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1771, 47);
@@ -72,18 +78,49 @@ namespace Spreadsheet_Logan_Kloft
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeBackgroundColorToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(84, 43);
-            this.toolStripMenuItem1.Text = "Cell";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(80, 43);
+            this.toolStripMenuItem1.Text = "File";
             // 
-            // changeBackgroundColorToolStripMenuItem
+            // Edit
             // 
-            this.changeBackgroundColorToolStripMenuItem.Name = "changeBackgroundColorToolStripMenuItem";
-            this.changeBackgroundColorToolStripMenuItem.Size = new System.Drawing.Size(492, 48);
-            this.changeBackgroundColorToolStripMenuItem.Text = "Change background color...";
-            this.changeBackgroundColorToolStripMenuItem.Click += new System.EventHandler(this.ChangeBackgroundColorToolStripMenuItem_Click);
+            this.Edit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Undo,
+            this.Redo});
+            this.Edit.Name = "Edit";
+            this.Edit.Size = new System.Drawing.Size(85, 43);
+            this.Edit.Text = "Edit";
+            // 
+            // Undo
+            // 
+            this.Undo.Enabled = false;
+            this.Undo.Name = "Undo";
+            this.Undo.Size = new System.Drawing.Size(403, 48);
+            this.Undo.Text = "Undo";
+            this.Undo.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
+            // 
+            // Redo
+            // 
+            this.Redo.Enabled = false;
+            this.Redo.Name = "Redo";
+            this.Redo.Size = new System.Drawing.Size(403, 48);
+            this.Redo.Text = "Redo";
+            this.Redo.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
+            // 
+            // cellToolStripMenuItem1
+            // 
+            this.cellToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeBackgroundColorToolStripMenuItem1});
+            this.cellToolStripMenuItem1.Name = "cellToolStripMenuItem1";
+            this.cellToolStripMenuItem1.Size = new System.Drawing.Size(84, 43);
+            this.cellToolStripMenuItem1.Text = "Cell";
+            // 
+            // changeBackgroundColorToolStripMenuItem1
+            // 
+            this.changeBackgroundColorToolStripMenuItem1.Name = "changeBackgroundColorToolStripMenuItem1";
+            this.changeBackgroundColorToolStripMenuItem1.Size = new System.Drawing.Size(492, 48);
+            this.changeBackgroundColorToolStripMenuItem1.Text = "Change background color...";
+            this.changeBackgroundColorToolStripMenuItem1.Click += new System.EventHandler(this.ChangeBackgroundColorToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -111,7 +148,11 @@ namespace Spreadsheet_Logan_Kloft
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem changeBackgroundColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Edit;
+        private System.Windows.Forms.ToolStripMenuItem Undo;
+        private System.Windows.Forms.ToolStripMenuItem Redo;
+        private System.Windows.Forms.ToolStripMenuItem cellToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem changeBackgroundColorToolStripMenuItem1;
     }
 }
 

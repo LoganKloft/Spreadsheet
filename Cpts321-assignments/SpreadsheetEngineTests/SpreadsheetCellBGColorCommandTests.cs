@@ -51,7 +51,7 @@ namespace SpreadsheetEngineTests
                 bgcolorAfter,
                 message);
             bgcolorCommand.Unexecute();
-            Assert.AreEqual(bgcolorAfter, spreadsheetCell.BGColor); // normal
+            Assert.AreEqual(bgcolorBefore, spreadsheetCell.BGColor); // normal
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace SpreadsheetEngineTests
                 bgcolorBefore,
                 bgcolorAfter,
                 message);
-            Assert.AreEqual(message, bgcolorCommand.Message); // normal
+            Assert.AreEqual(message, bgcolorCommand.Message()); // normal
         }
 
         /// <summary>

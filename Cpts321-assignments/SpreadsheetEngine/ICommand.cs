@@ -22,5 +22,11 @@ namespace CptS321
         /// The logic for undoing the action of the command.
         /// </summary>
         void Unexecute();
+
+        /// <summary>
+        /// Used to send a message to accompany the command.
+        /// </summary>
+        /// <returns> The message describing in low detail what the command does. </returns>
+        string Message();
     }
 }

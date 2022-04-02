@@ -69,7 +69,7 @@ namespace SpreadsheetEngineTests
                 textBefore,
                 textAfter,
                 message);
-            Assert.AreEqual(message, textCommand.Message); // normal
+            Assert.AreEqual(message, textCommand.Message()); // normal
         }
 
         /// <summary>

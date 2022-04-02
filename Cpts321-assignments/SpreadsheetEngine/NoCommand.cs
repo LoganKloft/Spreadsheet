@@ -26,5 +26,14 @@ namespace CptS321
         public void Unexecute()
         {
         }
+
+        /// <summary>
+        /// Used to send a message to accompany the command.
+        /// </summary>
+        /// <returns> The message describing in low detail what the command does. </returns>
+        public string Message()
+        {
+            return string.Empty;
+        }
     }
 }

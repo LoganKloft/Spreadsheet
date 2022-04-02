@@ -20,6 +20,7 @@ namespace Spreadsheet_Logan_Kloft
     public partial class Form1 : Form
     {
         private CptS321.Spreadsheet spreadsheet;
+        private CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
@@ -39,6 +40,9 @@ namespace Spreadsheet_Logan_Kloft
 
             // subscribe to the CellEndEdit event
             this.dataGridView1.CellEndEdit += this.CellEndEditHandler;
+
+            // subscribe to UndoRedoStackChanged event
+            this.commandInvoker.UndoRedoStackChanged += this.UndoRedoVisibilityHandler;
 
             // add columns from A-Z
             for (char columnName = 'A'; columnName <= 'Z'; columnName++)
@@ -84,6 +88,21 @@ namespace Spreadsheet_Logan_Kloft
             int col = e.ColumnIndex;
 
             CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
+
+            string currentText = cell.Text;
+            string newText = this.dataGridView1[col, row].Value.ToString();
+            CptS321.SpreadsheetCellTextCommand textCommand = new CptS321.SpreadsheetCellTextCommand(
+                cell,
+                currentText,
+                newText,
+                "text change");
+            if (currentText != newText)
+            {
+                List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+                commandList.Add(textCommand);
+                this.commandInvoker.AddUndo(commandList, "text change");
+            }
+
             if (this.dataGridView1[col, row].Value == null)
             {
                 cell.Text = string.Empty;
@@ -157,15 +176,86 @@ namespace Spreadsheet_Logan_Kloft
             {
                 if (colorDialog.ShowDialog() == DialogResult.OK)
                 {
+                    List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
                     foreach (DataGridViewCell selectedCell in this.dataGridView1.SelectedCells)
                     {
                         int row = selectedCell.RowIndex;
                         int col = selectedCell.ColumnIndex;
                         CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
+
+                        uint currentBGColor = cell.BGColor;
+                        uint newBGColor = (uint)colorDialog.Color.ToArgb();
+
+                        CptS321.SpreadsheetCellBGColorCommand bgcolorCommand = new CptS321.SpreadsheetCellBGColorCommand(
+                            cell,
+                            currentBGColor,
+                            newBGColor,
+                            "background color change");
+                        commandList.Add(bgcolorCommand);
+
                         cell.BGColor = (uint)colorDialog.Color.ToArgb();
                     }
+
+                    this.commandInvoker.AddUndo(commandList, "background color change");
                 }
             }
+        }
+
+        /// <summary>
+        /// Event handler for when the Undo menu item is clicked within the Edit menu.
+        /// </summary>
+        /// <param name="sender"> The Undo menu item. </param>
+        /// <param name="e"> The parameters of the event. </param>
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.commandInvoker.Undo();
+        }
+
+        /// <summary>
+        /// Event handler for when the Redo menu item is clicked within the Edit menu.
+        /// </summary>
+        /// <param name="sender"> The Redo menu item. </param>
+        /// <param name="e"> The parameters of the event. </param>
+        private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.commandInvoker.Redo();
+        }
+
+        /// <summary>
+        /// Handles the enability of the Undo and Redo menu strip items. Triggered whenever Redo or Undo is called in CommandInvoker.
+        /// </summary>
+        /// <param name="sender"> The instance of the CommandInvoker that had its method called. </param>
+        /// <param name="e"> The name of the. </param>
+        private void UndoRedoVisibilityHandler(object sender, EventArgs e)
+        {
+            ToolStripMenuItem edit = this.menuStrip1.Items["Edit"] as ToolStripMenuItem;
+            ToolStripItem undoMenuItem = edit.DropDownItems["Undo"];
+            ToolStripItem redoMenuItem = edit.DropDownItems["Redo"];
+
+            if (this.commandInvoker.CanUndo())
+            {
+                // enable the enability of the Undo menu strip item.
+                undoMenuItem.Enabled = true;
+            }
+            else
+            {
+                // disable the enability of the Undo menu strip item.
+                undoMenuItem.Enabled = false;
+            }
+
+            if (this.commandInvoker.CanRedo())
+            {
+                // enable the enability of the Redo menu strip item.
+                redoMenuItem.Enabled = true;
+            }
+            else
+            {
+                // disable the enability of the Redo menu strip item.
+                redoMenuItem.Enabled = false;
+            }
+
+            undoMenuItem.Text = this.commandInvoker.UndoText();
+            redoMenuItem.Text = this.commandInvoker.RedoText();
         }
     }
 }

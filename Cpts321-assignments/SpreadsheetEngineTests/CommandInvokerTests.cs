@@ -32,7 +32,10 @@ namespace SpreadsheetEngineTests
                 message);
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
             Assert.True(commandInvoker.CanUndo()); // Normal
             commandInvoker.Undo();
             commandInvoker.Redo();
@@ -58,7 +61,10 @@ namespace SpreadsheetEngineTests
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
             Assert.False(commandInvoker.CanUndo()); // Edge
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
             commandInvoker.Undo();
             Assert.False(commandInvoker.CanUndo()); // Normal
         }
@@ -81,7 +87,10 @@ namespace SpreadsheetEngineTests
                 message);
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
             commandInvoker.Undo();
             Assert.AreEqual(textBefore, spreadsheetCell.Text); // Normal
         }
@@ -104,7 +113,10 @@ namespace SpreadsheetEngineTests
                 message);
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
             commandInvoker.Undo();
             Assert.True(commandInvoker.CanRedo()); // Normal
         }
@@ -128,7 +140,10 @@ namespace SpreadsheetEngineTests
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
             Assert.False(commandInvoker.CanRedo()); // Edge
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
             Assert.False(commandInvoker.CanRedo()); // Normal
             commandInvoker.Undo();
             commandInvoker.Redo();
@@ -152,7 +167,10 @@ namespace SpreadsheetEngineTests
                 message);
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
             commandInvoker.Undo();
             commandInvoker.Redo();
             Assert.AreEqual(textAfter, spreadsheetCell.Text); // Normal
@@ -176,7 +194,10 @@ namespace SpreadsheetEngineTests
                 message);
 
             CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
-            commandInvoker.AddUndo(textCommand);
+            List<CptS321.ICommand> commandList = new List<CptS321.ICommand>();
+            commandList.Add(textCommand);
+
+            commandInvoker.AddUndo(commandList, "text change");
 
             Assert.True(commandInvoker.CanUndo()); // Normal
         }

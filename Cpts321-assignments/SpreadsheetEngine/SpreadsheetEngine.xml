@@ -112,21 +112,55 @@
             <param name="op"> String representation of an operator. </param>
             <returns> The associativity of the given operator. </returns>
         </member>
+        <member name="T:CptS321.CommandCollection">
+            <summary>
+            Stores a collection of commands and a message describing their action.
+            </summary>
+        </member>
+        <member name="M:CptS321.CommandCollection.#ctor(System.Collections.Generic.List{CptS321.ICommand},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CptS321.CommandCollection"/> class.
+            </summary>
+            <param name="commandList"> List of commands. </param>
+            <param name="message"> Message describing overall action of the list of commands. </param>
+        </member>
+        <member name="P:CptS321.CommandCollection.CommandList">
+            <summary>
+            Gets the commandList.
+            </summary>
+        </member>
+        <member name="P:CptS321.CommandCollection.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
         <member name="T:CptS321.CommandInvoker">
             <summary>
             Responsible for redoing and undoing commands.
             </summary>
         </member>
-        <member name="M:CptS321.CommandInvoker.AddUndo(CptS321.ICommand)">
+        <member name="E:CptS321.CommandInvoker.UndoRedoStackChanged">
             <summary>
-            Adds a command that can be undone by calling CommandInvoker.Undo().
+            Event that gets raised when either redoStack or undoStack or changed.
             </summary>
-            <param name="undoCommand"> The command that was just executed. </param>
+        </member>
+        <member name="M:CptS321.CommandInvoker.AddUndo(System.Collections.Generic.List{CptS321.ICommand},System.String)">
+            <summary>
+            Adds a list of commands that can be undone by calling CommandInvoker.Undo().
+            </summary>
+            <param name="commandList"> A list of one or more commands to be executed or unexecuted. </param>
+            <param name="message"> The message describing the overal action of the list of commands. </param>
+        </member>
+        <member name="M:CptS321.CommandInvoker.AddUndo(CptS321.CommandCollection)">
+            <summary>
+            Adds a commandCollection to the undoStack.
+            </summary>
+            <param name="commandCollection"> A collection of a list of commands and a message describing the action of the commands. </param>
         </member>
         <member name="M:CptS321.CommandInvoker.Undo">
             <summary>
-            Pops the command at the top of the undo stack.
-            Unexecutes the popped command and pushes it to the redoStack.
+            Pops the commandList at the top of the undo stack.
+            Unexecutes the popped commandList and pushes it to the redoStack.
             </summary>
         </member>
         <member name="M:CptS321.CommandInvoker.CanUndo">
@@ -134,6 +168,12 @@
             Returns true if undoStack is not empty, false otherwise.
             </summary>
             <returns> A boolean value that means whether there are any commands left to undo. </returns>
+        </member>
+        <member name="M:CptS321.CommandInvoker.UndoText">
+            <summary>
+            Returns the message of the top Command on the undo stack, otherwise returns "Undo".
+            </summary>
+            <returns> The message of the top undo command. </returns>
         </member>
         <member name="M:CptS321.CommandInvoker.CanRedo">
             <summary>
@@ -146,6 +186,12 @@
             Pops the command at the top of the redo stack.
             Executes the popped comman and pushes it to the undoStack.
             </summary>
+        </member>
+        <member name="M:CptS321.CommandInvoker.RedoText">
+            <summary>
+            Returns the message of the top Command on the redo stack, otherwise returns "Redo".
+            </summary>
+            <returns> The message of the top redo command. </returns>
         </member>
         <member name="T:CptS321.DivisionNode">
             <summary>
@@ -287,6 +333,12 @@
             The logic for undoing the action of the command.
             </summary>
         </member>
+        <member name="M:CptS321.ICommand.Message">
+            <summary>
+            Used to send a message to accompany the command.
+            </summary>
+            <returns> The message describing in low detail what the command does. </returns>
+        </member>
         <member name="T:CptS321.MultiplicationNode">
             <summary>
             Represents the multiplication binary operator.
@@ -339,6 +391,12 @@
             <summary>
             Represents a command that does nothing. Used as a place holder instead of null.
             </summary>
+        </member>
+        <member name="M:CptS321.NoCommand.Message">
+            <summary>
+            Used to send a message to accompany the command.
+            </summary>
+            <returns> The message describing in low detail what the command does. </returns>
         </member>
         <member name="T:CptS321.Node">
             <summary>
@@ -517,10 +575,11 @@
             <param name="bgcolorAfterCommand"> The BGColor after running the command. </param>
             <param name="message"> Message describing what is being updated in the cell. </param>
         </member>
-        <member name="P:CptS321.SpreadsheetCellBGColorCommand.Message">
+        <member name="M:CptS321.SpreadsheetCellBGColorCommand.Message">
             <summary>
-            Gets the message.
+            Used to send a message to accompany the command.
             </summary>
+            <returns> The message describing in low detail what the command does. </returns>
         </member>
         <member name="M:CptS321.SpreadsheetCellBGColorCommand.Execute">
             <summary>
@@ -546,10 +605,11 @@
             <param name="textAfterCommand"> The text of the cell after running the command. </param>
             <param name="message"> Message describing what is being updated in the cell. </param>
         </member>
-        <member name="P:CptS321.SpreadsheetCellTextCommand.Message">
+        <member name="M:CptS321.SpreadsheetCellTextCommand.Message">
             <summary>
-            Gets the message.
+            Used to send a message to accompany the command.
             </summary>
+            <returns> The message describing in low detail what the command does. </returns>
         </member>
         <member name="M:CptS321.SpreadsheetCellTextCommand.Execute">
             <summary>

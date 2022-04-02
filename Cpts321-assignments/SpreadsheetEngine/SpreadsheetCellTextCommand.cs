@@ -29,20 +29,21 @@ namespace CptS321
             CptS321.SpreadsheetCell spreadsheetCell,
             string textBeforeCommand,
             string textAfterCommand,
-            string message)
+            string message = null)
         {
             this.spreadsheetCell = spreadsheetCell;
+            this.textBeforeCommand = textBeforeCommand;
+            this.textAfterCommand = textAfterCommand;
+            this.message = message;
         }
 
         /// <summary>
-        /// Gets the message.
+        /// Used to send a message to accompany the command.
         /// </summary>
-        public string Message
+        /// <returns> The message describing in low detail what the command does. </returns>
+        public string Message()
         {
-            get
-            {
-                return this.message;
-            }
+            return this.message;
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace CptS321
         /// </summary>
         public void Execute()
         {
-            throw new NotImplementedException();
+            this.spreadsheetCell.Text = this.textAfterCommand;
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace CptS321
         /// </summary>
         public void Unexecute()
         {
-            throw new NotImplementedException();
+            this.spreadsheetCell.Text = this.textBeforeCommand;
         }
     }
 }

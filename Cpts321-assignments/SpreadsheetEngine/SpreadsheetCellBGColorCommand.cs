@@ -29,7 +29,7 @@ namespace CptS321
             CptS321.SpreadsheetCell spreadsheetCell,
             uint bgcolorBeforeCommand,
             uint bgcolorAfterCommand,
-            string message)
+            string message = null)
         {
             this.spreadsheetCell = spreadsheetCell;
             this.bgcolorBeforeCommand = bgcolorBeforeCommand;
@@ -38,14 +38,12 @@ namespace CptS321
         }
 
         /// <summary>
-        /// Gets the message.
+        /// Used to send a message to accompany the command.
         /// </summary>
-        public string Message
+        /// <returns> The message describing in low detail what the command does. </returns>
+        public string Message()
         {
-            get
-            {
-                return this.message;
-            }
+            return this.message;
         }
 
         /// <summary>
@@ -53,7 +51,7 @@ namespace CptS321
         /// </summary>
         public void Execute()
         {
-            throw new NotImplementedException();
+            this.spreadsheetCell.BGColor = this.bgcolorAfterCommand;
         }
 
         /// <summary>
@@ -61,7 +59,7 @@ namespace CptS321
         /// </summary>
         public void Unexecute()
         {
-            throw new NotImplementedException();
+            this.spreadsheetCell.BGColor = this.bgcolorBeforeCommand;
         }
     }
 }

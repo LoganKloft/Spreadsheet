@@ -13,23 +13,52 @@ namespace CptS321
     /// </summary>
     public class CommandInvoker
     {
-        private Stack<CptS321.ICommand> redoStack;
-        private Stack<CptS321.ICommand> undoStack;
+        private Stack<CptS321.CommandCollection> redoStack = new Stack<CptS321.CommandCollection>();
+        private Stack<CptS321.CommandCollection> undoStack = new Stack<CptS321.CommandCollection>();
 
         /// <summary>
-        /// Adds a command that can be undone by calling CommandInvoker.Undo().
+        /// Event that gets raised when either redoStack or undoStack or changed.
         /// </summary>
-        /// <param name="undoCommand"> The command that was just executed. </param>
-        public void AddUndo(CptS321.ICommand undoCommand)
+        public event EventHandler UndoRedoStackChanged = (sender, e) => { };
+
+        /// <summary>
+        /// Adds a list of commands that can be undone by calling CommandInvoker.Undo().
+        /// </summary>
+        /// <param name="commandList"> A list of one or more commands to be executed or unexecuted. </param>
+        /// <param name="message"> The message describing the overal action of the list of commands. </param>
+        public void AddUndo(List<CptS321.ICommand> commandList, string message)
         {
+            CptS321.CommandCollection commandCollection = new CptS321.CommandCollection(commandList, message);
+            this.undoStack.Push(commandCollection);
+            this.redoStack.Clear();
+            this.UndoRedoStackChanged(this, new EventArgs());
         }
 
         /// <summary>
-        /// Pops the command at the top of the undo stack.
-        /// Unexecutes the popped command and pushes it to the redoStack.
+        /// Adds a commandCollection to the undoStack.
+        /// </summary>
+        /// <param name="commandCollection"> A collection of a list of commands and a message describing the action of the commands. </param>
+        public void AddUndo(CptS321.CommandCollection commandCollection)
+        {
+            this.undoStack.Push(commandCollection);
+            this.redoStack.Clear();
+            this.UndoRedoStackChanged(this, new EventArgs());
+        }
+
+        /// <summary>
+        /// Pops the commandList at the top of the undo stack.
+        /// Unexecutes the popped commandList and pushes it to the redoStack.
         /// </summary>
         public void Undo()
         {
+            CptS321.CommandCollection commandCollection = this.undoStack.Pop();
+            foreach (ICommand command in commandCollection.CommandList)
+            {
+                command.Unexecute();
+            }
+
+            this.redoStack.Push(commandCollection);
+            this.UndoRedoStackChanged(this, new EventArgs());
         }
 
         /// <summary>
@@ -38,7 +67,21 @@ namespace CptS321
         /// <returns> A boolean value that means whether there are any commands left to undo. </returns>
         public bool CanUndo()
         {
-            return false;
+            return this.undoStack.Count > 0;
+        }
+
+        /// <summary>
+        /// Returns the message of the top Command on the undo stack, otherwise returns "Undo".
+        /// </summary>
+        /// <returns> The message of the top undo command. </returns>
+        public string UndoText()
+        {
+            if (this.undoStack.Count > 0)
+            {
+                return "Undo " + this.undoStack.Peek().Message;
+            }
+
+            return "Undo";
         }
 
         /// <summary>
@@ -47,7 +90,7 @@ namespace CptS321
         /// <returns> A boolean value that means whether there are any commands left to redo. </returns>
         public bool CanRedo()
         {
-            return false;
+            return this.redoStack.Count > 0;
         }
 
         /// <summary>
@@ -56,6 +99,28 @@ namespace CptS321
         /// </summary>
         public void Redo()
         {
+            CptS321.CommandCollection commandCollection = this.redoStack.Pop();
+            foreach (ICommand command in commandCollection.CommandList)
+            {
+                command.Execute();
+            }
+
+            this.undoStack.Push(commandCollection);
+            this.UndoRedoStackChanged(this, new EventArgs());
+        }
+
+        /// <summary>
+        /// Returns the message of the top Command on the redo stack, otherwise returns "Redo".
+        /// </summary>
+        /// <returns> The message of the top redo command. </returns>
+        public string RedoText()
+        {
+            if (this.redoStack.Count > 0)
+            {
+                return "Redo " + this.redoStack.Peek().Message;
+            }
+
+            return "Redo";
         }
     }
 }
