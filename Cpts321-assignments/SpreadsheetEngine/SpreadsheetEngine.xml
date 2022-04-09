@@ -318,6 +318,26 @@
             Gets or Sets value.
             </summary>
         </member>
+        <member name="T:CptS321.Globals">
+            <summary>
+            Defines global varaibles for the spreadsheet application.
+            </summary>
+        </member>
+        <member name="T:CptS321.Globals.SpreadsheetCell">
+            <summary>
+            Contains the global variables for the SpreadsheetCell class.
+            </summary>
+        </member>
+        <member name="P:CptS321.Globals.SpreadsheetCell.Default_BGColor">
+            <summary>
+            Gets the default value for the BGColor property of the SpreadsheetCell class.
+            </summary>
+        </member>
+        <member name="P:CptS321.Globals.SpreadsheetCell.Default_Text">
+            <summary>
+            Gets the default value for the Text property of teh SpreadsheetCell class.
+            </summary>
+        </member>
         <member name="T:CptS321.ICommand">
             <summary>
             Defines the basic behavior of any command in the Command Design Pattern.

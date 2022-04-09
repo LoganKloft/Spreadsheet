@@ -92,7 +92,7 @@ namespace SpreadsheetEngineTests
             bool result = false;
             using (System.IO.Stream stream = new System.IO.FileStream("OutputTestFile.xml", System.IO.FileMode.Open))
             {
-                result = testWorkbook.Save(stream, testSpreadsheet);
+                result = testWorkbook.Load(stream, testSpreadsheet);
             }
 
             Assert.False(result);

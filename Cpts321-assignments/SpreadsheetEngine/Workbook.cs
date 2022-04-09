@@ -22,10 +22,19 @@ namespace CptS321
         /// <returns> True if successful in loading the file, false otherwise. </returns>
         public bool Load(System.IO.Stream stream, CptS321.Spreadsheet spreadsheet)
         {
-            return false;
-
-            using (XmlReader reader = XmlReader.Create(stream))
+            if (stream is null)
             {
+                return false;
+            }
+
+            if (spreadsheet is null)
+            {
+                return false;
+            }
+
+            try
+            {
+                XmlReader reader = XmlReader.Create(stream);
                 while (reader.Read())
                 {
                     switch (reader.NodeType)
@@ -35,6 +44,12 @@ namespace CptS321
                     }
                 }
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -45,17 +60,64 @@ namespace CptS321
         /// <returns> True if successful in saving, false otherwise. </returns>
         public bool Save(System.IO.Stream stream, CptS321.Spreadsheet spreadsheet)
         {
-            return false;
-
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-
-            using (XmlWriter writer = XmlWriter.Create(stream, settings))
+            if (stream is null)
             {
+                return false;
+            }
+
+            if (spreadsheet is null)
+            {
+                return false;
+            }
+
+            try
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+
+                XmlWriter writer = XmlWriter.Create(stream, settings);
                 writer.WriteStartElement("spreadsheet");
+
+                for (int row = 1; row <= spreadsheet.RowCount; row++)
+                {
+                    for (int col = 1; col <= spreadsheet.ColumnCount; col++)
+                    {
+                        CptS321.SpreadsheetCell cell = spreadsheet.GetCell(row, col);
+
+                        // check if cell does not have default values
+                        if (cell.Text != CptS321.Globals.SpreadsheetCell.Default_Text || cell.BGColor != CptS321.Globals.SpreadsheetCell.Default_BGColor)
+                        {
+                            writer.WriteStartElement("cell");
+                            writer.WriteAttributeString("name", cell.ToString());
+
+                            if (cell.Text != CptS321.Globals.SpreadsheetCell.Default_Text | cell.Text != string.Empty)
+                            {
+                                writer.WriteStartElement("text");
+                                writer.WriteString(cell.Text);
+                                writer.WriteEndElement();
+                            }
+
+                            if (cell.BGColor != CptS321.Globals.SpreadsheetCell.Default_BGColor)
+                            {
+                                writer.WriteStartElement("bgcolor");
+                                writer.WriteString(cell.BGColor.ToString());
+                                writer.WriteEndElement();
+                            }
+
+                            writer.WriteEndElement();
+                        }
+                    }
+                }
+
                 writer.WriteEndElement();
                 writer.Close();
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
