@@ -634,5 +634,56 @@
             Affirms that an ExpressionVariable is properly stored inside of a VariableNode.
             </summary>
         </member>
+        <member name="T:SpreadsheetEngineTests.WorkbookTests">
+            <summary>
+            Tests for the Workbook tests.
+            Using defensive programming versus throwing exceptions.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestSaveEmptySpreadsheet">
+            <summary>
+            Test saving a null spreadsheet.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestSaveNullStream">
+            <summary>
+            Tests saving when the stream parameter is null.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestSaveUneditedSpreadsheet">
+            <summary>
+            Test saving an unedited spreadsheet.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestSaveEditedSpreadsheet">
+            <summary>
+            Test saving an edited spreadsheet.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestLoadNullStream">
+            <summary>
+            Tests load when the stream parameter is null.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestLoadFileNoCells">
+            <summary>
+            Test loading a file with only a root element spreadsheet.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestLoadIdealFile">
+            <summary>
+            An ideal file is one that has only the root element spreadsheet, and nested elements cell, bgcolor, and text.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestLoadNoisyFile">
+            <summary>
+            Test loading a file with ideal elements and also non-ideal elements which could be named anything allowed by xml.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.WorkbookTests.TestLoadWithNullSpreadsheet">
+            <summary>
+            Test Load when spreadsheet parameter is null.
+            </summary>
+        </member>
     </members>
 </doc>

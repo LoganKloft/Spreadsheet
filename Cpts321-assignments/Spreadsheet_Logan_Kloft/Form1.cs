@@ -21,6 +21,7 @@ namespace Spreadsheet_Logan_Kloft
     {
         private CptS321.Spreadsheet spreadsheet;
         private CptS321.CommandInvoker commandInvoker = new CptS321.CommandInvoker();
+        private CptS321.Workbook workbook = new CptS321.Workbook();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
@@ -225,7 +226,7 @@ namespace Spreadsheet_Logan_Kloft
         /// Handles the enability of the Undo and Redo menu strip items. Triggered whenever Redo or Undo is called in CommandInvoker.
         /// </summary>
         /// <param name="sender"> The instance of the CommandInvoker that had its method called. </param>
-        /// <param name="e"> The name of the. </param>
+        /// <param name="e"> The event parameters. </param>
         private void UndoRedoVisibilityHandler(object sender, EventArgs e)
         {
             ToolStripMenuItem edit = this.menuStrip1.Items["Edit"] as ToolStripMenuItem;
@@ -256,6 +257,44 @@ namespace Spreadsheet_Logan_Kloft
 
             undoMenuItem.Text = this.commandInvoker.UndoText();
             redoMenuItem.Text = this.commandInvoker.RedoText();
+        }
+
+        /// <summary>
+        /// Saves the current spreadsheet.
+        /// </summary>
+        /// <param name="sender"> The ToolStripItem that invoked this event. </param>
+        /// <param name="e"> The event parameters. </param>
+        private void Save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML-File | *.xml";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != string.Empty)
+            {
+                System.IO.Stream stream = saveFileDialog.OpenFile();
+                this.workbook.Save(stream, this.spreadsheet);
+                stream.Close();
+            }
+        }
+
+        /// <summary>
+        /// Loads an xml file.
+        /// </summary>
+        /// <param name="sender"> The TollStripItem that invoked this event. </param>
+        /// <param name="e"> The event parameters. </param>
+        private void LoadMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML-File | *.xml";
+            openFileDialog.ShowDialog();
+
+            if (openFileDialog.FileName != string.Empty)
+            {
+                System.IO.Stream stream = openFileDialog.OpenFile();
+                this.workbook.Load(stream, this.spreadsheet);
+                stream.Close();
+            }
         }
     }
 }

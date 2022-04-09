@@ -726,5 +726,26 @@
             </summary>
             <returns> The value field of variable. </returns>
         </member>
+        <member name="T:CptS321.Workbook">
+            <summary>
+            Class for loading and saving spreadsheets.
+            </summary>
+        </member>
+        <member name="M:CptS321.Workbook.Load(System.IO.Stream,CptS321.Spreadsheet)">
+            <summary>
+            Loads a spreadsheet from a xml file.
+            </summary>
+            <param name="stream"> The input xml file. </param>
+            <param name="spreadsheet"> The spreadsheet one wants to load to. </param>
+            <returns> True if successful in loading the file, false otherwise. </returns>
+        </member>
+        <member name="M:CptS321.Workbook.Save(System.IO.Stream,CptS321.Spreadsheet)">
+            <summary>
+            Saves a spreadsheet to an xml file.
+            </summary>
+            <param name="stream"> The output xml file. </param>
+            <param name="spreadsheet"> The spreadsheet to be stored. </param>
+            <returns> True if successful in saving, false otherwise. </returns>
+        </member>
     </members>
 </doc>

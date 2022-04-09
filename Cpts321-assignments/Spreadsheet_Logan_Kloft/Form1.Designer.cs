@@ -38,6 +38,8 @@ namespace Spreadsheet_Logan_Kloft
             this.Redo = new System.Windows.Forms.ToolStripMenuItem();
             this.cellToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changeBackgroundColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoadMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +80,9 @@ namespace Spreadsheet_Logan_Kloft
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SaveMenuItem,
+            this.LoadMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(80, 43);
             this.toolStripMenuItem1.Text = "File";
@@ -122,6 +127,20 @@ namespace Spreadsheet_Logan_Kloft
             this.changeBackgroundColorToolStripMenuItem1.Text = "Change background color...";
             this.changeBackgroundColorToolStripMenuItem1.Click += new System.EventHandler(this.ChangeBackgroundColorToolStripMenuItem_Click);
             // 
+            // SaveMenuItem
+            // 
+            this.SaveMenuItem.Name = "SaveMenuItem";
+            this.SaveMenuItem.Size = new System.Drawing.Size(403, 48);
+            this.SaveMenuItem.Text = "Save";
+            this.SaveMenuItem.Click += new System.EventHandler(this.Save_Click);
+            // 
+            // LoadMenuItem
+            // 
+            this.LoadMenuItem.Name = "LoadMenuItem";
+            this.LoadMenuItem.Size = new System.Drawing.Size(403, 48);
+            this.LoadMenuItem.Text = "Load";
+            this.LoadMenuItem.Click += new System.EventHandler(this.LoadMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
@@ -153,6 +172,8 @@ namespace Spreadsheet_Logan_Kloft
         private System.Windows.Forms.ToolStripMenuItem Redo;
         private System.Windows.Forms.ToolStripMenuItem cellToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem changeBackgroundColorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem SaveMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LoadMenuItem;
     }
 }
 
