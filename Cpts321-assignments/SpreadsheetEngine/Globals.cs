@@ -36,7 +36,7 @@ namespace CptS321
             {
                 get
                 {
-                    return null;
+                    return string.Empty;
                 }
             }
         }

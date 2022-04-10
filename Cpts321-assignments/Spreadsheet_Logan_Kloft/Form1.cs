@@ -91,7 +91,13 @@ namespace Spreadsheet_Logan_Kloft
             CptS321.SpreadsheetCell cell = this.spreadsheet.GetCell(row + 1, col + 1);
 
             string currentText = cell.Text;
-            string newText = this.dataGridView1[col, row].Value.ToString();
+            string newText = string.Empty;
+
+            if (this.dataGridView1[col, row].Value != null)
+            {
+                newText = this.dataGridView1[col, row].Value.ToString();
+            }
+
             CptS321.SpreadsheetCellTextCommand textCommand = new CptS321.SpreadsheetCellTextCommand(
                 cell,
                 currentText,
@@ -288,6 +294,9 @@ namespace Spreadsheet_Logan_Kloft
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "XML-File | *.xml";
             openFileDialog.ShowDialog();
+            this.spreadsheet.ResetToDefault();
+            this.commandInvoker.ClearRedoStack();
+            this.commandInvoker.ClearUndoStack();
 
             if (openFileDialog.FileName != string.Empty)
             {

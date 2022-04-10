@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<spreadsheet>
-  <cell name="A1">
-    <bgcolor>FF8000</bgcolor>
-    <text>A1+6</text>
-  </cell>
-</spreadsheet>

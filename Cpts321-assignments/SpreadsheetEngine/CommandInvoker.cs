@@ -29,9 +29,7 @@ namespace CptS321
         public void AddUndo(List<CptS321.ICommand> commandList, string message)
         {
             CptS321.CommandCollection commandCollection = new CptS321.CommandCollection(commandList, message);
-            this.undoStack.Push(commandCollection);
-            this.redoStack.Clear();
-            this.UndoRedoStackChanged(this, new EventArgs());
+            this.AddUndo(commandCollection);
         }
 
         /// <summary>
@@ -121,6 +119,24 @@ namespace CptS321
             }
 
             return "Redo";
+        }
+
+        /// <summary>
+        /// Empty the undo Stack. Called in the Load event handler.
+        /// </summary>
+        public void ClearUndoStack()
+        {
+            this.undoStack.Clear();
+            this.UndoRedoStackChanged(this, new EventArgs());
+        }
+
+        /// <summary>
+        /// Empty the redo stack. Called in the Load event handler.
+        /// </summary>
+        public void ClearRedoStack()
+        {
+            this.redoStack.Clear();
+            this.UndoRedoStackChanged(this, new EventArgs());
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CptS321
         /// </summary>
         protected string value;
 
-        private uint bgColor = 0xFFFFFFFF;
+        private uint bgColor = CptS321.Globals.SpreadsheetCell.Default_BGColor;
 
         private int rowIndex;
         private int columnIndex;
@@ -133,6 +133,15 @@ namespace CptS321
                 this.bgColor = value;
                 this.PropertyChanged(this, new PropertyChangedEventArgs("BGColor"));
             }
+        }
+
+        /// <summary>
+        /// Resets the Text and BGColor property of the cell to their respective global values.
+        /// </summary>
+        public void ResetCell()
+        {
+            this.Text = CptS321.Globals.SpreadsheetCell.Default_Text;
+            this.BGColor = CptS321.Globals.SpreadsheetCell.Default_BGColor;
         }
 
         /// <summary>

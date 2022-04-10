@@ -77,6 +77,33 @@ namespace CptS321
         }
 
         /// <summary>
+        /// Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
+        /// </summary>
+        /// <param name="variableName"> A cell location. </param>
+        /// <returns> The {row, col} in 1-based indexing. </returns>
+        public static int[] ParseVariableName(string variableName)
+        {
+            int row = int.Parse(variableName.Substring(1)); // already 1-based indexing.
+            int column = variableName[0] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
+            return new int[] { row, column };
+        }
+
+        /// <summary>
+        /// Resets every cell in the spreadsheet to their default values.
+        /// </summary>
+        public void ResetToDefault()
+        {
+            this.referenceCells.Clear();
+            for (int row = 1; row <= this.RowCount; row++)
+            {
+                for (int col = 1; col <= this.ColumnCount; col++)
+                {
+                    this.GetCell(row, col).ResetCell();
+                }
+            }
+        }
+
+        /// <summary>
         /// Accesses a cell.
         /// </summary>
         /// <param name="rowIndex"> The row of the cell one wants to access. </param>
@@ -138,7 +165,7 @@ namespace CptS321
                             this.referenceCells.Add(variableName, new List<string>() { changedCell.ToString() });
                         }
 
-                        int[] rowCol = this.ParseVariableName(variableName);
+                        int[] rowCol = ParseVariableName(variableName);
                         CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
                         double val = 0;
                         double.TryParse(cell.Value, out val);
@@ -188,7 +215,7 @@ namespace CptS321
             {
                 foreach (string referenceCellName in referenceCellNames)
                 {
-                    int[] rowCol = this.ParseVariableName(referenceCellName);
+                    int[] rowCol = ParseVariableName(referenceCellName);
                     CptS321.SpreadsheetCell spreadsheetCell = this.GetCell(rowCol[0], rowCol[1]);
                     this.RecalculateCellExpression(spreadsheetCell);
                 }
@@ -213,7 +240,7 @@ namespace CptS321
                 List<string> variableNames = expressionTree.GetVariableNames();
                 foreach (string variableName in variableNames)
                 {
-                    int[] rowCol = this.ParseVariableName(variableName);
+                    int[] rowCol = ParseVariableName(variableName);
                     CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
                     double val = 0;
                     double.TryParse(cell.Value, out val);
@@ -223,18 +250,6 @@ namespace CptS321
                 spreadsheetCell.Value = expressionTree.Evaluate().ToString();
                 this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
             }
-        }
-
-        /// <summary>
-        /// Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
-        /// </summary>
-        /// <param name="variableName"> A cell location. </param>
-        /// <returns> The {row, col} in 1-based indexing. </returns>
-        private int[] ParseVariableName(string variableName)
-        {
-            int row = int.Parse(variableName.Substring(1)); // already 1-based indexing.
-            int column = variableName[0] - 'A' + 1; // normalize to 0-index, then add 1 for 1-based indexing.
-            return new int[] { row, column };
         }
 
         /// <summary>

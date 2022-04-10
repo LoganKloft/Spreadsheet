@@ -193,6 +193,16 @@
             </summary>
             <returns> The message of the top redo command. </returns>
         </member>
+        <member name="M:CptS321.CommandInvoker.ClearUndoStack">
+            <summary>
+            Empty the undo Stack. Called in the Load event handler.
+            </summary>
+        </member>
+        <member name="M:CptS321.CommandInvoker.ClearRedoStack">
+            <summary>
+            Empty the redo stack. Called in the Load event handler.
+            </summary>
+        </member>
         <member name="T:CptS321.DivisionNode">
             <summary>
             Represents the division binary operator.
@@ -456,6 +466,18 @@
             Gets the width of the spreadsheet.
             </summary>
         </member>
+        <member name="M:CptS321.Spreadsheet.ParseVariableName(System.String)">
+            <summary>
+            Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
+            </summary>
+            <param name="variableName"> A cell location. </param>
+            <returns> The {row, col} in 1-based indexing. </returns>
+        </member>
+        <member name="M:CptS321.Spreadsheet.ResetToDefault">
+            <summary>
+            Resets every cell in the spreadsheet to their default values.
+            </summary>
+        </member>
         <member name="M:CptS321.Spreadsheet.GetCell(System.Int32,System.Int32)">
             <summary>
             Accesses a cell.
@@ -490,13 +512,6 @@
             and can be explicitly called.
             </summary>
             <param name="spreadsheetCell"> A spreadsheet cell whose text property must start with '='. </param>
-        </member>
-        <member name="M:CptS321.Spreadsheet.ParseVariableName(System.String)">
-            <summary>
-            Splits a variable that consists of firstly a letter, followed by any number of numbers into a 2-d array.
-            </summary>
-            <param name="variableName"> A cell location. </param>
-            <returns> The {row, col} in 1-based indexing. </returns>
         </member>
         <member name="T:CptS321.Spreadsheet.Cell">
             <summary>
@@ -572,6 +587,11 @@
         <member name="P:CptS321.SpreadsheetCell.BGColor">
             <summary>
             Gets or sets the bgColor.
+            </summary>
+        </member>
+        <member name="M:CptS321.SpreadsheetCell.ResetCell">
+            <summary>
+            Resets the Text and BGColor property of the cell to their respective global values.
             </summary>
         </member>
         <member name="M:CptS321.SpreadsheetCell.ToString">

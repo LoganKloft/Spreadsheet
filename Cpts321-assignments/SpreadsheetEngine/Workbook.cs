@@ -35,14 +35,64 @@ namespace CptS321
             try
             {
                 XmlReader reader = XmlReader.Create(stream);
+                string cellName = null;
+                string bgcolor = null;
+                string text = null;
                 while (reader.Read())
                 {
                     switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
+                            switch (reader.Name)
+                            {
+                                case "cell":
+                                    cellName = reader.GetAttribute("name");
+                                    break;
+                                case "bgcolor":
+                                    bgcolor = reader.ReadElementContentAsString();
+                                    break;
+                                case "text":
+                                    text = reader.ReadElementContentAsString();
+                                    break;
+                            }
+
+                            break;
+
+                        case XmlNodeType.EndElement:
+                            switch (reader.Name)
+                            {
+                                case "cell":
+                                    if (bgcolor != null || text != null)
+                                    {
+                                        int[] rowAndCol = CptS321.Spreadsheet.ParseVariableName(cellName);
+                                        CptS321.SpreadsheetCell cell = spreadsheet.GetCell(rowAndCol[0], rowAndCol[1]);
+                                        if (bgcolor != null)
+                                        {
+                                            // no alpha specified
+                                            if (bgcolor.Length == 6)
+                                            {
+                                                bgcolor = "FF" + bgcolor;
+                                            }
+
+                                            cell.BGColor = uint.Parse(bgcolor, System.Globalization.NumberStyles.HexNumber);
+                                            bgcolor = null;
+                                        }
+
+                                        if (text != null)
+                                        {
+                                            cell.Text = text;
+                                            text = null;
+                                        }
+                                    }
+
+                                    break;
+                            }
+
                             break;
                     }
                 }
+
+                reader.Close();
             }
             catch (Exception)
             {
@@ -85,12 +135,13 @@ namespace CptS321
                         CptS321.SpreadsheetCell cell = spreadsheet.GetCell(row, col);
 
                         // check if cell does not have default values
-                        if (cell.Text != CptS321.Globals.SpreadsheetCell.Default_Text || cell.BGColor != CptS321.Globals.SpreadsheetCell.Default_BGColor)
+                        if ((cell.Text != CptS321.Globals.SpreadsheetCell.Default_Text && cell.Text != null)
+                            || cell.BGColor != CptS321.Globals.SpreadsheetCell.Default_BGColor)
                         {
                             writer.WriteStartElement("cell");
                             writer.WriteAttributeString("name", cell.ToString());
 
-                            if (cell.Text != CptS321.Globals.SpreadsheetCell.Default_Text | cell.Text != string.Empty)
+                            if (cell.Text != CptS321.Globals.SpreadsheetCell.Default_Text && cell.Text != null)
                             {
                                 writer.WriteStartElement("text");
                                 writer.WriteString(cell.Text);
@@ -100,7 +151,7 @@ namespace CptS321
                             if (cell.BGColor != CptS321.Globals.SpreadsheetCell.Default_BGColor)
                             {
                                 writer.WriteStartElement("bgcolor");
-                                writer.WriteString(cell.BGColor.ToString());
+                                writer.WriteString(cell.BGColor.ToString("X"));
                                 writer.WriteEndElement();
                             }
 
