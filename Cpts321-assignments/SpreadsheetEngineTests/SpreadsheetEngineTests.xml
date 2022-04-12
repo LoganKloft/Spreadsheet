@@ -517,6 +517,11 @@
             Contains the tests for the Spreadsheet class.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestSelfReference">
+            <summary>
+            Tests a formula that includes a self reference.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestCellNameOutOfRange">
             <summary>
             Tests a formula that includes a cell that is out of bounds of the spreadsheet.

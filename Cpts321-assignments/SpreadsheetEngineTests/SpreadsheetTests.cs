@@ -17,6 +17,18 @@ namespace SpreadsheetEngineTests
         private bool isCellPropertyHandlerTriggered = false;
 
         /// <summary>
+        /// Tests a formula that includes a self reference.
+        /// </summary>
+        [Test]
+        public void TestSelfReference()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(1, 1);
+            CptS321.SpreadsheetCell testCell = testSpreadsheet.GetCell(1, 1);
+            testCell.Text = "=6+A1*27";
+            Assert.AreEqual("!(self reference)", testCell.Value); // exceptional
+        }
+
+        /// <summary>
         /// Tests a formula that includes a cell that is out of bounds of the spreadsheet.
         /// </summary>
         [Test]
