@@ -149,10 +149,18 @@ namespace CptS321
                     string expression = changedCell.Text.Substring(1);
                     CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
 
+                    bool allVariablesGoodVariables = true;
+
                     // Set the values of the variables
                     List<string> variableNames = expressionTree.GetVariableNames();
                     foreach (string variableName in variableNames)
                     {
+                        if (!this.IsValidCellName(variableName))
+                        {
+                            allVariablesGoodVariables = false;
+                            break;
+                        }
+
                         // Add the changedCell as a reference to variableName
                         // At this point, any previous occurences of changedCell in any values in the referenceCells dictionary
                         // have been removed.
@@ -172,8 +180,16 @@ namespace CptS321
                         expressionTree.SetVariable(variableName, val);
                     }
 
-                    // Update the Value of the changed cell
-                    changedCell.Value = expressionTree.Evaluate().ToString();
+                    if (allVariablesGoodVariables)
+                    {
+                        // Update the Value of the changed cell
+                        changedCell.Value = expressionTree.Evaluate().ToString();
+                    }
+                    else
+                    {
+                        // bad variable name
+                        changedCell.Value = "!(bad reference)";
+                    }
                 }
                 else
                 {
@@ -238,8 +254,15 @@ namespace CptS321
 
                 // Set the values of the variables
                 List<string> variableNames = expressionTree.GetVariableNames();
+                bool allVariablesGoodVariables = true;
                 foreach (string variableName in variableNames)
                 {
+                    if (!this.IsValidCellName(variableName))
+                    {
+                        allVariablesGoodVariables = false;
+                        break;
+                    }
+
                     int[] rowCol = ParseVariableName(variableName);
                     CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
                     double val = 0;
@@ -247,8 +270,75 @@ namespace CptS321
                     expressionTree.SetVariable(variableName, val);
                 }
 
-                spreadsheetCell.Value = expressionTree.Evaluate().ToString();
-                this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+                if (allVariablesGoodVariables)
+                {
+                    spreadsheetCell.Value = expressionTree.Evaluate().ToString();
+                    this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Given a cellName returns whether the cellName is valid or not.
+        /// </summary>
+        /// <param name="cellName"> Name of a cell. </param>
+        /// <returns> True if the cellName is valid, false otherwise. </returns>
+        private bool IsValidCellName(string cellName)
+        {
+            if (cellName == null)
+            {
+                return false;
+            }
+
+            // Too short
+            if (cellName.Length < 2)
+            {
+                return false;
+            }
+
+            // Too long
+            if (cellName.Length > 3)
+            {
+                return false;
+            }
+
+            char first = cellName[0];
+
+            // Not a valid column
+            if (first < 'A' || first > 'Z')
+            {
+                return false;
+            }
+
+            if (cellName.Length == 2)
+            {
+                if (cellName[1] >= '1' && cellName[1] <= '9')
+                {
+                    return true;
+                }
+
+                // Not a valid row.
+                else
+                {
+                    return false;
+                }
+            }
+
+            // cellName length is 3
+            else
+            {
+                if (cellName[1] >= '1' && cellName[1] <= '4' && cellName[2] >= '0' & cellName[2] <= '9')
+                {
+                    return true;
+                }
+                else if (cellName[1] == '5' && cellName[2] == '0')
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

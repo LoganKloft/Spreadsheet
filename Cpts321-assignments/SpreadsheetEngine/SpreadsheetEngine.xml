@@ -513,6 +513,13 @@
             </summary>
             <param name="spreadsheetCell"> A spreadsheet cell whose text property must start with '='. </param>
         </member>
+        <member name="M:CptS321.Spreadsheet.IsValidCellName(System.String)">
+            <summary>
+            Given a cellName returns whether the cellName is valid or not.
+            </summary>
+            <param name="cellName"> Name of a cell. </param>
+            <returns> True if the cellName is valid, false otherwise. </returns>
+        </member>
         <member name="T:CptS321.Spreadsheet.Cell">
             <summary>
             Acts the same as a SpreadsheetCell, but can be initiated only inside of Spreadsheet.
