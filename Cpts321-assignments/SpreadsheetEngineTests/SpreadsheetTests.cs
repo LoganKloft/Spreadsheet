@@ -17,6 +17,30 @@ namespace SpreadsheetEngineTests
         private bool isCellPropertyHandlerTriggered = false;
 
         /// <summary>
+        /// Tests a formula that includes a cell that is out of bounds of the spreadsheet.
+        /// </summary>
+        [Test]
+        public void TestCellNameOutOfRange()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(1, 1);
+            CptS321.SpreadsheetCell testCell = testSpreadsheet.GetCell(1, 1);
+            testCell.Text = "=6+Cell*27";
+            Assert.AreEqual("!(bad reference)", testCell.Value); // exceptional
+        }
+
+        /// <summary>
+        /// Tests a formula that includes a cell name that has no meaning.
+        /// </summary>
+        [Test]
+        public void TestBadCellName()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(1, 1);
+            CptS321.SpreadsheetCell testCell = testSpreadsheet.GetCell(1, 1);
+            testCell.Text = "=6+Z123123*27";
+            Assert.AreEqual("!(bad reference)", testCell.Value); // exceptional
+        }
+
+        /// <summary>
         /// Tests cell changing when the reference of the cell it is referencing changes.
         /// </summary>
         [Test]

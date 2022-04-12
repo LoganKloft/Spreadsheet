@@ -517,6 +517,16 @@
             Contains the tests for the Spreadsheet class.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestCellNameOutOfRange">
+            <summary>
+            Tests a formula that includes a cell that is out of bounds of the spreadsheet.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestBadCellName">
+            <summary>
+            Tests a formula that includes a cell name that has no meaning.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestExpressionWithReferenceOfReference">
             <summary>
             Tests cell changing when the reference of the cell it is referencing changes.
