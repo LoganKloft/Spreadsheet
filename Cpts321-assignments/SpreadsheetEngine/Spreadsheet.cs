@@ -150,11 +150,18 @@ namespace CptS321
                     CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
 
                     bool allVariablesGoodVariables = true;
+                    bool selfReference = false;
 
                     // Set the values of the variables
                     List<string> variableNames = expressionTree.GetVariableNames();
                     foreach (string variableName in variableNames)
                     {
+                        if (variableName == changedCell.ToString())
+                        {
+                            selfReference = true;
+                            break;
+                        }
+
                         if (!this.IsValidCellName(variableName))
                         {
                             allVariablesGoodVariables = false;
@@ -180,15 +187,20 @@ namespace CptS321
                         expressionTree.SetVariable(variableName, val);
                     }
 
-                    if (allVariablesGoodVariables)
+                    if (selfReference)
                     {
-                        // Update the Value of the changed cell
-                        changedCell.Value = expressionTree.Evaluate().ToString();
+                        // self reference
+                        changedCell.Value = "!(self reference)";
                     }
-                    else
+                    else if (!allVariablesGoodVariables)
                     {
                         // bad variable name
                         changedCell.Value = "!(bad reference)";
+                    }
+                    else
+                    {
+                        // Update the Value of the changed cell
+                        changedCell.Value = expressionTree.Evaluate().ToString();
                     }
                 }
                 else
@@ -247,7 +259,7 @@ namespace CptS321
         {
             // Load the expression
             string expression = spreadsheetCell.Text;
-            if (expression != null)
+            if (!string.IsNullOrEmpty(expression))
             {
                 expression = spreadsheetCell.Text.Substring(1);
                 CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
@@ -257,7 +269,7 @@ namespace CptS321
                 bool allVariablesGoodVariables = true;
                 foreach (string variableName in variableNames)
                 {
-                    if (!this.IsValidCellName(variableName))
+                    if (!this.IsValidCellName(variableName) || variableName == spreadsheetCell.ToString())
                     {
                         allVariablesGoodVariables = false;
                         break;

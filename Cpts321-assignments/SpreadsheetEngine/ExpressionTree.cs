@@ -102,6 +102,11 @@ namespace CptS321
         /// <returns> A double value that is the result of evaluating the expression. </returns>
         public double Evaluate()
         {
+            if (this.headNode == null)
+            {
+                return 0.0;
+            }
+
             return this.headNode.Evaluate();
         }
 
@@ -231,7 +236,7 @@ namespace CptS321
                     else
                     {
                         // lower or equal and left-associative to top
-                        while (symbol.Count > 0 && (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) > 0
+                        while (symbol.Count > 0 && symbol.Peek() != "(" && (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) > 0
                         || (CptS321.BinaryOperatorNodeFactory.ComparePrecedence(infix[i], symbol.Peek()) == 0 &&
                         CptS321.BinaryOperatorNodeFactory.GetAssociativity(infix[i]) == CptS321.BinaryOperatorNode.Associative.Left)))
                         {
@@ -259,6 +264,16 @@ namespace CptS321
         /// </summary>
         private void Build(List<string> infix)
         {
+            if (infix.Count == 0)
+            {
+                return;
+            }
+
+            if (infix == null)
+            {
+                return;
+            }
+
             Stack<Node> nodes = new Stack<Node>();
             List<string> postfix = this.InfixToPostfix(infix);
 
@@ -291,7 +306,10 @@ namespace CptS321
                 }
             }
 
-            this.headNode = nodes.Pop();
+            if (nodes.Count > 0)
+            {
+                this.headNode = nodes.Pop();
+            }
         }
     }
 }
