@@ -17,6 +17,38 @@ namespace SpreadsheetEngineTests
         private bool isCellPropertyHandlerTriggered = false;
 
         /// <summary>
+        /// Tests a formula that includes a circular reference with more than two cells in the cycle.
+        /// </summary>
+        [Test]
+        public void TestMultipleStepCircularReference()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(2, 2);
+            CptS321.SpreadsheetCell a1 = testSpreadsheet.GetCell(1, 1);
+            CptS321.SpreadsheetCell a2 = testSpreadsheet.GetCell(2, 1);
+            CptS321.SpreadsheetCell b1 = testSpreadsheet.GetCell(1, 2);
+            CptS321.SpreadsheetCell b2 = testSpreadsheet.GetCell(2, 2);
+            a1.Text = "=B1";
+            b1.Text = "=B2";
+            b2.Text = "=A2";
+            a2.Text = "=A1";
+            Assert.AreEqual("!(circular reference)", a2.Value); // exceptional
+        }
+
+        /// <summary>
+        /// Tests a formula that includes a circular reference with only two cells in the cycle.
+        /// </summary>
+        [Test]
+        public void TestSingleStepCircularReference()
+        {
+            CptS321.Spreadsheet testSpreadsheet = new CptS321.Spreadsheet(2, 1);
+            CptS321.SpreadsheetCell a1 = testSpreadsheet.GetCell(1, 1);
+            CptS321.SpreadsheetCell a2 = testSpreadsheet.GetCell(2, 1);
+            a1.Text = "=A2";
+            a2.Text = "=A1";
+            Assert.AreEqual("!(circular reference)", a2.Value); // exceptional
+        }
+
+        /// <summary>
         /// Tests a formula that includes a self reference.
         /// </summary>
         [Test]

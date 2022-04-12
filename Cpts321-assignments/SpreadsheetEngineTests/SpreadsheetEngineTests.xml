@@ -517,6 +517,16 @@
             Contains the tests for the Spreadsheet class.
             </summary>
         </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestMultipleStepCircularReference">
+            <summary>
+            Tests a formula that includes a circular reference with more than two cells in the cycle.
+            </summary>
+        </member>
+        <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestSingleStepCircularReference">
+            <summary>
+            Tests a formula that includes a circular reference with only two cells in the cycle.
+            </summary>
+        </member>
         <member name="M:SpreadsheetEngineTests.SpreadsheetTests.TestSelfReference">
             <summary>
             Tests a formula that includes a self reference.
