@@ -520,6 +520,20 @@
             <param name="cellName"> Name of a cell. </param>
             <returns> True if the cellName is valid, false otherwise. </returns>
         </member>
+        <member name="M:CptS321.Spreadsheet.HasValidExpressionVariables(CptS321.SpreadsheetCell)">
+            <summary>
+            Decides whether a cell, if it contains variables has only variables which are references to other cells.
+            </summary>
+            <param name="cell"> The cell to evaluate. </param>
+            <returns> True if cell is  and has not an expressoin or has variables which are cell references. </returns>
+        </member>
+        <member name="M:CptS321.Spreadsheet.HasSelfReference(CptS321.SpreadsheetCell)">
+            <summary>
+            Returns whether the cell, if an expression has a self reference.
+            </summary>
+            <param name="cell"> The cell to be evaluated. </param>
+            <returns> Returns true if cell contains an expression that contains a self reference, false otherwise. </returns>
+        </member>
         <member name="T:CptS321.Spreadsheet.Cell">
             <summary>
             Acts the same as a SpreadsheetCell, but can be initiated only inside of Spreadsheet.

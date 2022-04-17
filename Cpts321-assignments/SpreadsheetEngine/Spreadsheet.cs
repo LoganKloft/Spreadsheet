@@ -135,62 +135,60 @@ namespace CptS321
                 CptS321.SpreadsheetCell changedCell = (CptS321.SpreadsheetCell)sender;
                 if (changedCell.Text != null && changedCell.Text.StartsWith("="))
                 {
-                    // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
-                    foreach (List<string> cellNames in this.referenceCells.Values)
-                    {
-                        // found in dictionary, remove it.
-                        if (cellNames != null && cellNames.Contains(changedCell.ToString()))
-                        {
-                            cellNames.Remove(changedCell.ToString());
-                        }
-                    }
-
                     // Load the expression
                     string expression = changedCell.Text.Substring(1);
                     CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
 
-                    bool allVariablesGoodVariables = true;
-                    bool selfReference = false;
-
-                    // Set the values of the variables
                     List<string> variableNames = expressionTree.GetVariableNames();
-                    foreach (string variableName in variableNames)
+
+                    bool allVariablesGoodVariables = this.HasValidExpressionVariables(changedCell);
+                    bool selfReference = this.HasSelfReference(changedCell);
+                    bool circularReference = this.HasCircularVariable(changedCell);
+
+                    if (allVariablesGoodVariables)
                     {
-                        if (variableName == changedCell.ToString())
+                        // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
+                        foreach (List<string> cellNames in this.referenceCells.Values)
                         {
-                            selfReference = true;
-                            break;
+                            // found in dictionary, remove it.
+                            if (cellNames != null && cellNames.Contains(changedCell.ToString()))
+                            {
+                                cellNames.Remove(changedCell.ToString());
+                            }
                         }
 
-                        if (!this.IsValidCellName(variableName))
+                        // Set the values of the variables
+                        foreach (string variableName in variableNames)
                         {
-                            allVariablesGoodVariables = false;
-                            break;
-                        }
+                            // Add the changedCell as a reference to variableName
+                            // At this point, any previous occurences of changedCell in any values in the referenceCells dictionary
+                            // have been removed.
+                            if (this.referenceCells.ContainsKey(variableName))
+                            {
+                                this.referenceCells[variableName].Add(changedCell.ToString());
+                            }
+                            else
+                            {
+                                this.referenceCells.Add(variableName, new List<string>() { changedCell.ToString() });
+                            }
 
-                        // Add the changedCell as a reference to variableName
-                        // At this point, any previous occurences of changedCell in any values in the referenceCells dictionary
-                        // have been removed.
-                        if (this.referenceCells.ContainsKey(variableName))
-                        {
-                            this.referenceCells[variableName].Add(changedCell.ToString());
+                            int[] rowCol = ParseVariableName(variableName);
+                            CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
+                            double val = 0;
+                            double.TryParse(cell.Value, out val);
+                            expressionTree.SetVariable(variableName, val);
                         }
-                        else
-                        {
-                            this.referenceCells.Add(variableName, new List<string>() { changedCell.ToString() });
-                        }
-
-                        int[] rowCol = ParseVariableName(variableName);
-                        CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
-                        double val = 0;
-                        double.TryParse(cell.Value, out val);
-                        expressionTree.SetVariable(variableName, val);
                     }
 
                     if (selfReference)
                     {
                         // self reference
                         changedCell.Value = "!(self reference)";
+                    }
+                    else if (circularReference)
+                    {
+                        // circular reference
+                        changedCell.Value = "!(circular reference)";
                     }
                     else if (!allVariablesGoodVariables)
                     {
@@ -205,6 +203,16 @@ namespace CptS321
                 }
                 else
                 {
+                    // Remove all appearances of this cell from the List<string> in the referenceCells dictionary.
+                    foreach (List<string> cellNames in this.referenceCells.Values)
+                    {
+                        // found in dictionary, remove it.
+                        if (cellNames != null && cellNames.Contains(changedCell.ToString()))
+                        {
+                            cellNames.Remove(changedCell.ToString());
+                        }
+                    }
+
                     changedCell.Value = changedCell.Text;
                 }
 
@@ -264,26 +272,23 @@ namespace CptS321
                 expression = spreadsheetCell.Text.Substring(1);
                 CptS321.ExpressionTree expressionTree = new CptS321.ExpressionTree(expression);
 
-                // Set the values of the variables
                 List<string> variableNames = expressionTree.GetVariableNames();
-                bool allVariablesGoodVariables = true;
-                foreach (string variableName in variableNames)
+
+                bool allVariablesGoodVariables = this.HasValidExpressionVariables(spreadsheetCell);
+                bool selfReference = this.HasSelfReference(spreadsheetCell);
+                bool circularReference = this.HasCircularVariable(spreadsheetCell);
+
+                if (allVariablesGoodVariables && !selfReference && !circularReference)
                 {
-                    if (!this.IsValidCellName(variableName) || variableName == spreadsheetCell.ToString())
+                    foreach (string variableName in variableNames)
                     {
-                        allVariablesGoodVariables = false;
-                        break;
+                        int[] rowCol = ParseVariableName(variableName);
+                        CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
+                        double val = 0;
+                        double.TryParse(cell.Value, out val);
+                        expressionTree.SetVariable(variableName, val);
                     }
 
-                    int[] rowCol = ParseVariableName(variableName);
-                    CptS321.SpreadsheetCell cell = this.GetCell(rowCol[0], rowCol[1]);
-                    double val = 0;
-                    double.TryParse(cell.Value, out val);
-                    expressionTree.SetVariable(variableName, val);
-                }
-
-                if (allVariablesGoodVariables)
-                {
                     spreadsheetCell.Value = expressionTree.Evaluate().ToString();
                     this.CellPropertyChanged(spreadsheetCell, new System.ComponentModel.PropertyChangedEventArgs("Value"));
                 }
@@ -352,6 +357,181 @@ namespace CptS321
                     return false;
                 }
             }
+        }
+
+        /// <summary>
+        /// Decides whether a cell, if it contains variables has only variables which are references to other cells.
+        /// </summary>
+        /// <param name="cell"> The cell to evaluate. </param>
+        /// <returns> True if cell is  and has not an expressoin or has variables which are cell references. </returns>
+        private bool HasValidExpressionVariables(CptS321.SpreadsheetCell cell)
+        {
+            if (cell == null)
+            {
+                return true;
+            }
+
+            if (cell.Text == null)
+            {
+                return true;
+            }
+
+            if (cell.Text.Length == 0)
+            {
+                return true;
+            }
+
+            if (cell.Text[0] != '=')
+            {
+                return true;
+            }
+
+            string expression = cell.Text.Substring(1);
+            CptS321.ExpressionTree expressionTree = new ExpressionTree(expression);
+            List<string> variables = expressionTree.GetVariableNames();
+
+            foreach (string variable in variables)
+            {
+                if (!this.IsValidCellName(variable))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns whether the cell, if an expression has a self reference.
+        /// </summary>
+        /// <param name="cell"> The cell to be evaluated. </param>
+        /// <returns> Returns true if cell contains an expression that contains a self reference, false otherwise. </returns>
+        private bool HasSelfReference(CptS321.SpreadsheetCell cell)
+        {
+            if (cell == null)
+            {
+                return false;
+            }
+
+            if (cell.Text == null)
+            {
+                return false;
+            }
+
+            if (cell.Text.Length == 0)
+            {
+                return false;
+            }
+
+            if (cell.Text[0] != '=')
+            {
+                return false;
+            }
+
+            string expression = cell.Text.Substring(1);
+            CptS321.ExpressionTree expressionTree = new ExpressionTree(expression);
+            List<string> variables = expressionTree.GetVariableNames();
+
+            foreach (string variable in variables)
+            {
+                if (variable == cell.ToString())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool HasCircularVariable(CptS321.SpreadsheetCell cell)
+        {
+            if (cell == null)
+            {
+                return false;
+            }
+
+            if (cell.Text == null)
+            {
+                return false;
+            }
+
+            if (cell.Text.Length == 0)
+            {
+                return false;
+            }
+
+            if (cell.Text[0] != '=')
+            {
+                return false;
+            }
+
+            HashSet<string> visited = new HashSet<string>();
+            string expression = cell.Text.Substring(1);
+            CptS321.ExpressionTree expressionTree = new ExpressionTree(expression);
+            List<string> variables = expressionTree.GetVariableNames();
+            Stack<string> bfs = new Stack<string>();
+
+            // populate initial bfs.
+            foreach (string variable in variables)
+            {
+                if (this.IsValidCellName(variable))
+                {
+                    // add variable to visited set
+                    visited.Add(variable);
+
+                    // add the variables to iterate over in the bfs
+                    int[] rowAndCol = CptS321.Spreadsheet.ParseVariableName(variable);
+                    CptS321.SpreadsheetCell referencedCell = this.GetCell(rowAndCol[0], rowAndCol[1]);
+                    if (referencedCell.Text != null && referencedCell.Text.Length > 0 && referencedCell.Text[0] == '=')
+                    {
+                        string referencedCellExpression = referencedCell.Text.Substring(1);
+                        expressionTree.Expression = referencedCellExpression;
+                        List<string> vars = expressionTree.GetVariableNames();
+                        foreach (string var in vars)
+                        {
+                            bfs.Push(var);
+                        }
+                    }
+                }
+            }
+
+            // run bfs
+            while (bfs.Count > 0)
+            {
+                string variable = bfs.Pop();
+
+                if (variable == cell.ToString())
+                {
+                    return true;
+                }
+
+                if (visited.Contains(variable))
+                {
+                    continue;
+                }
+
+                if (this.IsValidCellName(variable))
+                {
+                    // add variable to visited set
+                    visited.Add(variable);
+
+                    // add the variables to iterate over in the bfs
+                    int[] rowAndCol = CptS321.Spreadsheet.ParseVariableName(variable);
+                    CptS321.SpreadsheetCell referencedCell = this.GetCell(rowAndCol[0], rowAndCol[1]);
+                    if (referencedCell.Text != null && referencedCell.Text.Length > 0 && referencedCell.Text[0] == '=')
+                    {
+                        string referencedCellExpression = referencedCell.Text.Substring(1);
+                        expressionTree.Expression = referencedCellExpression;
+                        List<string> vars = expressionTree.GetVariableNames();
+                        foreach (string var in vars)
+                        {
+                            bfs.Push(var);
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

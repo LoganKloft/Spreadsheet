@@ -39,6 +39,7 @@ namespace CptS321
         public override double Evaluate()
         {
             double? val = this.Variable.Value;
+
             if (val == null)
             {
                 throw new System.InvalidOperationException("Variable not initialized");
