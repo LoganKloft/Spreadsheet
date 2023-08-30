@@ -1,8 +1,19 @@
-Logan Kloft
-11728076
+# Spreadsheet
+- a basic spreadsheet application that can do the following:
+- evaluate basic equations (+, -, /, *)
+- color cells
+- undo / redo actions
+- export / import sheets
 
-Supressions:
-1) Suppressed protected field text and value in the SpreadsheetCell class of the SpreadsheetEngine class library.
-   As part of the assignment, these fields are required to be procted, and stylecop fumes that this is so.
-   Also apart of the homework is magically getting rid of all stylecop warnings, hence for these two reasons I
-   suppressed the warnings.
+# Technical
+- can detect loops if cells reference each other in a cycle
+- uses a tree to evaluate equations
+- command design pattern allows undo / redo ability
+- separation of logic and UI
+
+# Run
+- clone repository
+- double click the .sln file
+- visual studio should open if installed, now click run (the hollow green arrow)
+
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
